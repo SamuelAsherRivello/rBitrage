@@ -33,16 +33,18 @@ int main()
 
     Sphere sphere01 = Sphere(game);
     sphere01.SetPosition({game.size.x/4, game.size.y/4, 0});
+    sphere01.SetVelocity({100, 200, 0});
     game.AddActor(&sphere01);
 
     Sphere sphere02 = Sphere(game);
     sphere02.SetPosition({game.size.x/3, game.size.y/3, 0});
+    sphere02.SetVelocity({-200, 100, 0});
     game.AddActor(&sphere02);
 
-    Actor box = Actor(game, "src/assets/images/itch.io/projectTemplate/Foreground01.png");
-    box.SetSize({game.size.x, game.size.y, 0});
-    box.SetPosition({game.size.x/2, game.size.y/2, 0});
-    game.AddActor(&box);
+    Actor boundary = Actor(game, "src/assets/images/itch.io/projectTemplate/Boundary01.png");
+    boundary.SetSize({game.size.x, game.size.y, 0});
+    boundary.SetPosition({game.size.x/2, game.size.y/2, 0});
+    game.AddActor(&boundary);
 
 
     // FrameRenderLayer::PostCamera

@@ -6,14 +6,21 @@
 class Sphere : public Actor
 {
 public:
+
+    //
     Sphere(Game& game);
     ~Sphere(); 
+
+    //
     void OnFixedUpdate(float fixedDeltaTime) override;
     void OnFrameUpdate(float deltaTime) override;
     void OnFrameRender(const FrameRenderLayer& frameRenderLayer) override;
- 
+
+    //
+    Vector3 GetVelocity() const;
+    void SetVelocity(const Vector3& velocity);
 
 private:
-    int _speed;
+    Vector3 _velocity; 
 };
 
