@@ -5,7 +5,7 @@
 #include <optional>
 #include "FrameRenderLayer.h"
 
-namespace RMC::ProjectTemplate 
+namespace RMC::rBitrage 
 {
     class CameraSystem : public System 
     {

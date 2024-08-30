@@ -9,7 +9,7 @@
 #include "Actor.h"
 #include "FrameRenderLayer.h"
 
-namespace RMC::ProjectTemplate 
+namespace RMC::rBitrage 
 {
     class ActorSystem : public System 
     {

@@ -3,7 +3,7 @@
 #include "System.h"
 #include "Game.h"
 
-namespace RMC::ProjectTemplate 
+namespace RMC::rBitrage 
 {
     class DebugSystem : public System 
     {

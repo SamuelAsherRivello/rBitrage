@@ -1,7 +1,7 @@
 #include "Game.h"
 #include "DebugSystem.h"
 
-namespace RMC::ProjectTemplate 
+namespace RMC::rBitrage 
 {
     /**
      * DebugSystem is for showing developer-facing info

@@ -2,7 +2,7 @@
 #include <raylib.h>
 #include "Game.h"
 
-namespace RMC::ProjectTemplate {
+namespace RMC::rBitrage {
 
     class PhysicsSystem : public System {
         public:

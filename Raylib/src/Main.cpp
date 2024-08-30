@@ -7,11 +7,17 @@
 #include "InputSystem.h"
 #include "CameraSystem.h"
 #include "HudUI.h"
-using namespace RMC::ProjectTemplate;
+using namespace RMC::rBitrage;
 
 
-//WIP: Thoughts on runtime behavior...
-//TODO: Why does the ball flicker when moving (this started when I added the camera follow)
+// PERFORMANCE
+// TODO: Why does the ball flicker when moving (this started when I added the camera follow)
+// NEW FEATURES
+// TODO: Draw items by SceneGraph first (more work), then position.z second (easier). Instead as currently, by  _actors[index]
+// TODO: Add hot reloading
+// TODO: Add pooling (of arbitrary type perhaps, but Actor is the key use case for bullets)
+// IMPROVEMENTS
+// TODO: Scope how much physics we want. Alot? Import 3rd party. A little, then add concept of CollisionGroups to existing IsCollididing() and be done.
 
 int main()
 {

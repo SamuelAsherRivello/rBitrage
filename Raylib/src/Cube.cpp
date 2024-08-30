@@ -18,9 +18,9 @@ void Cube::OnFixedUpdate(float fixedDeltaTime)
 {
     Actor::OnFixedUpdate(fixedDeltaTime);
 
-    if (_game.HasSystem<RMC::ProjectTemplate::PhysicsSystem>())
+    if (_game.HasSystem<RMC::rBitrage::PhysicsSystem>())
     {
-        _isCollision = _game.GetSystem<RMC::ProjectTemplate::PhysicsSystem>()->IsCollision(this);
+        _isCollision = _game.GetSystem<RMC::rBitrage::PhysicsSystem>()->IsCollision(this);
         //std::cout << "_isCollision" << _isCollision << std::endl;
     }
 
@@ -31,31 +31,31 @@ void Cube::OnFrameUpdate(float deltaTime)
     Actor::OnFrameUpdate(deltaTime);
 
     // Input
-    if (_game.HasSystem<RMC::ProjectTemplate::InputSystem>()) {
+    if (_game.HasSystem<RMC::rBitrage::InputSystem>()) {
 
         Vector3 deltaPosition = Vector3();
 
-        if (_game.GetSystem<RMC::ProjectTemplate::InputSystem>()->IsActionDown("up"))
+        if (_game.GetSystem<RMC::rBitrage::InputSystem>()->IsActionDown("up"))
         {
             //std::cout << "Up" << std::endl; 
             deltaPosition.y -= _speed;
         }
-        if (_game.GetSystem<RMC::ProjectTemplate::InputSystem>()->IsActionDown("down"))
+        if (_game.GetSystem<RMC::rBitrage::InputSystem>()->IsActionDown("down"))
         {
             //std::cout << "Down" << std::endl;
             deltaPosition.y += _speed;
         }
-        if (_game.GetSystem<RMC::ProjectTemplate::InputSystem>()->IsActionDown("left"))
+        if (_game.GetSystem<RMC::rBitrage::InputSystem>()->IsActionDown("left"))
         {
             //std::cout << "Left" << std::endl;
             deltaPosition.x -= _speed;
         }
-        if (_game.GetSystem<RMC::ProjectTemplate::InputSystem>()->IsActionDown("right"))
+        if (_game.GetSystem<RMC::rBitrage::InputSystem>()->IsActionDown("right"))
         {
             //std::cout << "Right" << std::endl;
             deltaPosition.x += _speed;
         }
-        if (_game.GetSystem<RMC::ProjectTemplate::InputSystem>()->IsActionPressed("action"))
+        if (_game.GetSystem<RMC::rBitrage::InputSystem>()->IsActionPressed("action"))
         {
             std::cout << "Action" << std::endl;
         }

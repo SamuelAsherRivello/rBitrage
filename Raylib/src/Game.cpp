@@ -24,16 +24,16 @@ Game::~Game() {
 
 
 void Game::Initialize() {
-    InitWindow(size.x, size.y, "Raylib Template Project");
+    InitWindow(size.x, size.y, "rBitrage Template Project");
     SetTargetFPS(targetFPS);
 
     //NOTE: Order matters 
     //      affecting all subsequent lifecycle
-    AddSystem(new RMC::ProjectTemplate::CameraSystem(*this)); 
-    AddSystem(new RMC::ProjectTemplate::InputSystem(*this)); 
-    AddSystem(new RMC::ProjectTemplate::PhysicsSystem(*this)); 
-    AddSystem(new RMC::ProjectTemplate::ActorSystem(*this)); 
-    AddSystem(new RMC::ProjectTemplate::DebugSystem(*this)); 
+    AddSystem(new RMC::rBitrage::CameraSystem(*this)); 
+    AddSystem(new RMC::rBitrage::InputSystem(*this)); 
+    AddSystem(new RMC::rBitrage::PhysicsSystem(*this)); 
+    AddSystem(new RMC::rBitrage::ActorSystem(*this)); 
+    AddSystem(new RMC::rBitrage::DebugSystem(*this)); 
 
     for (System* system : _systems) {
         system->OnInitialize();
@@ -51,28 +51,28 @@ void Game::RemoveSystem(System* system) {
 }
 
 void Game::AddActor(Actor* actor) {
-    if (!HasSystem<RMC::ProjectTemplate::ActorSystem>())
+    if (!HasSystem<RMC::rBitrage::ActorSystem>())
     {
         std::cout << "AddActor() Failed" << std::endl;
     }
-    GetSystem<RMC::ProjectTemplate::ActorSystem>()->AddActor(actor);
+    GetSystem<RMC::rBitrage::ActorSystem>()->AddActor(actor);
 }
 
 void Game::RemoveActor(Actor* actor) {
-    if (!HasSystem<RMC::ProjectTemplate::ActorSystem>())
+    if (!HasSystem<RMC::rBitrage::ActorSystem>())
     {
         std::cout << "RemoveActor() Failed" << std::endl;
     }
-    GetSystem<RMC::ProjectTemplate::ActorSystem>()->RemoveActor(actor);
+    GetSystem<RMC::rBitrage::ActorSystem>()->RemoveActor(actor);
 }
 
 std::vector<Actor*> Game::GetActors()
 {
-    if (!HasSystem<RMC::ProjectTemplate::ActorSystem>())
+    if (!HasSystem<RMC::rBitrage::ActorSystem>())
     {
         std::cout << "GetActors() Failed" << std::endl;
     }
-    return GetSystem<RMC::ProjectTemplate::ActorSystem>()->GetActors();
+    return GetSystem<RMC::rBitrage::ActorSystem>()->GetActors();
 }
 
 
@@ -130,7 +130,7 @@ void Game::RenderFrame() {
         system->OnFrameRender(FrameRenderLayer::PreCamera);
     }
 
-    BeginMode2D(GetSystem<RMC::ProjectTemplate::CameraSystem>()->camera2D);
+    BeginMode2D(GetSystem<RMC::rBitrage::CameraSystem>()->camera2D);
 
     for (System* system : _systems) {
         system->OnFrameRender(FrameRenderLayer::Camera);

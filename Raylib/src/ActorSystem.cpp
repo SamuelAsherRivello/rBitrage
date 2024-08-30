@@ -4,7 +4,7 @@
 #include "Game.h"
 #include "ActorSystem.h"
 
-namespace RMC::ProjectTemplate 
+namespace RMC::rBitrage 
 {
 
     ActorSystem::ActorSystem(Game& game) : System(game) 

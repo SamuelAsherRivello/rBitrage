@@ -7,7 +7,7 @@
 #include "Action.h"
 #include "FrameRenderLayer.h"
 
-namespace RMC::ProjectTemplate 
+namespace RMC::rBitrage 
 {
     class InputSystem : public System 
     {

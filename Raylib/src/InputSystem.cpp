@@ -2,7 +2,7 @@
 #include "InputSystem.h"
 #include "Game.h"
 
-namespace RMC::ProjectTemplate 
+namespace RMC::rBitrage 
 {
     InputSystem::InputSystem(Game& game) : System(game)
     {

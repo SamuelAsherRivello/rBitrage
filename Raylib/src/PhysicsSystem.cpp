@@ -2,7 +2,7 @@
 #include "PhysicsSystem.h"
 #include "Game.h"
 
-namespace RMC::ProjectTemplate 
+namespace RMC::rBitrage 
 {
 
     PhysicsSystem::PhysicsSystem(Game& game) : System(game)

@@ -2,7 +2,7 @@
 #include "CameraSystem.h"
 #include <iostream>
 
-namespace RMC::ProjectTemplate 
+namespace RMC::rBitrage 
 {
     /**
      * DebugSystem renders the camera
