@@ -39,7 +39,7 @@ int main()
     game.AddActor(&sphere02);
 
     // FrameRenderLayer::PostCamera
-    Actor foreground = Actor(game, "src/assets/images/itch.io/projectTemplate/Foreground01.png", FrameRenderLayer::PostCamera);
+    Actor foreground = Actor(game, "src/assets/images/itch.io/projectTemplate/Foreground02.png", FrameRenderLayer::PostCamera);
     foreground.SetSize({game.size.x, game.size.y, 0});
     foreground.SetPosition({game.size.x/2, game.size.y/2, 0});
     game.AddActor(&foreground);
