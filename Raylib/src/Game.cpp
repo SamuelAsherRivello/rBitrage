@@ -18,13 +18,8 @@ Game::Game() {
 }
 
 Game::~Game() {
-    for (const auto& system  : _systems) {
-        delete system;
-    }
-
-    // for (const auto& actor  : _actors) {
-    //     delete actor; 
-    // }
+    //TODO: I read that std::vector clean up their children.
+    //      What else must I do here to clean the game?
 }
 
 

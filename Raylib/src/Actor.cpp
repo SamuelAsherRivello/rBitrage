@@ -38,32 +38,51 @@ void Actor::OnFrameRender(const FrameRenderLayer& frameRenderLayer) {
     {
         return;
     }
+
+    if (_texture.width == 0) 
+    {
+        return;
+    }
+
     DrawTexture(_texture, _position.x - _size.x/2, _position.y - _size.y/2, WHITE);
+    
 }
 
-Vector3 Actor::GetPosition() const {
+Vector3 Actor::GetPosition() const 
+{
     return _position;
 }
 
-void Actor::SetPosition(const Vector3& position) {
+void Actor::SetPosition(const Vector3& position) 
+{
     _position = position;
 }
 
-Vector3 Actor::GetSize() const {
+Vector3 Actor::GetSize() const 
+{
     return _size;
 }
 
-void Actor::SetSize(const Vector3& size) {
+void Actor::SetSize(const Vector3& size) 
+{
     _size = size;
+
+    if (_fileName == NULL)
+    {
+        return;
+    }
     Image image = LoadImage(_fileName);
     ImageResize(&image, _size.x, _size.y); 
     _texture = LoadTextureFromImage(image); 
+
 }
 
-Rectangle Actor::GetBounds() const  {
+Rectangle Actor::GetBounds() const  
+{
     return Rectangle{_position.x - _size.x/2, _position.y - _size.y/2, _size.x, _size.y};
 }
 
-FrameRenderLayer Actor::GetFrameRenderLayer() const  {
+FrameRenderLayer Actor::GetFrameRenderLayer() const  
+{
     return _frameRenderLayer;
 }

@@ -29,12 +29,13 @@ namespace RMC::ProjectTemplate
 
     void DebugSystem::OnFrameRender(const FrameRenderLayer& frameRenderLayer) 
     {
-        for (Actor* actor : _game.GetActors()) {
-            if (actor->GetFrameRenderLayer() != frameRenderLayer)
-            {
-                continue;
-            }
-            DrawRectangleLinesEx(actor->GetBounds(), 4, RED);
-        }
+        //Draw box around actors for debugging
+        // for (Actor* actor : _game.GetActors()) {
+        //     if (actor->GetFrameRenderLayer() != frameRenderLayer)
+        //     {
+        //         continue;
+        //     }
+        //     DrawRectangleLinesEx(actor->GetBounds(), 4, RED);
+        // }
     }
 } 

@@ -6,6 +6,7 @@
 #include "DebugSystem.h"
 #include "InputSystem.h"
 #include "CameraSystem.h"
+#include "HudUI.h"
 using namespace RMC::ProjectTemplate;
 
 
@@ -38,11 +39,21 @@ int main()
     sphere02.SetPosition({game.size.x/3, game.size.y/3, 0});
     game.AddActor(&sphere02);
 
+    Actor box = Actor(game, "src/assets/images/itch.io/projectTemplate/Foreground01.png");
+    box.SetSize({game.size.x, game.size.y, 0});
+    box.SetPosition({game.size.x/2, game.size.y/2, 0});
+    game.AddActor(&box);
+
+
     // FrameRenderLayer::PostCamera
-    Actor foreground = Actor(game, "src/assets/images/itch.io/projectTemplate/Foreground02.png", FrameRenderLayer::PostCamera);
+    Actor foreground = Actor(game, "src/assets/images/itch.io/projectTemplate/Foreground01.png", FrameRenderLayer::PostCamera);
     foreground.SetSize({game.size.x, game.size.y, 0});
     foreground.SetPosition({game.size.x/2, game.size.y/2, 0});
     game.AddActor(&foreground);
+
+    // FrameRenderLayer::PostCamera
+    HudUI hudUI = HudUI(game);
+    game.AddActor(&hudUI);
 
     //
     if (game.HasSystem<CameraSystem>())
