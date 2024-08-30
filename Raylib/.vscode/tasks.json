@@ -1,0 +1,35 @@
+{
+    "version": "2.0.0",
+    "tasks": 
+    [
+        {
+            "label": "Build and Execute",
+            "type": "shell",
+            "command": "clear && echo '\n******************************************' && echo 'Build and Execute Via: ./.vscode/task.json' && echo '******************************************\n' && mingw32-make bin/app && mingw32-make execute",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [],
+            "detail": "Custom build and execute task"
+        },
+        {
+            "label": "build and run",
+            "type": "shell",
+            "command": "mingw32-make && bin/app",
+            "problemMatcher": ["$gcc"],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": true
+            }
+        }
+    ]
+}

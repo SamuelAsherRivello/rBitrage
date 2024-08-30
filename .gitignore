@@ -1,0 +1,6 @@
+*.exe
+*.dsym
+/[Rr]aylib/-p
+/[Rr]aylib/bin
+/[Rr]aylib/include
+/[Rr]aylib/lib
