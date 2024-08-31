@@ -22,13 +22,13 @@ void Sphere::OnFrameUpdate(float deltaTime)
 {
     Actor::OnFrameUpdate(deltaTime);
 
-    _position.x += _velocity.x * deltaTime;
-    _position.y += _velocity.y * deltaTime;
+    _transformation.Position.x += _velocity.x * deltaTime;
+    _transformation.Position.y += _velocity.y * deltaTime;
 
-    if (_position.x + _size.x/2 >= GetScreenWidth() || _position.x - _size.x <= 0)
+    if (_transformation.Position.x + _size.x/2 >= GetScreenWidth() || _transformation.Position.x - _size.x <= 0)
         _velocity.x *= -1;
 
-    if (_position.y + _size.y >= GetScreenHeight() || _position.y - _size.y <= 0)
+    if (_transformation.Position.y + _size.y >= GetScreenHeight() || _transformation.Position.y - _size.y <= 0)
         _velocity.y *= -1;
 }
 

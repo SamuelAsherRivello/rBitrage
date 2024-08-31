@@ -44,18 +44,18 @@ void Actor::OnFrameRender(const FrameRenderLayer& frameRenderLayer) {
         return;
     }
 
-    DrawTexture(_texture, _position.x - _size.x/2, _position.y - _size.y/2, WHITE);
+    DrawTexture(_texture, _transformation.Position.x - _size.x/2, _transformation.Position.y - _size.y/2, WHITE);
     
 }
 
 Vector3 Actor::GetPosition() const 
 {
-    return _position;
+    return _transformation.Position;
 }
 
 void Actor::SetPosition(const Vector3& position) 
 {
-    _position = position;
+    _transformation.Position = position;
 }
 
 Vector3 Actor::GetSize() const 
@@ -79,7 +79,7 @@ void Actor::SetSize(const Vector3& size)
 
 Rectangle Actor::GetBounds() const  
 {
-    return Rectangle{_position.x - _size.x/2, _position.y - _size.y/2, _size.x, _size.y};
+    return Rectangle{_transformation.Position.x - _size.x/2, _transformation.Position.y - _size.y/2, _size.x, _size.y};
 }
 
 FrameRenderLayer Actor::GetFrameRenderLayer() const  

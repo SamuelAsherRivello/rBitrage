@@ -4,6 +4,13 @@
 #include "Game.h"
 #include "FrameRenderLayer.h"
 
+class Transformation
+{
+    public:
+        Vector3 Position; 
+        Vector3 Rotation;
+};
+
 // NEEDED? Forward declaration of Game class
 class Game;
 
@@ -29,8 +36,8 @@ public:
 
 protected:
     Game& _game;
-    Vector3 _position; 
-    Vector3 _size; 
+    Transformation _transformation;
+    Vector3 _size;
     const char *_fileName;
     FrameRenderLayer _frameRenderLayer;
     Texture2D _texture; 
