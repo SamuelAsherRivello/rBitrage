@@ -32,12 +32,7 @@ void Actor::OnFixedUpdate(float deltaTime) {
 void Actor::OnFrameUpdate(float deltaTime) {
 }
 
-void Actor::OnFrameRender(const FrameRenderLayer& frameRenderLayer) {
-
-    if (_frameRenderLayer != frameRenderLayer)
-    {
-        return;
-    }
+void Actor::OnFrameRender() {
 
     if (_texture.width == 0) 
     {

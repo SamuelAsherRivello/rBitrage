@@ -9,7 +9,7 @@ class HudUI : public Actor
 public:
     HudUI(Game& game);
     ~HudUI(); 
-    void OnFrameRender(const FrameRenderLayer& frameRenderLayer) override;
+    void OnFrameRender() override;
 
 private:
 };

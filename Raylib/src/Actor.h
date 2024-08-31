@@ -24,7 +24,7 @@ public:
     virtual void OnInitialize();
     virtual void OnFixedUpdate(float fixedDeltaTime);
     virtual void OnFrameUpdate(float deltaTime);
-    virtual void OnFrameRender(const FrameRenderLayer& frameRenderLayer);
+    virtual void OnFrameRender();
 
     Vector3 GetPosition() const;
     void SetPosition(const Vector3& position);

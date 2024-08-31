@@ -13,16 +13,10 @@ HudUI::~HudUI()
 {
 }
 
-void HudUI::OnFrameRender(const FrameRenderLayer& frameRenderLayer)
+void HudUI::OnFrameRender()
 {
-    Actor::OnFrameRender(frameRenderLayer);
+    Actor::OnFrameRender();
 
-    if (_frameRenderLayer != frameRenderLayer)
-    {
-        return;
-    }
-
-   
 
     int margin = 50;
     int upperLeftX = margin;

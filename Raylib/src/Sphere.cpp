@@ -32,9 +32,9 @@ void Sphere::OnFrameUpdate(float deltaTime)
         _velocity.y *= -1;
 }
 
-void Sphere::OnFrameRender(const FrameRenderLayer& frameRenderLayer)
+void Sphere::OnFrameRender()
 {
-    Actor::OnFrameRender(frameRenderLayer);
+    Actor::OnFrameRender();
 }
 
 

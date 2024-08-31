@@ -11,13 +11,14 @@ using namespace RMC::rBitrage;
 
 
 // PERFORMANCE
-// TODO: Why does the ball flicker when moving (this started when I added the camera follow)
+//      TODO: Why does the ball flicker when moving (this started when I added the camera follow)
 // NEW FEATURES
-// TODO: Draw items by SceneGraph first (more work), then position.z second (easier). Instead as currently, by  _actors[index]
-// TODO: Add hot reloading
-// TODO: Add pooling (of arbitrary type perhaps, but Actor is the key use case for bullets)
+//      TODO: Draw items by SceneGraph first (more work), then position.z second (easier). Instead as currently, by  _actors[index]
+//      TODO: Add hot reloading
+//      TODO: Add pooling (of arbitrary type perhaps, but Actor is the key use case for bullets)
+//      TODO: Actor DrawTexturePro supports pivot. Add it to actor and set to center by default? -- See https://docs.unity3d.com/ScriptReference/Sprite-pivot.html
 // IMPROVEMENTS
-// TODO: Scope how much physics we want. Alot? Import 3rd party. A little, then add concept of CollisionGroups to existing IsCollididing() and be done.
+//      TODO: Scope how much physics we want. Alot? Import 3rd party. A little, then add concept of CollisionGroups to existing IsCollididing() and be done.
 
 int main()
 {

@@ -54,7 +54,10 @@ namespace RMC::rBitrage
     void ActorSystem::OnFrameRender(const FrameRenderLayer& frameRenderLayer) 
     {
         for (Actor* actor : _actors) {
-            actor->OnFrameRender(frameRenderLayer);
+            if (actor->GetFrameRenderLayer() == frameRenderLayer)
+            {
+                actor->OnFrameRender();
+            }
         }
     }
 

@@ -85,14 +85,9 @@ void Cube::OnFrameUpdate(float deltaTime)
 
 }
 
-void Cube::OnFrameRender(const FrameRenderLayer& frameRenderLayer)
+void Cube::OnFrameRender()
 {
-    Actor::OnFrameRender(frameRenderLayer);
-
-    if (_frameRenderLayer != frameRenderLayer)
-    {
-        return;
-    }
+    Actor::OnFrameRender();
 
 
     //TODO: If/when collision is added to actor, then move this drawing to debugsystem

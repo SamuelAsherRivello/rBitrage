@@ -14,7 +14,7 @@ public:
     //
     void OnFixedUpdate(float fixedDeltaTime) override;
     void OnFrameUpdate(float deltaTime) override;
-    void OnFrameRender(const FrameRenderLayer& frameRenderLayer) override;
+    void OnFrameRender() override;
 
     //
     Vector3 GetVelocity() const;
