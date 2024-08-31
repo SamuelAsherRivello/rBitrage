@@ -19,6 +19,10 @@ void System::OnInitialize()
 {
 
 }
+void System::OnInitialized() 
+{
+
+}
 
 
 void System::OnFixedUpdate(float fixedDeltaTime) 

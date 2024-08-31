@@ -14,7 +14,8 @@ public:
 
     System(Game& game);
     virtual ~System(); 
-    virtual void OnInitialize();
+    virtual void OnInitialize(); //setup "me"
+    virtual void OnInitialized(); //setup 'dependencies"
     virtual void OnFixedUpdate(float fixedDeltaTime);
     virtual void OnFrameUpdate(float deltaTime);
     virtual void OnFrameRender(const FrameRenderLayer& frameRenderLayer);  
