@@ -1,20 +1,22 @@
 #pragma once
 #include <raylib.h>
 #include "Actor2D.h"
-
-class Cube2D : public Actor2D
+namespace RMC::rBitrage 
 {
-public:
-    Cube2D(Game& game);
-    ~Cube2D(); 
-    void OnFixedUpdate(float fixedDeltaTime) override;
-    void OnFrameUpdate(float deltaTime) override;
-    void OnFrameRender() override;
- 
+    class Cube2D : public Actor2D
+    {
+    public:
+        Cube2D(Game& game);
+        ~Cube2D(); 
+        void OnFixedUpdate(float fixedDeltaTime) override;
+        void OnFrameUpdate(float deltaTime) override;
+        void OnFrameRender() override;
+    
 
-private:
-    Vector3 _velocityLinear;
-    Vector3 _velocityAngular;
-    bool _isCollision;
-};
+    private:
+        Vector3 _velocityLinear;
+        Vector3 _velocityAngular;
+        bool _isCollision;
+    };
 
+}

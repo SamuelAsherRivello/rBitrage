@@ -6,22 +6,26 @@
 #include "FrameRenderLayer.h"
 #include "Transform.h"
 
-// NEEDED? Forward declaration of Game class
-class Game;
-
-class Actor2D : public Actor
+namespace RMC::rBitrage 
 {
-public:
-    Actor2D(Game& game, const char *fileName, const FrameRenderLayer& frameRenderLayer = FrameRenderLayer::Camera);
-    virtual ~Actor2D();
+    // NEEDED? Forward declaration of Game class
+    class Game;
 
-    virtual void OnInitialize();
-    virtual void OnFixedUpdate(float fixedDeltaTime);
-    virtual void OnFrameUpdate(float deltaTime);
-    virtual void OnFrameRender();
-    void SetSize(const Vector3 &size) override;
+    class Actor2D : public Actor
+    {
+    public:
+        Actor2D(Game& game, const char *fileName, const FrameRenderLayer& frameRenderLayer = FrameRenderLayer::Camera);
+        virtual ~Actor2D();
 
-protected:
-    const char *_fileName;
-    Texture2D _texture; 
-};
+        virtual void OnInitialize();
+        virtual void OnFixedUpdate(float fixedDeltaTime);
+        virtual void OnFrameUpdate(float deltaTime);
+        virtual void OnFrameRender();
+        void SetSize(const Vector3 &size) override;
+
+    protected:
+        const char *_fileName;
+        Texture2D _texture; 
+    };
+
+}

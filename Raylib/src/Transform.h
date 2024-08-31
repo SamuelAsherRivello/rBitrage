@@ -2,10 +2,13 @@
 #pragma once
 #include <raylib.h>
 
-class Transformation
+namespace RMC::rBitrage 
 {
-    public:
-        //This is euler
-        Vector3 Rotation = {0, 0, 0};
-        Vector3 Position = {0, 0, 0}; 
-};
+    class Transformation
+    {
+        public:
+            //This is euler
+            Vector3 Rotation = {0, 0, 0};
+            Vector3 Position = {0, 0, 0}; 
+    };
+}

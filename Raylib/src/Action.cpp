@@ -2,7 +2,8 @@
 
 #include "Action.h"
 #include <functional>
-
+namespace RMC::rBitrage 
+{
 void Action::AddBinding(ActionType actionType, std::function<bool()> binding) {
     if (binding != nullptr) {
         bindings[actionType].emplace_back(binding);
@@ -25,4 +26,5 @@ bool Action::IsDown() const {
         }
     }
     return false;
+}
 }

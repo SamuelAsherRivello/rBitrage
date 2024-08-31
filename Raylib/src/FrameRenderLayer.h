@@ -1,10 +1,12 @@
 #pragma once
-
-enum class FrameRenderLayer 
+namespace RMC::rBitrage 
 {
-    PreCamera,
-    Camera,
-    PostCamera,
-};
+    enum class FrameRenderLayer 
+    {
+        PreCamera,
+        Camera,
+        PostCamera,
+    };
+}
     
 

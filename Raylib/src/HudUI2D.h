@@ -4,14 +4,16 @@
 #include "Game.h"
 #include "Actor2D.h"
 
-
-class HudUI2D : public Actor2D
+namespace RMC::rBitrage 
 {
-public:
-    HudUI2D(Game& game);
-    ~HudUI2D(); 
-    void OnFrameRender() override;
+    class HudUI2D : public Actor2D
+    {
+    public:
+        HudUI2D(Game& game);
+        ~HudUI2D(); 
+        void OnFrameRender() override;
 
-private:
-};
+    private:
+    };
+}
 

@@ -3,24 +3,26 @@
 #include "Game.h"
 #include "FrameRenderLayer.h"
 
-
-// NEEDED? Forward declaration of Game class
-class Game;
-    
-
-class System  
+namespace RMC::rBitrage 
 {
-public:
+    // NEEDED? Forward declaration of Game class
+    class Game;
+        
 
-    System(Game& game);
-    virtual ~System(); 
-    virtual void OnInitialize(); //setup "me"
-    virtual void OnInitialized(); //setup 'dependencies"
-    virtual void OnFixedUpdate(float fixedDeltaTime);
-    virtual void OnFrameUpdate(float deltaTime);
-    virtual void OnFrameRender(const FrameRenderLayer& frameRenderLayer);  
+    class System  
+    {
+    public:
 
-protected:
-    Game& _game;
-};
+        System(Game& game);
+        virtual ~System(); 
+        virtual void OnInitialize(); //setup "me"
+        virtual void OnInitialized(); //setup 'dependencies"
+        virtual void OnFixedUpdate(float fixedDeltaTime);
+        virtual void OnFrameUpdate(float deltaTime);
+        virtual void OnFrameRender(const FrameRenderLayer& frameRenderLayer);  
+
+    protected:
+        Game& _game;
+    };
+}
 

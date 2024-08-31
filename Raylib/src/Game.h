@@ -5,69 +5,72 @@
 #include <memory>
 #include <chrono>
 
-// NEEDED? Forward declaration of System class
-class System;
-class Actor;
-
-class Game
+namespace RMC::rBitrage 
 {
-public:
+    // NEEDED? Forward declaration of System class
+    class System;
+    class Actor;
 
-    //Constructor
-    Game();
-    ~Game();
+    class Game
+    {
+    public:
 
-    //Actor
-    void AddActor(Actor* actor);
-    std::vector<Actor*>  GetActors();
-    void RemoveActor(Actor* actor);
+        //Constructor
+        Game();
+        ~Game();
 
-    //Lifecycle
-    void Initialize();
-    void AddSystem(System* system);
-    void RemoveSystem(System* system);
+        //Actor
+        void AddActor(Actor* actor);
+        std::vector<Actor*>  GetActors();
+        void RemoveActor(Actor* actor);
+
+        //Lifecycle
+        void Initialize();
+        void AddSystem(System* system);
+        void RemoveSystem(System* system);
+        template <typename T>
+        bool HasSystem() const;
+        template <typename T>
+        T* GetSystem() const;
+
+        //Lifecycle
+        void UpdateFrame();
+        void RenderFrame(); 
+
+        //Fields
+        Vector3 size;
+        Color backgroundColor;
+        bool isDebug = false;
+        int targetFPS = 120;
+        float fixedUpdateInterval = 0.2; 
+
+    private:
+        std::vector<System*> _systems;
+        std::chrono::steady_clock _deltaClock;
+        float _lastFixedUpdate = 0;
+
+    };
+
+
+
+    //TODO: Why can't I put this in the cpp file?
     template <typename T>
-    bool HasSystem() const;
+    bool Game::HasSystem() const {
+        for (System* system : _systems) {
+            if (typeid(*system) == typeid(T)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     template <typename T>
-    T* GetSystem() const;
-
-    //Lifecycle
-    void UpdateFrame();
-    void RenderFrame(); 
-
-    //Fields
-    Vector3 size;
-    Color backgroundColor;
-    bool isDebug = false;
-    int targetFPS = 120;
-    float fixedUpdateInterval = 0.2; 
-
-private:
-    std::vector<System*> _systems;
-    std::chrono::steady_clock _deltaClock;
-    float _lastFixedUpdate = 0;
-
-};
-
-
-
-//TODO: Why can't I put this in the cpp file?
-template <typename T>
-bool Game::HasSystem() const {
-    for (System* system : _systems) {
-        if (typeid(*system) == typeid(T)) {
-            return true;
+    T* Game::GetSystem() const {
+        for (System* system : _systems) {
+            if (typeid(*system) == typeid(T)) {
+                return dynamic_cast<T*>(system);
+            }
         }
+        return nullptr;
     }
-    return false;
-}
-
-template <typename T>
-T* Game::GetSystem() const {
-    for (System* system : _systems) {
-        if (typeid(*system) == typeid(T)) {
-            return dynamic_cast<T*>(system);
-        }
-    }
-    return nullptr;
 }
