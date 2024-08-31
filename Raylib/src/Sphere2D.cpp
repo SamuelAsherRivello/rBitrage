@@ -7,7 +7,7 @@
 namespace RMC::rBitrage 
 {
         
-    Sphere2D::Sphere2D(Game& game) : Actor2D(game, "src/assets/images/itch.io/projectTemplate/Ball01.png") { 
+    Sphere2D::Sphere2D(Game& game) : Actor2D(game, "Ball01") { 
         _velocity = {0, 0, 0};
     }
 

@@ -28,11 +28,18 @@ int createGame()
 {
     Game game = Game();
 
+     // LoaderSystem* loaderSystem = game.GetSystem<LoaderSystem>();
+        // loaderSystem->LoadAsset<Image>("Ball01", "src/assets/images/itch.io/projectTemplate/Ball01.png");
+        // loaderSystem->LoadAsset<Image>("Boundary01", "src/assets/images/itch.io/projectTemplate/Boundary01.png");
+        // loaderSystem->LoadAsset<Image>("Foreground01", "src/assets/images/itch.io/projectTemplate/Foreground01.png");
+        //or2D(game, "src/assets/images/itch.io/projectTemplate/Paddle01.png") { 
+        //Ball01
+
     //Calls System:OnInitialize **AND** System:OnInitialized
     game.Initialize();
 
     // FrameRenderLayer::PreCamera
-    Actor2D background = Actor2D(game, "src/assets/images/itch.io/projectTemplate/Background01.png", FrameRenderLayer::PreCamera);
+    Actor2D background = Actor2D(game, "Background01", FrameRenderLayer::PreCamera);
     background.SetSize({game.size.x, game.size.y, 0});
     background.SetPosition({game.size.x/2, game.size.y/2, 0});
     game.AddActor(&background);
@@ -52,13 +59,13 @@ int createGame()
     sphere02.SetVelocity({-200, 100, 0});
     game.AddActor(&sphere02);
 
-    Actor2D boundary = Actor2D(game, "src/assets/images/itch.io/projectTemplate/Boundary01.png");
+    Actor2D boundary = Actor2D(game, "Boundary01");
     boundary.SetSize({game.size.x, game.size.y, 0});
     boundary.SetPosition({game.size.x/2, game.size.y/2, 0});
     game.AddActor(&boundary);
 
     // FrameRenderLayer::PostCamera
-    Actor2D foreground = Actor2D(game, "src/assets/images/itch.io/projectTemplate/Foreground01.png", FrameRenderLayer::PostCamera);
+    Actor2D foreground = Actor2D(game, "Foreground01", FrameRenderLayer::PostCamera);
     foreground.SetSize({game.size.x, game.size.y, 0});
     foreground.SetPosition({game.size.x/2, game.size.y/2, 0});
     game.AddActor(&foreground);

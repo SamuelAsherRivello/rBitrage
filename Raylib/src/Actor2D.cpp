@@ -2,6 +2,7 @@
 #include "Actor.h"
 #include <raylib.h>
 #include <iostream>
+#include <string>
 
 namespace RMC::rBitrage 
 {
@@ -69,7 +70,12 @@ namespace RMC::rBitrage
         {
             return;
         }
-        Image image = LoadImage(_fileName);
+
+        std::string filePath = "src/assets/images/itch.io/projectTemplate/";
+        filePath += _fileName;
+        filePath += ".png";
+        const char *filePathPtr = filePath.c_str();
+        Image image = LoadImage(filePathPtr);
         ImageResize(&image, _size.x, _size.y); 
         _texture = LoadTextureFromImage(image); 
 

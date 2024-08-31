@@ -6,7 +6,7 @@
 #include <iostream>
 namespace RMC::rBitrage 
 {
-    Cube2D::Cube2D(Game& game) : Actor2D(game, "src/assets/images/itch.io/projectTemplate/Paddle01.png") { 
+    Cube2D::Cube2D(Game& game) : Actor2D(game, "Paddle01") { 
         _velocityLinear = {1000,1000,0};
         _velocityAngular = {0, 0, 100};
         _isCollision = false;
