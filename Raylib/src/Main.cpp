@@ -12,6 +12,8 @@ using namespace RMC::rBitrage;
 
 // PERFORMANCE
 //      TODO: Why does the ball flicker when moving (this started when I added the camera follow)
+// CODING STANDARDS
+//      TODO: Make a new "rBitrage.h" that contains every 'h' so users only need to include that ONE thing?
 // NEW FEATURES
 //      TODO: Draw items by SceneGraph first (more work), then position.z second (easier). Instead as currently, by  _actors[index]
 //      TODO: Add hot reloading
@@ -63,6 +65,7 @@ int main()
     // FrameRenderLayer::PostCamera
     HudUI hudUI = HudUI(game);
     game.AddActor(&hudUI);
+
 
     //
     if (game.HasSystem<CameraSystem>())

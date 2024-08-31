@@ -3,11 +3,11 @@
 #include <algorithm>
 #include "Game.h"
 #include "System.h"
-#include "CameraSystem.h" 
-#include "DebugSystem.h" 
-#include "InputSystem.h" 
-#include "PhysicsSystem.h" 
-#include "ActorSystem.h" 
+#include "CameraSystem.h"
+#include "DebugSystem.h"
+#include "InputSystem.h"
+#include "PhysicsSystem.h"
+#include "ActorSystem.h"
 
 Game::Game() {
     size = {1600, 1000, 0};
@@ -27,13 +27,13 @@ void Game::Initialize() {
     InitWindow(size.x, size.y, "rBitrage Template Project");
     SetTargetFPS(targetFPS);
 
-    //NOTE: Order matters 
+    //NOTE: Order matters
     //      affecting all subsequent lifecycle
-    AddSystem(new RMC::rBitrage::CameraSystem(*this)); 
-    AddSystem(new RMC::rBitrage::InputSystem(*this)); 
-    AddSystem(new RMC::rBitrage::PhysicsSystem(*this)); 
-    AddSystem(new RMC::rBitrage::ActorSystem(*this)); 
-    AddSystem(new RMC::rBitrage::DebugSystem(*this)); 
+    AddSystem(new RMC::rBitrage::CameraSystem(*this));
+    AddSystem(new RMC::rBitrage::InputSystem(*this));
+    AddSystem(new RMC::rBitrage::PhysicsSystem(*this));
+    AddSystem(new RMC::rBitrage::ActorSystem(*this));
+    AddSystem(new RMC::rBitrage::DebugSystem(*this));
 
     for (System* system : _systems) {
         system->OnInitialize();
@@ -129,6 +129,21 @@ void Game::RenderFrame() {
     for (System* system : _systems) {
         system->OnFrameRender(FrameRenderLayer::PreCamera);
     }
+
+    // Camera camera = { 0 };
+    // camera.position = (Vector3){ 0.0f, 10.0f, 10.0f };
+    // camera.target = (Vector3){ 0.0f, 0.0f, 0.0f };
+    // camera.up = (Vector3){ 0.0f, 1.0f, 0.0f };
+    // camera.fovy = 45.0f;
+    // camera.projection = CAMERA_PERSPECTIVE;
+
+    // BeginMode3D(camera);
+
+    //     // Draw enemy-box
+    //     DrawCube({0,0,0}, 3, 3, 3, BLUE);
+    //     DrawGrid(10, 1.0f);
+
+    // EndMode3D();
 
     BeginMode2D(GetSystem<RMC::rBitrage::CameraSystem>()->camera2D);
 

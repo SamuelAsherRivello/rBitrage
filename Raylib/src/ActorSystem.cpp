@@ -19,7 +19,8 @@ namespace RMC::rBitrage
      */
     void ActorSystem::OnInitialize() 
     {
-        for (Actor* actor : _actors) {
+        for (Actor* actor : _actors) 
+        {
             actor->OnInitialize();
         }
     }
@@ -31,7 +32,8 @@ namespace RMC::rBitrage
      */
     void ActorSystem::OnFixedUpdate(float fixedDeltaTime) 
     {
-        for (Actor* actor : _actors) {
+        for (Actor* actor : _actors) 
+        {
             actor->OnFixedUpdate(fixedDeltaTime);
         }
     }
@@ -43,7 +45,8 @@ namespace RMC::rBitrage
      */
     void ActorSystem::OnFrameUpdate(float deltaTime) 
     {
-        for (Actor* actor : _actors) {
+        for (Actor* actor : _actors) 
+        {
             actor->OnFrameUpdate(deltaTime);
         }
     }
@@ -53,7 +56,8 @@ namespace RMC::rBitrage
      */
     void ActorSystem::OnFrameRender(const FrameRenderLayer& frameRenderLayer) 
     {
-        for (Actor* actor : _actors) {
+        for (Actor* actor : _actors) 
+        {
             if (actor->GetFrameRenderLayer() == frameRenderLayer)
             {
                 actor->OnFrameRender();
