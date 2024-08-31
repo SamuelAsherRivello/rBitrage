@@ -32,8 +32,6 @@ void HudUI::OnFrameRender(const FrameRenderLayer& frameRenderLayer)
     Color fontColor = WHITE;
     int fontSize = 59;
 
-    //FPS
-     DrawFPS(margin, 120);   
 
     //Upper left
     int score = 100;

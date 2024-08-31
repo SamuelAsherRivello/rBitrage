@@ -44,7 +44,13 @@ void Actor::OnFrameRender(const FrameRenderLayer& frameRenderLayer) {
         return;
     }
 
-    DrawTexture(_texture, _transformation.Position.x - _size.x/2, _transformation.Position.y - _size.y/2, WHITE);
+    DrawTexturePro(
+        _texture, 
+        {0, 0, static_cast<float>(_texture.width), static_cast<float>(_texture.height)}, 
+        {_transformation.Position.x, _transformation.Position.y, static_cast<float>(_texture.width), static_cast<float>(_texture.height)},
+        {static_cast<float>(_texture.width)/2, static_cast<float>(_texture.height)/2},
+        _transformation.Rotation.z, 
+        WHITE);
     
 }
 
@@ -56,6 +62,16 @@ Vector3 Actor::GetPosition() const
 void Actor::SetPosition(const Vector3& position) 
 {
     _transformation.Position = position;
+}
+
+Vector3 Actor::GetRotation() const 
+{
+    return _transformation.Rotation;
+}
+
+void Actor::SetRotation(const Vector3& position) 
+{
+    _transformation.Rotation = position;
 }
 
 Vector3 Actor::GetSize() const 

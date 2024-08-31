@@ -29,6 +29,15 @@ namespace RMC::rBitrage
 
     void DebugSystem::OnFrameRender(const FrameRenderLayer& frameRenderLayer) 
     {
+        
+        //FPS
+        if (frameRenderLayer != FrameRenderLayer::PostCamera )
+        {
+            return;
+        }
+
+        DrawFPS(50, 120);   
+
         //Draw box around actors for debugging
         // for (Actor* actor : _game.GetActors()) {
         //     if (actor->GetFrameRenderLayer() != frameRenderLayer)

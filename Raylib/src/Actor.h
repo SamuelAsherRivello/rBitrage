@@ -7,8 +7,9 @@
 class Transformation
 {
     public:
-        Vector3 Position; 
-        Vector3 Rotation;
+        //This is euler
+        Vector3 Rotation = {0, 0, 0};
+        Vector3 Position = {0, 0, 0}; 
 };
 
 // NEEDED? Forward declaration of Game class
@@ -27,6 +28,8 @@ public:
 
     Vector3 GetPosition() const;
     void SetPosition(const Vector3& position);
+    Vector3 GetRotation() const;
+    void SetRotation(const Vector3 &position);
     //
     Vector3 GetSize() const;
     void SetSize(const Vector3 &size);
@@ -35,10 +38,10 @@ public:
     FrameRenderLayer GetFrameRenderLayer() const;
 
 protected:
-    Game& _game;
-    Transformation _transformation;
-    Vector3 _size;
     const char *_fileName;
     FrameRenderLayer _frameRenderLayer;
+    Game& _game;
     Texture2D _texture; 
+    Transformation _transformation;
+    Vector3 _size;
 };

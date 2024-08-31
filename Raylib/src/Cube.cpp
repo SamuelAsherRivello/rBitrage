@@ -6,7 +6,8 @@
 #include <iostream>
 
 Cube::Cube(Game& game) : Actor(game, "src/assets/images/itch.io/projectTemplate/Paddle01.png") { 
-    _speed = 1000;
+    _velocityLinear = {1000,1000,0};
+    _velocityAngular = {0, 0, 100};
     _isCollision = false;
 }
 
@@ -34,26 +35,29 @@ void Cube::OnFrameUpdate(float deltaTime)
     if (_game.HasSystem<RMC::rBitrage::InputSystem>()) {
 
         Vector3 deltaPosition = Vector3();
+        Vector3 deltaRotation = Vector3();
 
         if (_game.GetSystem<RMC::rBitrage::InputSystem>()->IsActionDown("up"))
         {
             //std::cout << "Up" << std::endl; 
-            deltaPosition.y -= _speed;
+            deltaPosition.y -= _velocityLinear.y;
         }
         if (_game.GetSystem<RMC::rBitrage::InputSystem>()->IsActionDown("down"))
         {
             //std::cout << "Down" << std::endl;
-            deltaPosition.y += _speed;
+            deltaPosition.y += _velocityLinear.y;
         }
         if (_game.GetSystem<RMC::rBitrage::InputSystem>()->IsActionDown("left"))
         {
             //std::cout << "Left" << std::endl;
-            deltaPosition.x -= _speed;
+            deltaPosition.x -= _velocityLinear.x;
+            deltaRotation.z -= _velocityAngular.z;
         }
         if (_game.GetSystem<RMC::rBitrage::InputSystem>()->IsActionDown("right"))
         {
             //std::cout << "Right" << std::endl;
-            deltaPosition.x += _speed;
+            deltaPosition.x += _velocityLinear.x;
+            deltaRotation.z += _velocityAngular.z;
         }
         if (_game.GetSystem<RMC::rBitrage::InputSystem>()->IsActionPressed("action"))
         {
@@ -69,6 +73,13 @@ void Cube::OnFrameUpdate(float deltaTime)
             position.y + deltaPosition.y * deltaTime , 
             position.z + deltaPosition.z * deltaTime});
         SetPosition(newPosition);
+
+        Vector3 rotation = GetRotation();
+        Vector3 newRotation = Vector3({
+            rotation.x + deltaRotation.x * deltaTime, 
+            rotation.y + deltaRotation.y * deltaTime , 
+            rotation.z + deltaRotation.z * deltaTime});
+        SetRotation(newRotation);
     }
 
 
@@ -83,6 +94,8 @@ void Cube::OnFrameRender(const FrameRenderLayer& frameRenderLayer)
         return;
     }
 
+
+    //TODO: If/when collision is added to actor, then move this drawing to debugsystem
     if (_isCollision)
     {
         DrawRectangleLinesEx(GetBounds(), 8, BLUE);

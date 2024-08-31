@@ -13,7 +13,8 @@ public:
  
 
 private:
-    int _speed;
+    Vector3 _velocityLinear;
+    Vector3 _velocityAngular;
     bool _isCollision;
 };
 
