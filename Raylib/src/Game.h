@@ -26,7 +26,8 @@ namespace RMC::rBitrage
 
         //Lifecycle
         void Initialize();
-        void AddSystem(System* system);
+        void Initialized();
+        void AddSystem(System *system);
         void RemoveSystem(System* system);
         template <typename T>
         bool HasSystem() const;

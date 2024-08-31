@@ -1,4 +1,5 @@
 #include "ActorSystem.h"
+#include "ApplicationSystem.h"
 #include "AudioSystem.h"
 #include "CameraSystem.h"
 #include "DebugSystem.h"
@@ -33,6 +34,7 @@ namespace RMC::rBitrage
         //NOTE: Order here matters...
         //      affecting order of subsequent lifecycle calls
         AddSystem(new ActorSystem(*this));
+        AddSystem(new ApplicationSystem(*this));
         AddSystem(new AudioSystem(*this));
         AddSystem(new CameraSystem(*this));
         AddSystem(new DebugSystem(*this));
@@ -119,9 +121,26 @@ namespace RMC::rBitrage
             action.AddBinding(ActionType::IsDown, []() { return IsGamepadButtonDown(0, GAMEPAD_BUTTON_RIGHT_FACE_LEFT); });
             //
             inputSystem->AddAction("action", action);
+
+            //Fullscreen
+            Action fullscreenAction;
+            //IsDown
+            fullscreenAction.AddBinding(ActionType::IsPressed, []() { return IsKeyPressed(KEY_F); });
+            //
+            inputSystem->AddAction("fullscreen", fullscreenAction);
         }
 
+        Initialized();
+
     }
+
+    void Game::Initialized() {
+
+        for (System* system : _systems) {
+            system->OnInitialized();
+        }
+    }
+
 
     void Game::AddSystem(System* system) {
         _systems.push_back(system);

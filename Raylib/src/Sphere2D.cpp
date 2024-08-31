@@ -27,28 +27,40 @@ namespace RMC::rBitrage
         _transformation.Position.x += _velocity.x * deltaTime;
         _transformation.Position.y += _velocity.y * deltaTime;
 
+        const float minX = 0, maxX = GetScreenWidth();
+        const float minY = 0, maxY = GetScreenHeight();
+
         bool hasChangedDirection = false;
-        if (_transformation.Position.x + _size.x/2 >= GetScreenWidth() || _transformation.Position.x - _size.x <= 0)
+        if (_velocity.x < 0 && _transformation.Position.x - _size.x/2 <= minX)
         {
             _velocity.x *= -1;
             hasChangedDirection = true;
         }
-        
-
-        if (_transformation.Position.y + _size.y >= GetScreenHeight() || _transformation.Position.y - _size.y <= 0)
+            
+        else if (_velocity.x > 0 && _transformation.Position.x + _size.x/2 >= maxX)
+        {
+            _velocity.x *= -1;
+            hasChangedDirection = true;
+        }
+         
+        if (_velocity.y < 0 && _transformation.Position.y - _size.y/2 <= minY)
+        {
+            _velocity.y *= -1;
+            hasChangedDirection = true;
+        }
+            
+        else if (_velocity.y > 0 && _transformation.Position.y + _size.y/2 >= maxY)
         {
             _velocity.y *= -1;
             hasChangedDirection = true;
         }
 
-        if(hasChangedDirection)
-        {
+        if (hasChangedDirection) {
             if (_game.HasSystem<AudioSystem>())
             {
                 _game.GetSystem<AudioSystem>()->PlaySound2("Hit01");
             }
         }
-        
     }
 
     void Sphere2D::OnFrameRender()

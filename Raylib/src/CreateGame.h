@@ -1,6 +1,7 @@
 #include "CameraSystem.h"
 #include "Cube2D.h"
 #include "DebugSystem.h"
+#include "ApplicationSystem.h"
 #include "Game.h"
 #include "HudUI2D.h"
 #include "InputSystem.h"
@@ -14,6 +15,7 @@ using namespace RMC::rBitrage;
 //      TODO: Why does the ball flicker when moving (this started when I added the camera follow)
 // CODING STANDARDS
 //      TODO: Make a new "rBitrage.h" that contains every 'h' so users only need to include that ONE thing?
+//      TODO: Do a full pass over all methods per pointers. Pointers as arguments? Pointers as return values? Efficient + Standardized?
 // NEW FEATURES
 //      TODO: Draw items by SceneGraph first (more work), then position.z second (easier). Instead as currently, by  _actors[index]
 //      TODO: Add hot reloading
@@ -26,7 +28,7 @@ int createGame()
 {
     Game game = Game();
 
-    //Calls System:OnInitialize
+    //Calls System:OnInitialize **AND** System:OnInitialized
     game.Initialize();
 
     // FrameRenderLayer::PreCamera
@@ -73,15 +75,19 @@ int createGame()
     }
 
     //
-    while (!WindowShouldClose())
+    if (game.HasSystem<ApplicationSystem>())
     {
-        //Calls System:OnFrameUpdate **AND** System:OnFixedUpdate
-        game.UpdateFrame();
+        while (!game.GetSystem<ApplicationSystem>()->RaylibWindowShouldClose())
+        {
+            //Calls System:OnFrameUpdate **AND** System:OnFixedUpdate
+            game.UpdateFrame();
 
-        //Calls System:OnFrameRender
-        game.RenderFrame();
-    
+            //Calls System:OnFrameRender
+            game.RenderFrame();
+        
+        }
+        game.GetSystem<ApplicationSystem>()->RaylibCloseWindow();
     }
-    CloseWindow();
+
     return 0;
 }
