@@ -1,15 +1,17 @@
 #include "Actor2D.h"
 #include "Actor.h"
+#include "LoaderSystem.h"
 #include <raylib.h>
 #include <iostream>
 #include <string>
+#include <string.h>
 
 namespace RMC::rBitrage 
 {
     Actor2D::Actor2D(Game& game, const char *fileName, const FrameRenderLayer& frameRenderLayer) 
         : Actor (game, frameRenderLayer)
     {
-        _fileName = fileName;
+        _assetKey = fileName;
 
         //TODO: I call this **Again** eventhough parent does it
         // just to trigger building the texture. Can I remove this?
@@ -66,18 +68,28 @@ namespace RMC::rBitrage
     {
         Actor::SetSize(size);
 
-        if (_fileName == NULL)
+        if (strlen(_assetKey) == 0)
         {
+            std::cout << "SetSize() failed per _fileName for " << _assetKey << std::endl;
             return;
         }
 
-        std::string filePath = "src/assets/images/itch.io/projectTemplate/";
-        filePath += _fileName;
-        filePath += ".png";
-        const char *filePathPtr = filePath.c_str();
-        Image image = LoadImage(filePathPtr);
-        ImageResize(&image, _size.x, _size.y); 
-        _texture = LoadTextureFromImage(image); 
+        if (!_game.HasSystem<LoaderSystem>())
+        {
+            std::cout << "SetSize() failed per LoaderSystem for " << _assetKey << std::endl;
+            return;
+        }
+
+        Image image = _game.GetSystem<LoaderSystem>()->GetAssetCopy<Image>(_assetKey);
+
+        if (image.width == 0)
+        {
+            std::cout << "SetSize() failed per image for " << _assetKey << std::endl;
+            return;
+        }
+
+        ImageResize(&image, size.x, size.y);
+        _texture = LoadTextureFromImage(image);
 
     }
 }

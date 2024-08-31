@@ -38,6 +38,9 @@ namespace RMC::rBitrage
         void UpdateFrame();
         void RenderFrame(); 
 
+        //
+        bool GetIsInitialized() const { return _isInitialized; }
+
         //Fields
         Vector3 size;
         Color backgroundColor;
@@ -49,6 +52,7 @@ namespace RMC::rBitrage
         std::vector<System*> _systems;
         std::chrono::steady_clock _deltaClock;
         float _lastFixedUpdate = 0;
+        bool _isInitialized = false;
 
     };
 

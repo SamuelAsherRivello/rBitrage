@@ -24,7 +24,7 @@ namespace RMC::rBitrage
         void SetSize(const Vector3 &size) override;
 
     protected:
-        const char *_fileName;
+        const char *_assetKey;
         Texture2D _texture; 
     };
 

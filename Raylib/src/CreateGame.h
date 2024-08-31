@@ -5,6 +5,7 @@
 #include "Game.h"
 #include "HudUI2D.h"
 #include "InputSystem.h"
+#include "LoaderSystem.h" 
 #include "Sphere2D.h"
 #include <iostream>
 #include <raylib.h>
@@ -28,16 +29,31 @@ int createGame()
 {
     Game game = Game();
 
-     // LoaderSystem* loaderSystem = game.GetSystem<LoaderSystem>();
-        // loaderSystem->LoadAsset<Image>("Ball01", "src/assets/images/itch.io/projectTemplate/Ball01.png");
-        // loaderSystem->LoadAsset<Image>("Boundary01", "src/assets/images/itch.io/projectTemplate/Boundary01.png");
-        // loaderSystem->LoadAsset<Image>("Foreground01", "src/assets/images/itch.io/projectTemplate/Foreground01.png");
-        //or2D(game, "src/assets/images/itch.io/projectTemplate/Paddle01.png") { 
-        //Ball01
-
-    //Calls System:OnInitialize **AND** System:OnInitialized
+   //Calls System:OnInitialize **AND** System:OnInitialized
     game.Initialize();
 
+
+    if (!game.GetIsInitialized())
+    {
+        return 0;
+    }
+
+
+    if (!game.HasSystem<LoaderSystem>())
+    {
+        return 0;
+    }
+
+    LoaderSystem* loaderSystem = game.GetSystem<LoaderSystem>();
+    loaderSystem->AddAsset<Image>("Ball01", "src/assets/images/itch.io/projectTemplate/Ball01.png");
+    loaderSystem->AddAsset<Image>("Background01", "src/assets/images/itch.io/projectTemplate/Background01.png");
+    loaderSystem->AddAsset<Image>("Boundary01", "src/assets/images/itch.io/projectTemplate/Boundary01.png");
+    loaderSystem->AddAsset<Image>("Foreground01", "src/assets/images/itch.io/projectTemplate/Foreground01.png");
+    loaderSystem->AddAsset<Image>("Paddle01", "src/assets/images/itch.io/projectTemplate/Paddle01.png");
+    //
+    //loaderSystem->AddAsset<Sound>("Hit01", "src/assets/audio/sfx/Hit01.wav");
+    //loaderSystem->AddAsset<Sound>("Hit03", "src/assets/audio/sfx/Hit03.wav");
+ 
     // FrameRenderLayer::PreCamera
     Actor2D background = Actor2D(game, "Background01", FrameRenderLayer::PreCamera);
     background.SetSize({game.size.x, game.size.y, 0});

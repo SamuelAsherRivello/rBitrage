@@ -6,6 +6,7 @@
 #include "Game.h"
 #include "InputSystem.h"
 #include "PhysicsSystem.h"
+#include "LoaderSystem.h"
 #include "System.h"
 #include <algorithm>
 #include <iostream>
@@ -27,7 +28,15 @@ namespace RMC::rBitrage
     }
 
 
-    void Game::Initialize() {
+    void Game::Initialize() 
+    {
+
+        if (_isInitialized)
+        {
+            return;
+        }
+
+
         InitWindow(size.x, size.y, "rBitrage Template Project");
         SetTargetFPS(targetFPS);
 
@@ -39,6 +48,7 @@ namespace RMC::rBitrage
         AddSystem(new CameraSystem(*this));
         AddSystem(new DebugSystem(*this));
         AddSystem(new InputSystem(*this));
+        AddSystem(new LoaderSystem(*this));
         AddSystem(new PhysicsSystem(*this));
 
         for (System* system : _systems) {
@@ -136,9 +146,16 @@ namespace RMC::rBitrage
 
     void Game::Initialized() {
 
+        if (_isInitialized)
+        {
+            return;
+        }
+
         for (System* system : _systems) {
             system->OnInitialized();
         }
+        
+        _isInitialized = true;
     }
 
 
