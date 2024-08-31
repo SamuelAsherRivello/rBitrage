@@ -4,7 +4,7 @@
 namespace RMC::rBitrage 
 {
     /**
-     * DebugSystem is for showing developer-facing info
+     * System for showing developer-facing info
      * in the console and onscreen. 
      */
     DebugSystem::DebugSystem(Game& game) : System(game) 
@@ -17,15 +17,18 @@ namespace RMC::rBitrage
 
     }
 
+
     void DebugSystem::OnFixedUpdate(float fixedDeltaTime) 
     {
         // std::cout << "OnFixedUpdate(" << fixedDeltaTime << ")" << std::endl;
     }
 
+
     void DebugSystem::OnFrameUpdate(float deltaTime) 
     {
         // std::cout << "OnFrameUpdate(" << deltaTime << ")" << std::endl;
     }
+
 
     void DebugSystem::OnFrameRender(const FrameRenderLayer& frameRenderLayer) 
     {

@@ -3,24 +3,37 @@
 #include <raylib.h>
 #include <iostream>
 
-System::System(Game& game): _game (game) {
+System::System(Game& game): _game (game) 
+{
    
 }
-System::~System() {
 
+
+System::~System() 
+{
     std::cout << "ok " << std::endl;
-   
 }
 
-void System::OnInitialize() {
+
+void System::OnInitialize() 
+{
+
 }
 
-void System::OnFixedUpdate(float fixedDeltaTime) {
+
+void System::OnFixedUpdate(float fixedDeltaTime) 
+{
+
 }
 
-void System::OnFrameUpdate(float deltaTime) {
+
+void System::OnFrameUpdate(float deltaTime) 
+{
+
 }
 
-void System::OnFrameRender(const FrameRenderLayer& frameRenderLayer) {
+
+void System::OnFrameRender(const FrameRenderLayer& frameRenderLayer) 
+{
 
 }

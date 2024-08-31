@@ -21,7 +21,7 @@ using namespace RMC::rBitrage;
 //      TODO: Actor DrawTexturePro supports pivot. Add it to actor and set to center by default? -- See https://docs.unity3d.com/ScriptReference/Sprite-pivot.html
 // IMPROVEMENTS
 //      TODO: Scope how much physics we want. Alot? Import 3rd party. A little, then add concept of CollisionGroups to existing IsCollididing() and be done.
-
+//      TODO: Change System:OnInitialize to System:OnInitializeAsync and have game wait for it
 int main()
 {
     Game game = Game();

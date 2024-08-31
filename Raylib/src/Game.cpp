@@ -1,13 +1,14 @@
-#include <iostream>
-#include <memory>
-#include <algorithm>
-#include "Game.h"
-#include "System.h"
+#include "ActorSystem.h"
+#include "AudioSystem.h"
 #include "CameraSystem.h"
 #include "DebugSystem.h"
+#include "Game.h"
 #include "InputSystem.h"
 #include "PhysicsSystem.h"
-#include "ActorSystem.h"
+#include "System.h"
+#include <algorithm>
+#include <iostream>
+#include <memory>
 
 Game::Game() {
     size = {1600, 1000, 0};
@@ -27,13 +28,14 @@ void Game::Initialize() {
     InitWindow(size.x, size.y, "rBitrage Template Project");
     SetTargetFPS(targetFPS);
 
-    //NOTE: Order matters
-    //      affecting all subsequent lifecycle
+    //NOTE: Order here matters...
+    //      affecting order of subsequent lifecycle calls
+    AddSystem(new RMC::rBitrage::ActorSystem(*this));
+    AddSystem(new RMC::rBitrage::AudioSystem(*this));
     AddSystem(new RMC::rBitrage::CameraSystem(*this));
+    AddSystem(new RMC::rBitrage::DebugSystem(*this));
     AddSystem(new RMC::rBitrage::InputSystem(*this));
     AddSystem(new RMC::rBitrage::PhysicsSystem(*this));
-    AddSystem(new RMC::rBitrage::ActorSystem(*this));
-    AddSystem(new RMC::rBitrage::DebugSystem(*this));
 
     for (System* system : _systems) {
         system->OnInitialize();
