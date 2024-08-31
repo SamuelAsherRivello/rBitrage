@@ -92,7 +92,7 @@ void Cube2D::OnFrameRender()
     //TODO: If/when collision is added to actor, then move this drawing to debugsystem
     if (_isCollision)
     {
-        DrawRectangleLinesEx(GetBounds(), 8, BLUE);
+        DrawRectangleLinesEx(GetBounds().ToRectangle(), 8, BLUE);
     }
    
 }

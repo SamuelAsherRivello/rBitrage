@@ -27,7 +27,7 @@ namespace RMC::rBitrage
         for (Actor* otherActor : _game.GetActors())
         {
             if (actor == otherActor) continue;
-            if (CheckCollisionRecs(actor->GetBounds(), otherActor->GetBounds()))
+            if (CheckCollisionRecs(actor->GetBounds().ToRectangle(), otherActor->GetBounds().ToRectangle()))
             {
                 return true; // collision detected
             }

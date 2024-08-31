@@ -2,6 +2,7 @@
 #pragma once
 #include <raylib.h>
 #include "Game.h"
+#include "Bounds.h"
 #include "FrameRenderLayer.h"
 #include "Transform.h"
 
@@ -28,7 +29,7 @@ public:
     Vector3 GetSize() const;
     virtual void SetSize(const Vector3 &size);
     //
-    Rectangle GetBounds() const;
+    Bounds GetBounds() const;
     FrameRenderLayer GetFrameRenderLayer() const;
 
 protected:

@@ -65,9 +65,12 @@ void Actor::SetSize(const Vector3& size)
 
 }
 
-Rectangle Actor::GetBounds() const  
+Bounds Actor::GetBounds() const  
 {
-    return Rectangle{_transformation.Position.x - _size.x/2, _transformation.Position.y - _size.y/2, _size.x, _size.y};
+    return {
+                {_transformation.Position.x, _transformation.Position.y, _transformation.Position.z}, 
+                {_size.x, _size.y, _size.z}
+            };
 }
 
 FrameRenderLayer Actor::GetFrameRenderLayer() const  
