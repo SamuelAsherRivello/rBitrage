@@ -1,14 +1,15 @@
 #pragma once
 #include "FrameRenderLayer.h"
-#include "HudUI.h"
+#include "HudUI2D.h"
 #include "Game.h"
+#include "Actor2D.h"
 
 
-class HudUI : public Actor
+class HudUI2D : public Actor2D
 {
 public:
-    HudUI(Game& game);
-    ~HudUI(); 
+    HudUI2D(Game& game);
+    ~HudUI2D(); 
     void OnFrameRender() override;
 
 private:

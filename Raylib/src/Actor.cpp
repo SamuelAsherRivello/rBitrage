@@ -3,49 +3,34 @@
 #include <iostream>
 
 
-Actor::Actor(Game& game, const char *fileName, const FrameRenderLayer& frameRenderLayer) : _game (game) {
-
-    _fileName = fileName;
+Actor::Actor(Game& game, const FrameRenderLayer& frameRenderLayer) : _game (game) 
+{
     _frameRenderLayer = frameRenderLayer;
     SetPosition({0,0,0});
     SetSize({100, 100, 0});
 }
 
-Actor::~Actor() {
-      if (_texture.id != 0) { // Check if texture is valid
-        std::cout << "Unloading texture with ID: " << _texture.id << std::endl;
-        UnloadTexture(_texture);
-        _texture.id = 0; // Mark texture as invalid
-    } else {
-        std::cout << "Texture is not valid, skipping UnloadTexture." << std::endl;
-    }
-    std::cout << "Exiting Actor destructor" << std::endl;
+Actor::~Actor() 
+{
+ 
 }
 
-void Actor::OnInitialize() {
+void Actor::OnInitialize() 
+{
 }
 
 
-void Actor::OnFixedUpdate(float deltaTime) {
+void Actor::OnFixedUpdate(float fixedDeltaTime) 
+{
 }
 
-void Actor::OnFrameUpdate(float deltaTime) {
+void Actor::OnFrameUpdate(float deltaTime) 
+{
 }
 
-void Actor::OnFrameRender() {
+void Actor::OnFrameRender() 
+{
 
-    if (_texture.width == 0) 
-    {
-        return;
-    }
-
-    DrawTexturePro(
-        _texture, 
-        {0, 0, static_cast<float>(_texture.width), static_cast<float>(_texture.height)}, 
-        {_transformation.Position.x, _transformation.Position.y, static_cast<float>(_texture.width), static_cast<float>(_texture.height)},
-        {static_cast<float>(_texture.width)/2, static_cast<float>(_texture.height)/2},
-        _transformation.Rotation.z, 
-        WHITE);
     
 }
 
@@ -77,14 +62,6 @@ Vector3 Actor::GetSize() const
 void Actor::SetSize(const Vector3& size) 
 {
     _size = size;
-
-    if (_fileName == NULL)
-    {
-        return;
-    }
-    Image image = LoadImage(_fileName);
-    ImageResize(&image, _size.x, _size.y); 
-    _texture = LoadTextureFromImage(image); 
 
 }
 

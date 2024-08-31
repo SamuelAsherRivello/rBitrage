@@ -1,22 +1,20 @@
-#include "HudUI.h"
-#include "Actor.h"
+#include "HudUI2D.h"
+#include "Actor2D.h"
 #include <iostream>
 #include "FrameRenderLayer.h"
-
-HudUI::HudUI(Game& game) : Actor(game, "", FrameRenderLayer::PostCamera) { 
-
+HudUI2D::HudUI2D(Game& game) : Actor2D(game, "", FrameRenderLayer::PostCamera) 
+{ 
     SetSize({game.size.x, game.size.y, 0});
     SetPosition({game.size.x/2, game.size.y/2, 0});
 }
 
-HudUI::~HudUI()
+HudUI2D::~HudUI2D()
 {
 }
 
-void HudUI::OnFrameRender()
+void HudUI2D::OnFrameRender()
 {
-    Actor::OnFrameRender();
-
+    Actor2D::OnFrameRender();
 
     int margin = 50;
     int upperLeftX = margin;

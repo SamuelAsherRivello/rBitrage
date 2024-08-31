@@ -1,15 +1,15 @@
 #pragma once
 #include <raylib.h>
-#include "Actor.h"
+#include "Actor2D.h"
 
 
-class Sphere : public Actor
+class Sphere2D : public Actor2D
 {
 public:
 
     //
-    Sphere(Game& game);
-    ~Sphere(); 
+    Sphere2D(Game& game);
+    ~Sphere2D(); 
 
     //
     void OnFixedUpdate(float fixedDeltaTime) override;

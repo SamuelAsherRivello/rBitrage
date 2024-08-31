@@ -1,12 +1,12 @@
 #pragma once
 #include <raylib.h>
-#include "Actor.h"
+#include "Actor2D.h"
 
-class Cube : public Actor
+class Cube2D : public Actor2D
 {
 public:
-    Cube(Game& game);
-    ~Cube(); 
+    Cube2D(Game& game);
+    ~Cube2D(); 
     void OnFixedUpdate(float fixedDeltaTime) override;
     void OnFrameUpdate(float deltaTime) override;
     void OnFrameRender() override;

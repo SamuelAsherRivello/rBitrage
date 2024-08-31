@@ -1,26 +1,26 @@
-#include "Sphere.h"
-#include "Actor.h"
+#include "Sphere2D.h"
+#include "Actor2D.h"
 #include <raylib.h>
 #include "InputSystem.h"
 #include "PhysicsSystem.h"
 #include <iostream>
 
-Sphere::Sphere(Game& game) : Actor(game, "src/assets/images/itch.io/projectTemplate/Ball01.png") { 
+Sphere2D::Sphere2D(Game& game) : Actor2D(game, "src/assets/images/itch.io/projectTemplate/Ball01.png") { 
     _velocity = {0, 0, 0};
 }
 
-Sphere::~Sphere()
+Sphere2D::~Sphere2D()
 {
 }
 
-void Sphere::OnFixedUpdate(float fixedDeltaTime)
+void Sphere2D::OnFixedUpdate(float fixedDeltaTime)
 {
-    Actor::OnFixedUpdate(fixedDeltaTime);
+    Actor2D::OnFixedUpdate(fixedDeltaTime);
 }
 
-void Sphere::OnFrameUpdate(float deltaTime)
+void Sphere2D::OnFrameUpdate(float deltaTime)
 {
-    Actor::OnFrameUpdate(deltaTime);
+    Actor2D::OnFrameUpdate(deltaTime);
 
     _transformation.Position.x += _velocity.x * deltaTime;
     _transformation.Position.y += _velocity.y * deltaTime;
@@ -32,18 +32,18 @@ void Sphere::OnFrameUpdate(float deltaTime)
         _velocity.y *= -1;
 }
 
-void Sphere::OnFrameRender()
+void Sphere2D::OnFrameRender()
 {
-    Actor::OnFrameRender();
+    Actor2D::OnFrameRender();
 }
 
 
-Vector3 Sphere::GetVelocity() const 
+Vector3 Sphere2D::GetVelocity() const 
 {
     return _velocity;
 }
 
-void Sphere::SetVelocity(const Vector3& velocity) 
+void Sphere2D::SetVelocity(const Vector3& velocity) 
 {
     _velocity = velocity;
 }

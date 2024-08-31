@@ -1,23 +1,23 @@
-#include "Cube.h"
-#include "Actor.h"
+#include "Cube2D.h"
+#include "Actor2D.h"
 #include <raylib.h>
 #include "InputSystem.h"
 #include "PhysicsSystem.h"
 #include <iostream>
 
-Cube::Cube(Game& game) : Actor(game, "src/assets/images/itch.io/projectTemplate/Paddle01.png") { 
+Cube2D::Cube2D(Game& game) : Actor2D(game, "src/assets/images/itch.io/projectTemplate/Paddle01.png") { 
     _velocityLinear = {1000,1000,0};
     _velocityAngular = {0, 0, 100};
     _isCollision = false;
 }
 
-Cube::~Cube()
+Cube2D::~Cube2D()
 {
 }
 
-void Cube::OnFixedUpdate(float fixedDeltaTime)
+void Cube2D::OnFixedUpdate(float fixedDeltaTime)
 {
-    Actor::OnFixedUpdate(fixedDeltaTime);
+    Actor2D::OnFixedUpdate(fixedDeltaTime);
 
     if (_game.HasSystem<RMC::rBitrage::PhysicsSystem>())
     {
@@ -27,9 +27,9 @@ void Cube::OnFixedUpdate(float fixedDeltaTime)
 
 }
 
-void Cube::OnFrameUpdate(float deltaTime)
+void Cube2D::OnFrameUpdate(float deltaTime)
 {
-    Actor::OnFrameUpdate(deltaTime);
+    Actor2D::OnFrameUpdate(deltaTime);
 
     // Input
     if (_game.HasSystem<RMC::rBitrage::InputSystem>()) {
@@ -85,10 +85,9 @@ void Cube::OnFrameUpdate(float deltaTime)
 
 }
 
-void Cube::OnFrameRender()
+void Cube2D::OnFrameRender()
 {
-    Actor::OnFrameRender();
-
+    Actor2D::OnFrameRender();
 
     //TODO: If/when collision is added to actor, then move this drawing to debugsystem
     if (_isCollision)
