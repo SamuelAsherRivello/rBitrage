@@ -39,7 +39,7 @@ namespace RMC::rBitrage
                 if (IsWindowFullscreen())
                 {
                     // if we are full screen, then go back to the windowed size
-                    SetWindowSize(_game.size.x, _game.size.y);
+                    SetWindowSize(_game.screen.size.x, _game.screen.size.y);
                 }
                 else
                 {

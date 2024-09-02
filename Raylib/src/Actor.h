@@ -36,7 +36,7 @@ namespace RMC::rBitrage
     protected:
         FrameRenderLayer _frameRenderLayer;
         Game& _game;
-        Transformation _transformation;
+        Transform _transformation;
         Vector3 _size;
     };
 }

@@ -70,6 +70,7 @@
 		"sstream": "cpp",
 		"variant": "cpp",
 		"any": "cpp",
-		"*.m": "cpp"
+		"*.m": "cpp",
+		"map": "cpp"
 	}
 }

@@ -7,8 +7,8 @@ namespace RMC::rBitrage
     {
     HudUI2D::HudUI2D(Game& game) : Actor2D(game, "", FrameRenderLayer::PostCamera) 
     { 
-        SetSize({game.size.x, game.size.y, 0});
-        SetPosition({game.size.x/2, game.size.y/2, 0});
+        SetSize({game.screen.size.x, game.screen.size.y, 0});
+        SetPosition({game.screen.size.x/2, game.screen.size.y/2, 0});
     }
 
     HudUI2D::~HudUI2D()
@@ -22,7 +22,7 @@ namespace RMC::rBitrage
         int margin = 50;
         int upperLeftX = margin;
         int upperLeftY = margin;
-        int upperRightX = _game.size.x - margin - 290;
+        int upperRightX = _game.screen.size.x - margin - 290;
         int upperRightY = margin;
         Color fontColor = WHITE;
         int fontSize = 59;

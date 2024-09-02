@@ -4,6 +4,7 @@
 #include "CameraSystem.h"
 #include "DebugSystem.h"
 #include "Game.h"
+#include "Screen.h"
 #include "InputSystem.h"
 #include "PhysicsSystem.h"
 #include "LoaderSystem.h"
@@ -14,12 +15,16 @@
 
 namespace RMC::rBitrage 
 {
-    Game::Game() {
-        size = {1600, 1000, 0};
+    Game::Game() : screen(1920, 1080) {
+
+        //KEEP These values hardcoded HERE. Override using public API as desired.
         backgroundColor = {53, 137, 202, 255};
-        isDebug = true;
-        targetFPS = 120; //120, Frame updates per second
         fixedUpdateInterval = .2; //0.2, Seconds between fixed updates
+        title = "rBitrage Template";  //KEEP Here. Over-set publicaclly
+        isDebug = false;  
+        targetFPS = 120; //KEEP: 120, Frame updates per second
+        world = World();
+
     }
 
     Game::~Game() {
@@ -36,8 +41,7 @@ namespace RMC::rBitrage
             return;
         }
 
-
-        InitWindow(size.x, size.y, "rBitrage Template Project");
+        InitWindow(screen.size.x, screen.size.y, title);
         SetTargetFPS(targetFPS);
 
         //NOTE: Order here matters...
@@ -46,12 +50,17 @@ namespace RMC::rBitrage
         AddSystem(new ApplicationSystem(*this));
         AddSystem(new AudioSystem(*this));
         AddSystem(new CameraSystem(*this));
-        AddSystem(new DebugSystem(*this));
         AddSystem(new InputSystem(*this));
         AddSystem(new LoaderSystem(*this));
         AddSystem(new PhysicsSystem(*this));
 
-        for (System* system : _systems) {
+        if (this->isDebug) 
+        {
+            AddSystem(new DebugSystem(*this));
+        }
+
+        for (System* system : _systems) 
+        {
             system->OnInitialize();
         }
 

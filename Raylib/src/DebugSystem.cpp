@@ -41,7 +41,12 @@ namespace RMC::rBitrage
 
         DrawFPS(50, 120);   
 
-        DrawWorldOrigin();
+        //Draw world first, thicker
+        DrawWorldSizeHalf();
+        DrawWorldBounds();
+
+        //Draw screen after, thinner
+        DrawScreenSizeHalf();
         DrawScreenBounds();
      
 
@@ -55,18 +60,33 @@ namespace RMC::rBitrage
         // }
     }
 
-    void DebugSystem::DrawWorldOrigin() 
+    void DebugSystem::DrawWorldSizeHalf() 
     {
         //HORIZONTAL
-        DrawLineEx({0, _game.size.y/2}, {_game.size.x, _game.size.y/2}, 4, _worldColor);
+        DrawLineEx({0, _game.world.size.y/2}, {_game.world.size.x, _game.world.size.y/2}, _worldStroke, _worldColor);
 
         //VERTICAL
-        DrawLineEx({_game.size.x/2, 0}, {_game.size.x/2, _game.size.y}, 4, _worldColor);
+        DrawLineEx({_game.world.size.x/2, 0}, {_game.world.size.x/2, _game.world.size.y}, _worldStroke, _worldColor);
+
+    }
+
+    void DebugSystem::DrawScreenSizeHalf() 
+    {
+        //HORIZONTAL
+        DrawLineEx({0, _game.screen.size.y/2}, {_game.screen.size.x, _game.screen.size.y/2}, _screenStroke, _screenColor);
+
+        //VERTICAL
+        DrawLineEx({_game.screen.size.x/2, 0}, {_game.screen.size.x/2, _game.screen.size.y}, _screenStroke, _screenColor);
 
     }
 
     void DebugSystem::DrawScreenBounds() 
     {
-        DrawRectangleLinesEx({0, 0, _game.size.x, _game.size.y}, 4, _screenColor);
+        DrawRectangleLinesEx({0, 0, _game.screen.size.x, _game.screen.size.y}, _screenStroke, _screenColor);
+    }
+
+    void DebugSystem::DrawWorldBounds() 
+    {
+        DrawRectangleLinesEx({0, 0, _game.world.size.x, _game.world.size.y}, _worldStroke, _worldColor);
     }
 } 

@@ -4,6 +4,8 @@
 #include "System.h"
 #include <memory>
 #include <chrono>
+#include "World.h"
+#include "Screen.h"
 
 namespace RMC::rBitrage 
 {
@@ -34,6 +36,7 @@ namespace RMC::rBitrage
         template <typename T>
         T* GetSystem() const;
 
+
         //Lifecycle
         void UpdateFrame();
         void RenderFrame(); 
@@ -42,15 +45,16 @@ namespace RMC::rBitrage
         bool GetIsInitialized() const { return _isInitialized; }
 
         //Fields
-        Vector3 size;
         Color backgroundColor;
-        bool isDebug = false;
-        int targetFPS = 120;
-        float fixedUpdateInterval = 0.2; 
+        bool isDebug;
+        int targetFPS;
+        float fixedUpdateInterval;
+        const char * title;
+        World world;
+        Screen screen;
 
     private:
         std::vector<System*> _systems;
-        std::chrono::steady_clock _deltaClock;
         float _lastFixedUpdate = 0;
         bool _isInitialized = false;
 

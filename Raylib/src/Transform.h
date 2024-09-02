@@ -4,7 +4,7 @@
 
 namespace RMC::rBitrage 
 {
-    class Transformation
+    class Transform
     {
         public:
             //This is euler

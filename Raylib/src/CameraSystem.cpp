@@ -14,8 +14,8 @@ namespace RMC::rBitrage
     void CameraSystem::OnInitialize() 
     {
         camera2D = Camera2D();
-        camera2D.target = {_game.size.x/2, _game.size.y/2};
-        camera2D.offset = {_game.size.x/2, _game.size.y/2};
+        camera2D.target = {_game.screen.center.x, _game.screen.center.y};
+        camera2D.offset = {_game.screen.size.x/2, _game.screen.size.y/2};
         camera2D.rotation = 0.0f;
         camera2D.zoom = 1;
     }

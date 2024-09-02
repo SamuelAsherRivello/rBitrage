@@ -16,23 +16,31 @@ int gameCreateSpheres()
 {
     Game game = Game();
 
+    //Overrides
+    game.world.size = game.screen.size;   //balls bounds off world bounds
+    game.isDebug = true; //show gizmos
+
+    //
     game.Initialize();
+
+
     LoaderSystem* loaderSystem = game.GetSystem<LoaderSystem>();
     loaderSystem->AddAsset<Image>("Ball01", "src/assets/images/itch.io/projectTemplate/Ball01.png");
+    loaderSystem->AddAsset<Image>("Background01", "src/assets/images/itch.io/projectTemplate/Background01.png");
  
     // FrameRenderLayer::PreCamera
-    Actor2D background = Actor2D(game, "Background01", FrameRenderLayer::PreCamera);
-    background.SetSize({game.size.x, game.size.y, 0});
-    background.SetPosition({game.size.x/2, game.size.y/2, 0});
-    game.AddActor(&background);
+    // Actor2D background = Actor2D(game, "Background01", FrameRenderLayer::PreCamera);
+    // background.SetSize({game.screen.size.x, game.screen.size.y, 0});
+    // background.SetPosition({game.screen.size.x/2, game.screen.size.y/2, 0});
+    // game.AddActor(&background);
 
     for (int i = 0; i < 10; i++)
     {
         Sphere2D* sphere = new Sphere2D(game);
-        sphere->SetPosition({game.size.x/2, game.size.y/2, 0});
+        sphere->SetPosition(game.world.center);
 
-        float x = std::rand() % -100 + std::rand() % 2000;
-        float y = std::rand() % -100 + std::rand() % 200;
+        float x = (-std::rand() % 3 + std::rand() % 6) * 100;
+        float y = (-std::rand() % 3 + std::rand() % 6) * 100; 
         sphere->SetVelocity({x, y, 0});
         game.AddActor(sphere);
     }
@@ -41,12 +49,6 @@ int gameCreateSpheres()
     HudUI2D hudUI = HudUI2D(game);
     game.AddActor(&hudUI);
 
-
-    //
-    if (game.HasSystem<CameraSystem>())
-    {
-        //game.GetSystem<CameraSystem>()->GetCamera2D().offset = {game.size.x/2, game.size.y/2};
-    }
 
     //
     if (game.HasSystem<ApplicationSystem>())

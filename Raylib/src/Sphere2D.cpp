@@ -27,8 +27,10 @@ namespace RMC::rBitrage
         _transformation.Position.x += _velocity.x * deltaTime;
         _transformation.Position.y += _velocity.y * deltaTime;
 
-        const float minX = 0, maxX = GetScreenWidth();
-        const float minY = 0, maxY = GetScreenHeight();
+        const float minX = _game.world.GetMin().x;
+        const float maxX = _game.world.GetMax().x;
+        const float minY = _game.world.GetMin().y;
+        const float maxY = _game.world.GetMax().y;
 
         bool hasChangedDirection = false;
         if (_velocity.x < 0 && _transformation.Position.x - _size.x/2 <= minX)

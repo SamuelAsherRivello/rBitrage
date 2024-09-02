@@ -56,34 +56,34 @@ int gameCreateMain()
  
     // FrameRenderLayer::PreCamera
     Actor2D background = Actor2D(game, "Background01", FrameRenderLayer::PreCamera);
-    background.SetSize({game.size.x, game.size.y, 0});
-    background.SetPosition({game.size.x/2, game.size.y/2, 0});
+    background.SetSize({game.screen.size.x, game.screen.size.y, 0});
+    background.SetPosition({game.screen.size.x/2, game.screen.size.y/2, 0});
     game.AddActor(&background);
 
     // FrameRenderLayer::Camera
     Cube2D cube01 = Cube2D(game);
-    cube01.SetPosition({game.size.x/2, game.size.y/2, 0});
+    cube01.SetPosition({game.screen.size.x/2, game.screen.size.y/2, 0});
     game.AddActor(&cube01);
 
     Sphere2D sphere01 = Sphere2D(game);
-    sphere01.SetPosition({game.size.x/4, game.size.y/4, 0});
+    sphere01.SetPosition({game.screen.size.x/4, game.screen.size.y/4, 0});
     sphere01.SetVelocity({100, 200, 0});
     game.AddActor(&sphere01);
 
     Sphere2D sphere02 = Sphere2D(game);
-    sphere02.SetPosition({game.size.x/3, game.size.y/3, 0});
+    sphere02.SetPosition({game.screen.size.x/3, game.screen.size.y/3, 0});
     sphere02.SetVelocity({-200, 100, 0});
     game.AddActor(&sphere02);
 
     Actor2D boundary = Actor2D(game, "Boundary01");
-    boundary.SetSize({game.size.x, game.size.y, 0});
-    boundary.SetPosition({game.size.x/2, game.size.y/2, 0});
+    boundary.SetSize({game.screen.size.x, game.screen.size.y, 0});
+    boundary.SetPosition({game.screen.size.x/2, game.screen.size.y/2, 0});
     game.AddActor(&boundary);
 
     // FrameRenderLayer::PostCamera
     Actor2D foreground = Actor2D(game, "Foreground01", FrameRenderLayer::PostCamera);
-    foreground.SetSize({game.size.x, game.size.y, 0});
-    foreground.SetPosition({game.size.x/2, game.size.y/2, 0});
+    foreground.SetSize({game.screen.size.x, game.screen.size.y, 0});
+    foreground.SetPosition({game.screen.size.x/2, game.screen.size.y/2, 0});
     game.AddActor(&foreground);
 
     // FrameRenderLayer::PostCamera
