@@ -7,7 +7,7 @@
 #include "Screen.h"
 #include "InputSystem.h"
 #include "PhysicsSystem.h"
-#include "LoaderSystem.h"
+#include "AssetLoaderSystem.h"
 #include "System.h"
 #include <algorithm>
 #include <iostream>
@@ -51,7 +51,7 @@ namespace RMC::rBitrage
         AddSystem(new AudioSystem(*this));
         AddSystem(new CameraSystem(*this));
         AddSystem(new InputSystem(*this));
-        AddSystem(new LoaderSystem(*this));
+        AddSystem(new AssetLoaderSystem(*this));
         AddSystem(new PhysicsSystem(*this));
 
         if (this->isDebug) 
@@ -188,7 +188,11 @@ namespace RMC::rBitrage
     void Game::RemoveActor(Actor* actor) {
         if (!HasSystem<ActorSystem>())
         {
-            std::cout << "RemoveActor() Failed" << std::endl;
+            std::cout << "RemoveActor() Failed, no system" << std::endl;
+        }
+        if (!GetSystem<ActorSystem>()->HasActor(actor))
+        {
+            std::cout << "RemoveActor() Failed, no actor" << std::endl;
         }
         GetSystem<ActorSystem>()->RemoveActor(actor);
     }
@@ -247,7 +251,11 @@ namespace RMC::rBitrage
     }
 
 
-
+    /**
+     * Draws the frame.
+     * we call all systems 3 times, before, during, and after camera
+     * each system does 'nothing' except the on the 1? pass it wants. 
+     */
     void Game::RenderFrame() {
 
         BeginDrawing();
@@ -257,6 +265,8 @@ namespace RMC::rBitrage
             system->OnFrameRender(FrameRenderLayer::PreCamera);
         }
 
+////////////////////////////////////////////////
+        /// 3d camera - move later to its own system
         // Camera camera = { 0 };
         // camera.position = (Vector3){ 0.0f, 10.0f, 10.0f };
         // camera.target = (Vector3){ 0.0f, 0.0f, 0.0f };
@@ -271,6 +281,9 @@ namespace RMC::rBitrage
         //     DrawGrid(10, 1.0f);
 
         // EndMode3D();
+
+///////////////////////////////////////////////////////////
+
 
         BeginMode2D(GetSystem<CameraSystem>()->camera2D);
 

@@ -1,6 +1,6 @@
 #include "Actor2D.h"
 #include "Actor.h"
-#include "LoaderSystem.h"
+#include "AssetLoaderSystem.h"
 #include <raylib.h>
 #include <iostream>
 #include <string>
@@ -54,13 +54,17 @@ namespace RMC::rBitrage
             return;
         }
 
+
+       unsigned char oo = 255 * GetOpacity();
+
+
         DrawTexturePro(
             _texture, 
             {0, 0, static_cast<float>(_texture.width), static_cast<float>(_texture.height)}, 
             {_transformation.Position.x, _transformation.Position.y, static_cast<float>(_texture.width), static_cast<float>(_texture.height)},
             {static_cast<float>(_texture.width)/2, static_cast<float>(_texture.height)/2},
             _transformation.Rotation.z, 
-            WHITE);
+            CLITERAL(Color){ 255, 255, 255, oo });
         
     }
 
@@ -74,13 +78,13 @@ namespace RMC::rBitrage
             return;
         }
 
-        if (!_game.HasSystem<LoaderSystem>())
+        if (!_game.HasSystem<AssetLoaderSystem>())
         {
             std::cout << "SetSize() failed per LoaderSystem for " << _assetKey << std::endl;
             return;
         }
 
-        Image image = _game.GetSystem<LoaderSystem>()->GetAssetCopy<Image>(_assetKey);
+        Image image = _game.GetSystem<AssetLoaderSystem>()->GetAssetAsImage<Image>(_assetKey);
 
         if (image.width == 0)
         {

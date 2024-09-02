@@ -5,7 +5,7 @@
 #include "Game.h"
 #include "HudUI2D.h"
 #include "InputSystem.h"
-#include "LoaderSystem.h" 
+#include "AssetLoaderSystem.h" 
 #include "Sphere2D.h"
 #include <iostream>
 #include <raylib.h>
@@ -29,6 +29,10 @@ int gameCreateMain()
 {
     Game game = Game();
 
+    //Overrides
+    game.world.size = game.screen.size;   //balls bounds off world bounds
+    game.isDebug = true; //show gizmos
+
    //Calls System:OnInitialize **AND** System:OnInitialized
     game.Initialize();
 
@@ -39,18 +43,17 @@ int gameCreateMain()
     }
 
 
-    if (!game.HasSystem<LoaderSystem>())
+    if (!game.HasSystem<AssetLoaderSystem>())
     {
         return 0;
     }
 
-    LoaderSystem* loaderSystem = game.GetSystem<LoaderSystem>();
+    AssetLoaderSystem* loaderSystem = game.GetSystem<AssetLoaderSystem>();
     loaderSystem->AddAsset<Image>("Ball01", "src/assets/images/itch.io/projectTemplate/Ball01.png");
     loaderSystem->AddAsset<Image>("Background01", "src/assets/images/itch.io/projectTemplate/Background01.png");
     loaderSystem->AddAsset<Image>("Boundary01", "src/assets/images/itch.io/projectTemplate/Boundary01.png");
     loaderSystem->AddAsset<Image>("Foreground01", "src/assets/images/itch.io/projectTemplate/Foreground01.png");
     loaderSystem->AddAsset<Image>("Paddle01", "src/assets/images/itch.io/projectTemplate/Paddle01.png");
-    //
     //loaderSystem->AddAsset<Sound>("Hit01", "src/assets/audio/sfx/Hit01.wav");
     //loaderSystem->AddAsset<Sound>("Hit03", "src/assets/audio/sfx/Hit03.wav");
  
@@ -62,6 +65,7 @@ int gameCreateMain()
 
     // FrameRenderLayer::Camera
     Cube2D cube01 = Cube2D(game);
+    cube01.SetOpacity(0.5f);
     cube01.SetPosition({game.screen.size.x/2, game.screen.size.y/2, 0});
     game.AddActor(&cube01);
 

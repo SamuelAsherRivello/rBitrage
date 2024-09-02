@@ -1,5 +1,5 @@
 #include "Game.h"
-#include "LoaderSystem.h"
+#include "AssetLoaderSystem.h"
 #include <iostream>
 
 namespace RMC::rBitrage 
@@ -7,12 +7,12 @@ namespace RMC::rBitrage
     /**
      * System for loading any assets
      */
-    LoaderSystem::LoaderSystem(Game& game) : System(game) 
+    AssetLoaderSystem::AssetLoaderSystem(Game& game) : System(game) 
     {
 
     }
 
-    void LoaderSystem::OnInitialize() 
+    void AssetLoaderSystem::OnInitialize() 
     {
     }
 

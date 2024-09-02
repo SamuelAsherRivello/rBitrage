@@ -20,6 +20,8 @@ namespace RMC::rBitrage
             std::vector<Actor*> GetActors();
             void RemoveActor(Actor* actor);
 
+            bool HasActor(Actor *actor);
+
         protected:
             void OnInitialize() override;
             void OnFixedUpdate(float deltaTime) override;

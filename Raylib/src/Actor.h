@@ -29,6 +29,8 @@ namespace RMC::rBitrage
         //
         Vector3 GetSize() const;
         virtual void SetSize(const Vector3 &size);
+        float GetOpacity();
+        void SetOpacity(float opacity);
         //
         Bounds GetBounds() const;
         FrameRenderLayer GetFrameRenderLayer() const;
@@ -38,5 +40,10 @@ namespace RMC::rBitrage
         Game& _game;
         Transform _transformation;
         Vector3 _size;
+
+    private:
+        float _opacity;
+        
     };
+   
 }

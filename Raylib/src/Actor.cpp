@@ -6,6 +6,7 @@ namespace RMC::rBitrage
 {
     Actor::Actor(Game& game, const FrameRenderLayer& frameRenderLayer) : _game (game) 
     {
+        _opacity = 1;
         _frameRenderLayer = frameRenderLayer;
         SetPosition({0,0,0});
         SetSize({100, 100, 0});
@@ -53,6 +54,17 @@ namespace RMC::rBitrage
     void Actor::SetRotation(const Vector3& position) 
     {
         _transformation.Rotation = position;
+    }
+
+    float Actor::GetOpacity()
+    {
+        return _opacity;
+    }
+
+    void Actor::SetOpacity(float opacity)
+    {
+         // Clamp the opacity value between 0 and 1
+         _opacity = std::max(0.0f, std::min(opacity, 1.0f));
     }
 
     Vector3 Actor::GetSize() const 

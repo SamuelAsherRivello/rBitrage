@@ -88,6 +88,16 @@ namespace RMC::rBitrage
     }
 
     /**
+     * HasActor: Determines if it has an actor 
+     *
+     * @param actor The actor to check.
+     */
+    bool ActorSystem::HasActor(Actor* actor) 
+    {
+        return count(_actors.begin(), _actors.end(), actor) > 0;
+    }
+
+    /**
      * GetActors: Gets a list of all actors in the system.
      *
      * @return A vector of all actors in the system.

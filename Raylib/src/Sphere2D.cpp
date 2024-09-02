@@ -60,7 +60,7 @@ namespace RMC::rBitrage
         if (hasChangedDirection) {
             if (_game.HasSystem<AudioSystem>())
             {
-                //_game.GetSystem<AudioSystem>()->PlaySound2("Hit01");
+                _game.GetSystem<AudioSystem>()->PlaySound("Hit01");
             }
         }
     }

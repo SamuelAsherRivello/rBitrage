@@ -4,6 +4,7 @@
 #include "Game.h"
 #include <unordered_map>
 #include <string>
+#include "AssetLoaderSystem.h"
 
 namespace RMC::rBitrage 
 {
@@ -13,15 +14,13 @@ namespace RMC::rBitrage
             AudioSystem(Game& game);
             ~AudioSystem();
             void OnInitialize() override;
+            void OnInitialized() override;
 
             //
-            bool HasSound(const char *soundName);
-            Sound GetSound(const char *soundName);
-            void AddSound(const char *fileName, const char *soundName);
-            void PlaySound2(const char *soundName);
+            void PlaySound(const char *soundName);
 
         private:
-            std::unordered_map<std::string, Sound> _soundsByName;  
+            AssetLoaderSystem* _assetLoaderSystem;
             
     };
 
