@@ -69,6 +69,7 @@
 		"span": "cpp",
 		"sstream": "cpp",
 		"variant": "cpp",
-		"any": "cpp"
+		"any": "cpp",
+		"*.m": "cpp"
 	}
 }
