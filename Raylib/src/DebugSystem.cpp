@@ -41,6 +41,10 @@ namespace RMC::rBitrage
 
         DrawFPS(50, 120);   
 
+        DrawWorldOrigin();
+        DrawScreenBounds();
+     
+
         //Draw box around actors for debugging
         // for (Actor* actor : _game.GetActors()) {
         //     if (actor->GetFrameRenderLayer() != frameRenderLayer)
@@ -49,5 +53,20 @@ namespace RMC::rBitrage
         //     }
         //     DrawRectangleLinesEx(actor->GetBounds(), 4, RED);
         // }
+    }
+
+    void DebugSystem::DrawWorldOrigin() 
+    {
+        //HORIZONTAL
+        DrawLineEx({0, _game.size.y/2}, {_game.size.x, _game.size.y/2}, 4, _worldColor);
+
+        //VERTICAL
+        DrawLineEx({_game.size.x/2, 0}, {_game.size.x/2, _game.size.y}, 4, _worldColor);
+
+    }
+
+    void DebugSystem::DrawScreenBounds() 
+    {
+        DrawRectangleLinesEx({0, 0, _game.size.x, _game.size.y}, 4, _screenColor);
     }
 } 

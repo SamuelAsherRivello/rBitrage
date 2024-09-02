@@ -25,7 +25,7 @@ using namespace RMC::rBitrage;
 // IMPROVEMENTS
 //      TODO: Scope how much physics we want. Alot? Import 3rd party. A little, then add concept of CollisionGroups to existing IsCollididing() and be done.
 //      TODO: Change System:OnInitialize to System:OnInitializeAsync and have game wait for it
-int createGame()
+int gameCreateMain()
 {
     Game game = Game();
 

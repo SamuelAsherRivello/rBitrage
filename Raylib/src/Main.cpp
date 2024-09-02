@@ -1,8 +1,9 @@
-#include "CreateGame.h"
+#include "GameCreateMain.h"
+#include "GameCreateSpheres.h"
 
 int main()
 {
-    return createGame();
-    //return createGame2D(); //TODO: Implement
+    //return gameCreateMain();
+    return gameCreateSpheres(); 
     //return createGame3D(); //TODO: Implement
 }
