@@ -1,6 +1,9 @@
 #include "Actor.h"
+#include "Utilities.h"
 #include <raylib.h>
 #include <iostream>
+
+
 
 namespace RMC::rBitrage 
 {
@@ -8,6 +11,10 @@ namespace RMC::rBitrage
     {
         _opacity = 1;
         _frameRenderLayer = frameRenderLayer;
+
+        //
+        SetPivot({0.5f, 0.5f, 0.5}); //center pivot by default
+        SetName(typeid(this).name());
         SetPosition({0,0,0});
         SetSize({100, 100, 0});
     }
@@ -32,9 +39,22 @@ namespace RMC::rBitrage
 
     void Actor::OnFrameRender() 
     {
-
-        
+        std::cout << "3, ActorSystem::OnFrameRender" << std::endl;
     }
+
+
+    const char* Actor::GetName() const 
+    {
+        return _name;
+    }
+
+    //TODO: I'm recalling this in child constructors. I'd like to call it only in the parent
+    //and have the solution 'know' the name of the child-most name
+    void Actor::SetName(const char* name) 
+    {
+        _name = name;
+    }
+
 
     Vector3 Actor::GetPosition() const 
     {
@@ -51,6 +71,17 @@ namespace RMC::rBitrage
         return _transformation.Rotation;
     }
 
+    void Actor::SetPivot(const Vector3& pivot) 
+    {
+        _pivot = Utilities::ToVector3Normalized(pivot);
+    }
+
+    Vector3 Actor::GetPivot() const 
+    {
+        return _pivot;
+    }
+    
+
     void Actor::SetRotation(const Vector3& position) 
     {
         _transformation.Rotation = position;
@@ -64,7 +95,7 @@ namespace RMC::rBitrage
     void Actor::SetOpacity(float opacity)
     {
          // Clamp the opacity value between 0 and 1
-         _opacity = std::max(0.0f, std::min(opacity, 1.0f));
+         _opacity = Utilities::ToFloatNormalized(opacity);
     }
 
     Vector3 Actor::GetSize() const 
@@ -75,7 +106,6 @@ namespace RMC::rBitrage
     void Actor::SetSize(const Vector3& size) 
     {
         _size = size;
-
     }
 
     Bounds Actor::GetBounds() const  

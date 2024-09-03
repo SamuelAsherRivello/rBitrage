@@ -4,7 +4,8 @@ namespace RMC::rBitrage
     enum class FrameRenderLayer 
     {
         PreCamera,
-        Camera,
+        Camera2D,
+        Camera3D,
         PostCamera,
     };
 }

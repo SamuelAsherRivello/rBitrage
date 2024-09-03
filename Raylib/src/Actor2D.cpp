@@ -1,6 +1,7 @@
 #include "Actor2D.h"
 #include "Actor.h"
 #include "AssetLoaderSystem.h"
+#include "Utilities.h"
 #include <raylib.h>
 #include <iostream>
 #include <string>
@@ -8,10 +9,10 @@
 
 namespace RMC::rBitrage 
 {
-    Actor2D::Actor2D(Game& game, const char *fileName, const FrameRenderLayer& frameRenderLayer) 
+    Actor2D::Actor2D(Game& game, const char *assetKey, const FrameRenderLayer& frameRenderLayer) 
         : Actor (game, frameRenderLayer)
     {
-        _assetKey = fileName;
+        _assetKey = assetKey;
 
         //TODO: I call this **Again** eventhough parent does it
         // just to trigger building the texture. Can I remove this?
@@ -49,22 +50,21 @@ namespace RMC::rBitrage
 
         Actor::OnFrameRender();
 
-        if (_texture.width == 0) 
+        if (strlen(_assetKey) == 0)
         {
             return;
         }
 
+        std::cout << GetName() << " " << Utilities::ToVector2(_pivot).x << " -- " << Utilities::ToVector2(_pivot).y << " " << std::endl;
 
-       unsigned char oo = 255 * GetOpacity();
-
-
+        unsigned char opacity = 255 * GetOpacity();
         DrawTexturePro(
             _texture, 
             {0, 0, static_cast<float>(_texture.width), static_cast<float>(_texture.height)}, 
             {_transformation.Position.x, _transformation.Position.y, static_cast<float>(_texture.width), static_cast<float>(_texture.height)},
-            {static_cast<float>(_texture.width)/2, static_cast<float>(_texture.height)/2},
+            {Vector2Multiply({static_cast<float>(_texture.width), static_cast<float>(_texture.height)}, Utilities::ToVector2(_pivot))},
             _transformation.Rotation.z, 
-            CLITERAL(Color){ 255, 255, 255, oo });
+            CLITERAL(Color){ 255, 255, 255, opacity });
         
     }
 
@@ -92,6 +92,7 @@ namespace RMC::rBitrage
             return;
         }
 
+       
         ImageResize(&image, size.x, size.y);
         _texture = LoadTextureFromImage(image);
 

@@ -1,5 +1,8 @@
 #include "Game.h"
 #include "DebugSystem.h"
+#include "CameraSystem.h"
+#include "Utilities.h"
+#include <iostream>
 
 namespace RMC::rBitrage 
 {
@@ -41,43 +44,67 @@ namespace RMC::rBitrage
 
         DrawFPS(50, 120);   
 
-        //Draw world first, thicker
-        DrawWorldSizeHalf();
-        DrawWorldBounds();
+  
 
-        //Draw screen after, thinner
+        if (_game.GetSystem<CameraSystem>()->cameraSystemMode != CameraSystemMode::Cam2D)
+        {
+            DrawGrid(10, 1.0f);
+        }
+     
+        if (_game.GetSystem<CameraSystem>()->cameraSystemMode != CameraSystemMode::Cam3D)
+        {
+            //1 of 2 Draw world first, thicker
+            DrawWorldSizeHalf();
+            DrawWorldBounds();
+        }
+
+        //2 of 2 Draw screen after, thinner
         DrawScreenSizeHalf();
         DrawScreenBounds();
-     
 
+
+        std::cout << "LAYER >>>> " << Utilities::ToString(frameRenderLayer) << std::endl;
+        
         //Draw box around actors for debugging
-        // for (Actor* actor : _game.GetActors()) {
-        //     if (actor->GetFrameRenderLayer() != frameRenderLayer)
-        //     {
-        //         continue;
-        //     }
-        //     DrawRectangleLinesEx(actor->GetBounds(), 4, RED);
-        // }
+        for (Actor* actor : _game.GetActors()) {
+            //Ignore actor layer, draw it here
+            DrawActorBounds(actor);
+            DrawActorPivot(actor);
+            DrawActorCenter(actor);
+          
+        }
     }
 
+//1
     void DebugSystem::DrawWorldSizeHalf() 
     {
-        //HORIZONTAL
-        DrawLineEx({0, _game.world.size.y/2}, {_game.world.size.x, _game.world.size.y/2}, _worldStroke, _worldColor);
-
-        //VERTICAL
-        DrawLineEx({_game.world.size.x/2, 0}, {_game.world.size.x/2, _game.world.size.y}, _worldStroke, _worldColor);
+        Rectangle worldRect = {_game.world.center.x, _game.world.center.y, _game.world.size.x, _game.world.size.y};
+        DrawCrosshairsAtCenterRectangle(worldRect, .5, _worldStroke, _worldColor);  
 
     }
 
     void DebugSystem::DrawScreenSizeHalf() 
     {
-        //HORIZONTAL
-        DrawLineEx({0, _game.screen.size.y/2}, {_game.screen.size.x, _game.screen.size.y/2}, _screenStroke, _screenColor);
+        Rectangle screenRect = {_game.screen.center.x, _game.screen.center.y, _game.screen.size.x, _game.screen.size.y};
+        DrawCrosshairsAtCenterRectangle(screenRect, 1.0, _screenStroke, _screenColor); //GREEN
 
-        //VERTICAL
-        DrawLineEx({_game.screen.size.x/2, 0}, {_game.screen.size.x/2, _game.screen.size.y}, _screenStroke, _screenColor);
+    }
 
+    void DebugSystem::DrawCrosshairsAtCenterRectangle(Rectangle rectangle, float scale, float thick, Color color)
+    {
+        //HORIZONTAL - TODO: Draw from mid left to mid right
+        DrawLineEx(
+            {rectangle.x,                   rectangle.y + rectangle.height/2},
+            {rectangle.x + rectangle.width, rectangle.y + rectangle.height/2}, 
+            thick, 
+            color);
+        
+        //VERTICAL - TODO: draw from mid top to mid bottom
+        DrawLineEx(
+            {rectangle.x + rectangle.width/2, rectangle.y},
+            {rectangle.x + rectangle.width/2, rectangle.y + rectangle.height}, 
+            thick, 
+            color);
     }
 
     void DebugSystem::DrawScreenBounds() 
@@ -89,4 +116,36 @@ namespace RMC::rBitrage
     {
         DrawRectangleLinesEx({0, 0, _game.world.size.x, _game.world.size.y}, _worldStroke, _worldColor);
     }
+
+
+    void DebugSystem::DrawActorBounds(Actor* actor) 
+    {
+        DrawCrosshairsAtCenterRectangle(actor->GetBounds().ToRectangle(), 1.0, 4, GREEN);
+    }
+
+    //2
+    void DebugSystem::DrawActorPivot(Actor* actor)
+    {
+        // Calculate the offset from the actor's center to the pivot point
+        float offsetX = actor->GetPivot().x * actor->GetBounds().size.x;
+        float offsetY = actor->GetPivot().y * actor->GetBounds().size.y;
+
+        DrawCircle(
+            actor->GetBounds().center.x + offsetX, 
+            actor->GetBounds().center.y + offsetY, 
+            _pivotRadius, 
+            PURPLE);
+    }
+
+    //1
+    void DebugSystem::DrawActorCenter(Actor* actor) 
+    {
+        DrawRectangle(
+            actor->GetBounds().center.x - _centerRadius/2, 
+            actor->GetBounds().center.y - _centerRadius/2, 
+            _centerRadius, 
+            _centerRadius, 
+            WHITE);
+    }
+
 } 

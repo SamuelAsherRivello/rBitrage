@@ -14,7 +14,7 @@ namespace RMC::rBitrage
     class Actor
     {
     public:
-        Actor(Game& game, const FrameRenderLayer& frameRenderLayer = FrameRenderLayer::Camera);
+        Actor(Game& game, const FrameRenderLayer& frameRenderLayer = FrameRenderLayer::Camera2D);
         virtual ~Actor();
 
         virtual void OnInitialize();
@@ -24,8 +24,16 @@ namespace RMC::rBitrage
 
         Vector3 GetPosition() const;
         void SetPosition(const Vector3& position);
+        
         Vector3 GetRotation() const;
         void SetRotation(const Vector3 &position);
+
+        void SetPivot(const Vector3& pivot);
+        Vector3 GetPivot() const;
+
+        const char* GetName() const;
+        void SetName(const char* name);
+
         //
         Vector3 GetSize() const;
         virtual void SetSize(const Vector3 &size);
@@ -40,9 +48,11 @@ namespace RMC::rBitrage
         Game& _game;
         Transform _transformation;
         Vector3 _size;
+        Vector3 _pivot;
 
     private:
         float _opacity;
+        const char * _name;
         
     };
    

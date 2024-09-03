@@ -24,6 +24,7 @@ namespace RMC::rBitrage
         isDebug = false;  
         targetFPS = 120; //KEEP: 120, Frame updates per second
         world = World();
+        cameraSystemMode = CameraSystemMode::Cam2DAnd3D;
 
     }
 
@@ -49,7 +50,7 @@ namespace RMC::rBitrage
         AddSystem(new ActorSystem(*this));
         AddSystem(new ApplicationSystem(*this));
         AddSystem(new AudioSystem(*this));
-        AddSystem(new CameraSystem(*this));
+        AddSystem(new CameraSystem(*this, CameraSystemMode::Cam2D));
         AddSystem(new InputSystem(*this));
         AddSystem(new AssetLoaderSystem(*this));
         AddSystem(new PhysicsSystem(*this));
@@ -57,6 +58,13 @@ namespace RMC::rBitrage
         if (this->isDebug) 
         {
             AddSystem(new DebugSystem(*this));
+        }
+
+        //Forward game configuration to systems
+        //so its easier for the dev-user to set it early
+        if (HasSystem<CameraSystem>())
+        {
+            GetSystem<CameraSystem>()->cameraSystemMode = this->cameraSystemMode;
         }
 
         for (System* system : _systems) 
@@ -258,45 +266,37 @@ namespace RMC::rBitrage
      */
     void Game::RenderFrame() {
 
+
         BeginDrawing();
         ClearBackground(backgroundColor);
-
         for (System* system : _systems) {
             system->OnFrameRender(FrameRenderLayer::PreCamera);
         }
 
-////////////////////////////////////////////////
-        /// 3d camera - move later to its own system
-        // Camera camera = { 0 };
-        // camera.position = (Vector3){ 0.0f, 10.0f, 10.0f };
-        // camera.target = (Vector3){ 0.0f, 0.0f, 0.0f };
-        // camera.up = (Vector3){ 0.0f, 1.0f, 0.0f };
-        // camera.fovy = 45.0f;
-        // camera.projection = CAMERA_PERSPECTIVE;
-
-        // BeginMode3D(camera);
-
-        //     // Draw enemy-box
-        //     DrawCube({0,0,0}, 3, 3, 3, BLUE);
-        //     DrawGrid(10, 1.0f);
-
-        // EndMode3D();
-
-///////////////////////////////////////////////////////////
 
 
-        BeginMode2D(GetSystem<CameraSystem>()->camera2D);
-
-        for (System* system : _systems) {
-            system->OnFrameRender(FrameRenderLayer::Camera);
+        if (GetSystem<CameraSystem>()->cameraSystemMode != CameraSystemMode::Cam3D)
+        {
+            BeginMode2D(GetSystem<CameraSystem>()->camera2D);
+            for (System* system : _systems) {
+                system->OnFrameRender(FrameRenderLayer::Camera2D);
+            }
+            EndMode2D();
         }
+       
 
-        EndMode2D();
+        if (GetSystem<CameraSystem>()->cameraSystemMode != CameraSystemMode::Cam2D)
+        {
+            BeginMode3D(GetSystem<CameraSystem>()->camera3D);
+            for (System* system : _systems) {
+                system->OnFrameRender(FrameRenderLayer::Camera3D);
+            }
+            EndMode3D();
+        }
 
         for (System* system : _systems) {
             system->OnFrameRender(FrameRenderLayer::PostCamera);
         }
-
         EndDrawing();
 
     }

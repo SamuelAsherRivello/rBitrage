@@ -5,6 +5,7 @@
 #include <memory>
 #include <chrono>
 #include "World.h"
+#include "CameraSystemMode.h"
 #include "Screen.h"
 
 namespace RMC::rBitrage 
@@ -48,6 +49,7 @@ namespace RMC::rBitrage
         Color backgroundColor;
         bool isDebug;
         int targetFPS;
+        CameraSystemMode cameraSystemMode;
         float fixedUpdateInterval;
         const char * title;
         World world;

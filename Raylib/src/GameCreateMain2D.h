@@ -2,6 +2,7 @@
 #include "Cube2D.h"
 #include "DebugSystem.h"
 #include "ApplicationSystem.h"
+#include "CameraSystemMode.h"
 #include "Game.h"
 #include "HudUI2D.h"
 #include "InputSystem.h"
@@ -25,15 +26,16 @@ using namespace RMC::rBitrage;
 // IMPROVEMENTS
 //      TODO: Scope how much physics we want. Alot? Import 3rd party. A little, then add concept of CollisionGroups to existing IsCollididing() and be done.
 //      TODO: Change System:OnInitialize to System:OnInitializeAsync and have game wait for it
-int gameCreateMain()
+int gameCreateMain2D()
 {
     Game game = Game();
 
     //Overrides
+    game.cameraSystemMode = CameraSystemMode::Cam2D;
     game.world.size = game.screen.size;   //balls bounds off world bounds
     game.isDebug = true; //show gizmos
 
-   //Calls System:OnInitialize **AND** System:OnInitialized
+    //Calls System:OnInitialize **AND** System:OnInitialized
     game.Initialize();
 
 
@@ -54,20 +56,37 @@ int gameCreateMain()
     loaderSystem->AddAsset<Image>("Boundary01", "src/assets/images/itch.io/projectTemplate/Boundary01.png");
     loaderSystem->AddAsset<Image>("Foreground01", "src/assets/images/itch.io/projectTemplate/Foreground01.png");
     loaderSystem->AddAsset<Image>("Paddle01", "src/assets/images/itch.io/projectTemplate/Paddle01.png");
-    //loaderSystem->AddAsset<Sound>("Hit01", "src/assets/audio/sfx/Hit01.wav");
-    //loaderSystem->AddAsset<Sound>("Hit03", "src/assets/audio/sfx/Hit03.wav");
+    loaderSystem->AddAsset<Sound>("Hit01", "src/assets/audio/sfx/Hit01.wav");
+    loaderSystem->AddAsset<Sound>("Hit03", "src/assets/audio/sfx/Hit03.wav");
  
     // FrameRenderLayer::PreCamera
     Actor2D background = Actor2D(game, "Background01", FrameRenderLayer::PreCamera);
     background.SetSize({game.screen.size.x, game.screen.size.y, 0});
-    background.SetPosition({game.screen.size.x/2, game.screen.size.y/2, 0});
+    background.SetPosition(game.world.center);
     game.AddActor(&background);
 
     // FrameRenderLayer::Camera
     Cube2D cube01 = Cube2D(game);
-    cube01.SetOpacity(0.5f);
+    cube01.SetOpacity(1.0f);
     cube01.SetPosition({game.screen.size.x/2, game.screen.size.y/2, 0});
     game.AddActor(&cube01);
+
+    Cube2D cube02 = Cube2D(game);
+    cube02.SetOpacity(0.5f);
+    cube02.SetPivot({0,0,0}); // upper left
+    cube02.SetPosition({game.screen.size.x/2 + 300, game.screen.size.y/2, 0});
+    game.AddActor(&cube02);
+
+    Cube2D cube03 = Cube2D(game);
+    cube03.SetOpacity(.25f);
+    cube03.SetPivot({1, 1, 1}); // lower right
+    cube03.SetPosition({game.screen.size.x/2 + 600, game.screen.size.y/2, 0});
+    game.AddActor(&cube03);
+
+
+
+
+
 
     Sphere2D sphere01 = Sphere2D(game);
     sphere01.SetPosition({game.screen.size.x/4, game.screen.size.y/4, 0});
@@ -80,8 +99,8 @@ int gameCreateMain()
     game.AddActor(&sphere02);
 
     Actor2D boundary = Actor2D(game, "Boundary01");
-    boundary.SetSize({game.screen.size.x, game.screen.size.y, 0});
-    boundary.SetPosition({game.screen.size.x/2, game.screen.size.y/2, 0});
+    boundary.SetSize({game.world.size});
+    boundary.SetPosition(game.world.center);
     game.AddActor(&boundary);
 
     // FrameRenderLayer::PostCamera
@@ -98,7 +117,7 @@ int gameCreateMain()
     //
     if (game.HasSystem<CameraSystem>())
     {
-        game.GetSystem<CameraSystem>()->SetTargetActor(&cube01);
+        //game.GetSystem<CameraSystem>()->SetTargetActor(&cube01);
     }
 
     //

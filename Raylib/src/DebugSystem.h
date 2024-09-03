@@ -16,14 +16,22 @@ namespace RMC::rBitrage
 
             void DrawWorldSizeHalf();
             void DrawScreenSizeHalf();
+            void DrawCrosshairsAtCenterRectangle(Rectangle rectangle, float scale, float thick, Color color);
             void DrawScreenBounds();
 
             void DrawWorldBounds();
 
+            //
+            void DrawActorBounds(Actor* actor);
+            void DrawActorPivot(Actor *actor);
+            void DrawActorCenter(Actor *actor);
+
         private:
+            Color _actorColor = ORANGE;
             Color _worldColor = BLUE;
             Color _screenColor = GREEN;
-
+            float _centerRadius = 10;
+            float _pivotRadius = 10;
             float _worldStroke = 10;
             float _screenStroke = 4;
     };

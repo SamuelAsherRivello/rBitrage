@@ -47,6 +47,7 @@ namespace RMC::rBitrage
     {
         for (Actor* actor : _actors) 
         {
+            std::cout << "ActorSystem::OnFrameUpdate" << actor->GetName() << std::endl;
             actor->OnFrameUpdate(deltaTime);
         }
     }
@@ -58,8 +59,10 @@ namespace RMC::rBitrage
     {
         for (Actor* actor : _actors) 
         {
+            std::cout << "1, ActorSystem::OnFrameRender" << std::endl;
             if (actor->GetFrameRenderLayer() == frameRenderLayer)
             {
+                std::cout << "2, ActorSystem::OnFrameRender" << std::endl;
                 actor->OnFrameRender();
             }
         }

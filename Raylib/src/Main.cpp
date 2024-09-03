@@ -1,10 +1,11 @@
-#include "GameCreateMain.h"
-#include "GameCreateSpheres.h"
+#include "GameCreateMain2D.h"
+#include "GameCreateSpheres2D.h"
+#include "GameCreateSpheres3D.h"
 
 int main()
 {
-    //return gameCreateMain();
-    return gameCreateSpheres(); 
-    //return createGame3D(); //TODO: Implement
+    return gameCreateMain2D();
+    //return gameCreateSpheres2D(); 
+    //return gameCreateSpheres3D(); 
     return 0;
 }

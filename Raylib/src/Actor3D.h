@@ -11,11 +11,11 @@ namespace RMC::rBitrage
     // NEEDED? Forward declaration of Game class
     class Game;
 
-    class Actor2D : public Actor
+    class Actor3D : public Actor
     {
     public:
-        Actor2D(Game& game, const char *assetKey, const FrameRenderLayer& frameRenderLayer = FrameRenderLayer::Camera2D);
-        virtual ~Actor2D();
+        Actor3D(Game& game, const char *assetKey, const FrameRenderLayer& frameRenderLayer = FrameRenderLayer::Camera3D);
+        virtual ~Actor3D();
 
         void OnInitialize() override;
         void OnFixedUpdate(float fixedDeltaTime) override;
@@ -25,7 +25,6 @@ namespace RMC::rBitrage
 
     protected:
         const char *_assetKey;
-        Texture2D _texture; 
     };
 
 }

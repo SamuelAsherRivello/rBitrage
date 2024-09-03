@@ -4,6 +4,7 @@
 
 namespace RMC::rBitrage 
 {
+    //TODO: this has the same name as a class in raylib. Problem?
     class Transform
     {
         public:
