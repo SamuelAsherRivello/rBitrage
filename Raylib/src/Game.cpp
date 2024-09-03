@@ -184,6 +184,7 @@ namespace RMC::rBitrage
     void Game::RemoveSystem(System* system) {
         _systems.erase(std::remove(_systems.begin(), _systems.end(), system), _systems.end());
     }
+    
 
     void Game::AddActor(Actor* actor) {
         if (!HasSystem<ActorSystem>())

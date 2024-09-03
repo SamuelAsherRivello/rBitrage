@@ -62,11 +62,13 @@ namespace RMC::rBitrage
         DrawScreenSizeHalf();
         DrawScreenBounds();
 
-
-        std::cout << "LAYER >>>> " << Utilities::ToString(frameRenderLayer) << std::endl;
-        
         //Draw box around actors for debugging
         for (Actor* actor : _game.GetActors()) {
+
+            if (!actor->GetIsDebug())
+            {
+                continue;
+            }
             //Ignore actor layer, draw it here
             DrawActorBounds(actor);
             DrawActorPivot(actor);

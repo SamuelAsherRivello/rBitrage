@@ -28,13 +28,16 @@ namespace RMC::rBitrage
             template <typename T>
             T GetAssetAsSound(const char *assetKey);
 
+            void LoadAllAssets();
+            
         private:
 
             //TODO: Ideally we have one is with value of T or Asset<T>. I could not get it to work.
             //WORKAROUND: Separate list for each type. Not bad.
             std::unordered_map<std::string, Image> _imagesByKey;  
-            std::unordered_map<std::string, Sound> _soundsByKey;  
-            
+            std::unordered_map<std::string, Sound> _soundsByKey;
+
+           
     };
 
     template <typename T>
@@ -118,4 +121,6 @@ namespace RMC::rBitrage
             return T();
         }
     }
+
+
 } 

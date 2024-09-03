@@ -13,6 +13,7 @@ namespace RMC::rBitrage
         _frameRenderLayer = frameRenderLayer;
 
         //
+        SetIsDebug(false);
         SetPivot({0.5f, 0.5f, 0.5}); //center pivot by default
         SetName(typeid(this).name());
         SetPosition({0,0,0});
@@ -39,7 +40,6 @@ namespace RMC::rBitrage
 
     void Actor::OnFrameRender() 
     {
-        std::cout << "3, ActorSystem::OnFrameRender" << std::endl;
     }
 
 
@@ -86,6 +86,17 @@ namespace RMC::rBitrage
     {
         _transformation.Rotation = position;
     }
+
+    bool Actor::GetIsDebug() const 
+    {
+        return _isDebug;
+    }
+
+    void Actor::SetIsDebug(bool isDebug) 
+    {
+        _isDebug = isDebug;
+    }
+
 
     float Actor::GetOpacity()
     {

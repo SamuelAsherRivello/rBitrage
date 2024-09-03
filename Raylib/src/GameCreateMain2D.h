@@ -26,6 +26,10 @@ using namespace RMC::rBitrage;
 // IMPROVEMENTS
 //      TODO: Scope how much physics we want. Alot? Import 3rd party. A little, then add concept of CollisionGroups to existing IsCollididing() and be done.
 //      TODO: Change System:OnInitialize to System:OnInitializeAsync and have game wait for it
+// POOLING
+//      TODO: Think about a factory for actors. ActorPool.Create(ActorType) or ??
+
+
 int gameCreateMain2D()
 {
     Game game = Game();
@@ -58,6 +62,7 @@ int gameCreateMain2D()
     loaderSystem->AddAsset<Image>("Paddle01", "src/assets/images/itch.io/projectTemplate/Paddle01.png");
     loaderSystem->AddAsset<Sound>("Hit01", "src/assets/audio/sfx/Hit01.wav");
     loaderSystem->AddAsset<Sound>("Hit03", "src/assets/audio/sfx/Hit03.wav");
+    loaderSystem->LoadAllAssets();
  
     // FrameRenderLayer::PreCamera
     Actor2D background = Actor2D(game, "Background01", FrameRenderLayer::PreCamera);

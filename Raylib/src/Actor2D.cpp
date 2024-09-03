@@ -55,8 +55,6 @@ namespace RMC::rBitrage
             return;
         }
 
-        std::cout << GetName() << " " << Utilities::ToVector2(_pivot).x << " -- " << Utilities::ToVector2(_pivot).y << " " << std::endl;
-
         unsigned char opacity = 255 * GetOpacity();
         DrawTexturePro(
             _texture, 

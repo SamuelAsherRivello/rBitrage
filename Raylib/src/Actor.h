@@ -22,26 +22,33 @@ namespace RMC::rBitrage
         virtual void OnFrameUpdate(float deltaTime);
         virtual void OnFrameRender();
 
-        Vector3 GetPosition() const;
-        void SetPosition(const Vector3& position);
+        virtual Vector3 GetPosition() const;
+        virtual void SetPosition(const Vector3& position);
         
-        Vector3 GetRotation() const;
-        void SetRotation(const Vector3 &position);
+        virtual Vector3 GetRotation() const;
+        virtual void SetRotation(const Vector3 &position);
 
-        void SetPivot(const Vector3& pivot);
-        Vector3 GetPivot() const;
+        virtual void SetPivot(const Vector3& pivot);
+        virtual Vector3 GetPivot() const;
 
-        const char* GetName() const;
-        void SetName(const char* name);
+        virtual const char* GetName() const;
+        virtual void SetName(const char* name);
 
         //
-        Vector3 GetSize() const;
+        virtual Vector3 GetSize() const;
         virtual void SetSize(const Vector3 &size);
-        float GetOpacity();
-        void SetOpacity(float opacity);
+
         //
-        Bounds GetBounds() const;
-        FrameRenderLayer GetFrameRenderLayer() const;
+        virtual float GetOpacity();
+        virtual void SetOpacity(float opacity);
+
+        //for gizmos
+        virtual bool GetIsDebug() const;
+        virtual void SetIsDebug(bool isDebug);
+
+        //
+        virtual Bounds GetBounds() const;
+        virtual FrameRenderLayer GetFrameRenderLayer() const;
 
     protected:
         FrameRenderLayer _frameRenderLayer;
@@ -51,6 +58,7 @@ namespace RMC::rBitrage
         Vector3 _pivot;
 
     private:
+        bool _isDebug;
         float _opacity;
         const char * _name;
         

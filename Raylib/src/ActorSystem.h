@@ -16,9 +16,9 @@ namespace RMC::rBitrage
         public:
             ActorSystem(Game& game);
 
-            void AddActor(Actor* actor);
             std::vector<Actor*> GetActors();
-            void RemoveActor(Actor* actor);
+            void AddActor(Actor *actor);
+            void RemoveActor(Actor *actor);
 
             bool HasActor(Actor *actor);
 
@@ -30,6 +30,7 @@ namespace RMC::rBitrage
 
         private:
             std::vector<Actor*> _actors;
+            
 
     };
 }

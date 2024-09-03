@@ -73,7 +73,6 @@ namespace RMC::rBitrage
     {
         Actor3D::OnFrameRender();
 
-std::cout << "4, ActorSystem::OnFrameRender 2" << std::endl;
     }
 
 

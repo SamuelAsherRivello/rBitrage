@@ -29,6 +29,7 @@ int gameCreateSpheres3D()
     loaderSystem->AddAsset<Image>("Background01", "src/assets/images/itch.io/projectTemplate/Background01.png");
     loaderSystem->AddAsset<Sound>("Hit01", "src/assets/audio/sfx/Hit01.wav");
     loaderSystem->AddAsset<Sound>("Hit03", "src/assets/audio/sfx/Hit03.wav");
+    loaderSystem->LoadAllAssets();
 
     for (int i = 0; i < 1; i++)
     {

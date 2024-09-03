@@ -30,6 +30,7 @@ int gameCreateSpheres2D()
     loaderSystem->AddAsset<Image>("Background01", "src/assets/images/itch.io/projectTemplate/Background01.png");
     loaderSystem->AddAsset<Sound>("Hit01", "src/assets/audio/sfx/Hit01.wav");
     loaderSystem->AddAsset<Sound>("Hit03", "src/assets/audio/sfx/Hit03.wav");
+    loaderSystem->LoadAllAssets();
 
     // FrameRenderLayer::PreCamera
     Actor2D background = Actor2D(game, "Background01", FrameRenderLayer::PreCamera);
