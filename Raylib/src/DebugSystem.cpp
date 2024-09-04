@@ -63,16 +63,16 @@ namespace RMC::rBitrage
         DrawScreenBounds();
 
         //Draw box around actors for debugging
-        for (Actor* actor : _game.GetActors()) {
+        for (auto& actor : _game.GetActors()) {
 
             if (!actor->GetIsDebug())
             {
                 continue;
             }
             //Ignore actor layer, draw it here
-            DrawActorBounds(actor);
-            DrawActorPivot(actor);
-            DrawActorCenter(actor);
+            DrawActorBounds(actor.get());
+            DrawActorPivot(actor.get());
+            DrawActorCenter(actor.get());
           
         }
     }

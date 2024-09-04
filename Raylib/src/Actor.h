@@ -5,6 +5,7 @@
 #include "Bounds.h"
 #include "FrameRenderLayer.h"
 #include "Transform.h"
+#include "Utilities.h"
 
 namespace RMC::rBitrage 
 {
@@ -14,6 +15,7 @@ namespace RMC::rBitrage
     class Actor
     {
     public:
+        Actor();
         Actor(Game& game, const FrameRenderLayer& frameRenderLayer = FrameRenderLayer::Camera2D);
         virtual ~Actor();
 
@@ -51,16 +53,17 @@ namespace RMC::rBitrage
         virtual FrameRenderLayer GetFrameRenderLayer() const;
 
     protected:
-        FrameRenderLayer _frameRenderLayer;
+    
         Game& _game;
         Transform _transformation;
         Vector3 _size;
         Vector3 _pivot;
+        FrameRenderLayer _frameRenderLayer;
 
     private:
         bool _isDebug;
-        float _opacity;
         const char * _name;
+        float _opacity;
         
     };
    

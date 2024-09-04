@@ -2,17 +2,28 @@
 #include "Utilities.h"
 #include <raylib.h>
 #include <iostream>
+#include "Game.h"
 
 
 
 namespace RMC::rBitrage 
 {
-    Actor::Actor(Game& game, const FrameRenderLayer& frameRenderLayer) : _game (game) 
-    {
-        _opacity = 1;
-        _frameRenderLayer = frameRenderLayer;
+    //1
+     Actor::Actor() : 
+        _game(Game()),
+        _opacity(1.0f),
+        _frameRenderLayer(FrameRenderLayer::Camera2D)
+        {
 
-        //
+        }
+
+    //2
+    Actor::Actor(Game& game, const FrameRenderLayer& frameRenderLayer) 
+        : 
+        _game(game),
+         _opacity(1.0f),
+          _frameRenderLayer(frameRenderLayer)
+    {
         SetIsDebug(false);
         SetPivot({0.5f, 0.5f, 0.5}); //center pivot by default
         SetName(typeid(this).name());

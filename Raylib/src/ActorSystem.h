@@ -16,11 +16,12 @@ namespace RMC::rBitrage
         public:
             ActorSystem(Game& game);
 
-            std::vector<Actor*> GetActors();
-            void AddActor(Actor *actor);
-            void RemoveActor(Actor *actor);
-
-            bool HasActor(Actor *actor);
+            //
+            std::vector<std::unique_ptr<Actor>> GetActors();
+            void AddActor(std::unique_ptr<Actor> actor);
+            bool RemoveActor(std::unique_ptr<Actor> actor);
+            bool HasActor(std::unique_ptr<Actor> actor);
+            //
 
         protected:
             void OnInitialize() override;
@@ -28,8 +29,10 @@ namespace RMC::rBitrage
             void OnFrameUpdate(float deltaTime) override;
             void OnFrameRender(const FrameRenderLayer& frameRenderLayer) override;
 
+      
+
         private:
-            std::vector<Actor*> _actors;
+            std::vector<std::unique_ptr<Actor>> _actors;
             
 
     };

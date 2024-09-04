@@ -184,29 +184,31 @@ namespace RMC::rBitrage
     void Game::RemoveSystem(System* system) {
         _systems.erase(std::remove(_systems.begin(), _systems.end(), system), _systems.end());
     }
-    
+        
 
-    void Game::AddActor(Actor* actor) {
+    void Game::AddActor(std::unique_ptr<Actor> actor)
+    {
         if (!HasSystem<ActorSystem>())
         {
             std::cout << "AddActor() Failed" << std::endl;
         }
-        GetSystem<ActorSystem>()->AddActor(actor);
+        GetSystem<ActorSystem>()->AddActor(std::move(actor));
     }
 
-    void Game::RemoveActor(Actor* actor) {
+    void Game::RemoveActor(std::unique_ptr<Actor> actor)
+    {
         if (!HasSystem<ActorSystem>())
         {
             std::cout << "RemoveActor() Failed, no system" << std::endl;
         }
-        if (!GetSystem<ActorSystem>()->HasActor(actor))
+        if (!GetSystem<ActorSystem>()->HasActor(std::move(actor)))
         {
             std::cout << "RemoveActor() Failed, no actor" << std::endl;
         }
-        GetSystem<ActorSystem>()->RemoveActor(actor);
     }
 
-    std::vector<Actor*> Game::GetActors()
+    
+    std::vector<std::unique_ptr<Actor>> Game::GetActors()
     {
         if (!HasSystem<ActorSystem>())
         {

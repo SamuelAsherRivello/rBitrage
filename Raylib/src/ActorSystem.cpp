@@ -4,59 +4,35 @@
 #include "Game.h"
 #include "ActorSystem.h"
 
-namespace RMC::rBitrage 
+namespace RMC::rBitrage
 {
-
-    ActorSystem::ActorSystem(Game& game) : System(game) 
+    void ActorSystem::OnInitialize()
     {
-        // Constructor to initialize the system.
-    }
-
-    /**
-     * Lifecycle
-     *
-     * OnInitialize: Initializes the actor system.
-     */
-    void ActorSystem::OnInitialize() 
-    {
-        for (Actor* actor : _actors) 
+        for (auto& actor : _actors)
         {
             actor->OnInitialize();
         }
     }
 
-    /**
-     * OnFixedUpdate: Called every fixed time step.
-     *
-     * @param fixedDeltaTime The delta time since last fixed update.
-     */
-    void ActorSystem::OnFixedUpdate(float fixedDeltaTime) 
+    void ActorSystem::OnFixedUpdate(float fixedDeltaTime)
     {
-        for (Actor* actor : _actors) 
+        for (auto& actor : _actors)
         {
             actor->OnFixedUpdate(fixedDeltaTime);
         }
     }
 
-    /**
-     * OnFrameUpdate: Called every frame.
-     *
-     * @param deltaTime The delta time since last update.
-     */
-    void ActorSystem::OnFrameUpdate(float deltaTime) 
+    void ActorSystem::OnFrameUpdate(float deltaTime)
     {
-        for (Actor* actor : _actors) 
+        for (auto& actor : _actors)
         {
             actor->OnFrameUpdate(deltaTime);
         }
     }
 
-    /**
-     * OnFrameRender: Called every frame.
-     */
-    void ActorSystem::OnFrameRender(const FrameRenderLayer& frameRenderLayer) 
+    void ActorSystem::OnFrameRender(const FrameRenderLayer& frameRenderLayer)
     {
-        for (Actor* actor : _actors) 
+        for (auto& actor : _actors)
         {
             if (actor->GetFrameRenderLayer() == frameRenderLayer)
             {
@@ -65,44 +41,39 @@ namespace RMC::rBitrage
         }
     }
 
-    /**
-     * Others
-     *
-     * AddActor: Adds an actor to the system.
-     *
-     * @param actor The actor to add.
-     */
-    void ActorSystem::AddActor(Actor* actor) 
+    void ActorSystem::AddActor(std::unique_ptr<Actor> actor)
     {
-        _actors.push_back(actor);
+        _actors.emplace_back(std::move(actor));
     }
 
-    /**
-     * RemoveActor: Removes an actor from the system.
-     *
-     * @param actor The actor to remove.
-     */
-    void ActorSystem::RemoveActor(Actor* actor) 
+    bool ActorSystem::RemoveActor(std::unique_ptr<Actor> actor)
     {
-        _actors.erase(std::remove(_actors.begin(), _actors.end(), actor), _actors.end());
+        for (auto& a : _actors)
+        {
+            if (a.get() == actor.get())
+            {
+                _actors.erase(std::remove(_actors.begin(), _actors.end(), actor), _actors.end());
+                return true;
+            }
+        }
+
+        return false;
     }
 
-    /**
-     * HasActor: Determines if it has an actor 
-     *
-     * @param actor The actor to check.
-     */
-    bool ActorSystem::HasActor(Actor* actor) 
+    bool ActorSystem::HasActor(std::unique_ptr<Actor> actor)
     {
-        return count(_actors.begin(), _actors.end(), actor) > 0;
-    }
+        for (const auto& a : _actors)
+        {
+            if (a.get() == actor.get())
+            {
+                return true;
+            }
+        }
 
-    /**
-     * GetActors: Gets a list of all actors in the system.
-     *
-     * @return A vector of all actors in the system.
-     */
-    std::vector<Actor*> ActorSystem::GetActors() 
+        return false;
+    }
+    
+    std::vector<std::unique_ptr<Actor>> ActorSystem::GetActors()
     {
         return _actors;
     }

@@ -24,14 +24,14 @@ namespace RMC::rBitrage
     
     bool PhysicsSystem::IsCollision(Actor* actor)
     {
-        for (Actor* otherActor : _game.GetActors())
-        {
-            if (actor == otherActor) continue;
-            if (CheckCollisionRecs(actor->GetBounds().ToRectangle(), otherActor->GetBounds().ToRectangle()))
-            {
-                return true; // collision detected
-            }
-        }
+        // for (auto otherActor : _game.GetActors())
+        // {
+        //     if (actor == otherActor.get()) continue;
+        //     if (CheckCollisionRecs(actor->GetBounds().ToRectangle(), otherActor->GetBounds().ToRectangle()))
+        //     {
+        //         return true; // collision detected
+        //     }
+        // }
         return false; // no collisions found
     }
 

@@ -9,6 +9,7 @@
 
 namespace RMC::rBitrage 
 {
+
     Actor2D::Actor2D(Game& game, const char *assetKey, const FrameRenderLayer& frameRenderLayer) 
         : Actor (game, frameRenderLayer)
     {

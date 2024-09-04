@@ -23,9 +23,9 @@ namespace RMC::rBitrage
         ~Game();
 
         //Actor
-        std::vector<Actor*>  GetActors();
-        void AddActor(Actor *actor);
-        void RemoveActor(Actor *actor);
+        std::vector<std::unique_ptr<Actor>> GetActors();
+        void AddActor(std::unique_ptr<Actor> actor);
+        void RemoveActor(std::unique_ptr<Actor> actor);
 
         //Lifecycle
         void Initialize();
