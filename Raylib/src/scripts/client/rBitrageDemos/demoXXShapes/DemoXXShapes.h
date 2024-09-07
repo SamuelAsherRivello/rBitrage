@@ -1,9 +1,11 @@
 #include <raylib.h>
-#include "client/rBitrage/Game.h"
-#include "client/rBitrageDemos/actors/Ball2D.h"
-#include "client/rBitrageDemos/actors/Background2D.h"
+//
+#include "client/rBitrage/Game2D.h"
 #include "client/rBitrage/actors/Shape2D.h"
 #include "client/rBitrage/systems/CameraSystem.h"
+//
+#include "client/rBitrageDemos/actors/Ball2D.h"
+#include "client/rBitrageDemos/actors/Background2D.h"
 
 using namespace RMC::rBitrage;
 
@@ -11,8 +13,8 @@ using namespace RMC::rBitrage;
 int DemoXXShapes() 
 {
     // Create Game
-    Game game = Game();
-    game.title = "DemoXXShapes";
+    Game2D game = Game2D();
+    game.title = "Demo XX Shapes";
 
 
     // Initialize

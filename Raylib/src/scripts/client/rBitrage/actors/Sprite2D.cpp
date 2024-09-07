@@ -36,7 +36,6 @@ namespace RMC::rBitrage
 
         unsigned char opacity = 255 * GetOpacity();
 
-              std::cout << "drawing image " << _texture.width << " and " << _texture.height << " for " << _assetKey << std::endl;
         DrawTexturePro
             (
                 _texture, 

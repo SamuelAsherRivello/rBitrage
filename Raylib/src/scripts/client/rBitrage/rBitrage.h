@@ -24,7 +24,9 @@
 // ////////////////////////
 // rBitrage
 // ////////////////////////
-// #include "client/rBitrage/Game.h"
+#include "client/rBitrage/core/Game.h"
+#include "client/rBitrage/Game2D.h"
+#include "client/rBitrage/Game3D.h"
 
 // #include "client/rBitrage/types/Action.h"
 // #include "client/rBitrage/types/Bounds.h"
@@ -44,7 +46,7 @@
 
 
 // #include "client/rBitrage/systems/ActorSystem.h"
-//#include "client/rBitrage/systems/ApplicationSystem.h"
+#include "client/rBitrage/systems/ApplicationSystem.h"
 //#include "client/rBitrage/systems/AssetLoaderSystem.h"
 // #include "client/rBitrage/systems/AudioSystem.h"
 // #include "client/rBitrage/systems/CameraSystem.h"
@@ -57,5 +59,5 @@
 
 #include "client/rBitrage/utilities/Utilities.h" 
 
-
+#include "client/rBitrage/utilities/Random.h" 
 

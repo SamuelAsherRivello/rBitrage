@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string.h>
 #include "client/rBitrage/actors/Actor.h"
-#include "client/rBitrage/Game.h"
+#include "client/rBitrage/core/Game.h"
 #include "client/rBitrage/utilities/Utilities.h"
 #include "client/rBitrage/types/FrameRenderLayer.h"
 

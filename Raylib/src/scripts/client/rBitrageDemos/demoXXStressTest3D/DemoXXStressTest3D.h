@@ -1,10 +1,12 @@
 #include <raylib.h>
-#include "client/rBitrage/Game.h"
-#include "client/rBitrageDemos/actors/Ball3D.h"
-#include "client/rBitrage/utilities/Random.h"
-#include "client/rBitrage/systems/CameraSystem.h"
 #include <algorithm>
 #include <memory>
+//
+#include "client/rBitrage/Game3D.h"
+#include "client/rBitrage/utilities/Random.h"
+#include "client/rBitrage/systems/CameraSystem.h"
+//
+#include "client/rBitrageDemos/actors/Ball3D.h"
 
 using namespace RMC::rBitrage;
 
@@ -12,7 +14,7 @@ using namespace RMC::rBitrage;
 int DemoXXStressTest3D() 
 {
     // Create Game
-    Game game = Game();
+    Game3D game = Game3D();
     game.world.center = {0, 0, 0};
     game.world.size = {20, 20, 20};
     game.cameraSystemMode = CameraSystemMode::Cam3D;

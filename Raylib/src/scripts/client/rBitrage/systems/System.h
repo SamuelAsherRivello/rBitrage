@@ -1,6 +1,6 @@
 #pragma once
 #include <raylib.h>
-#include "client/rBitrage/Game.h"
+#include "client/rBitrage/core/Game.h"
 #include "client/rBitrage/types/FrameRenderLayer.h"
 #include <iostream>
 namespace RMC::rBitrage 

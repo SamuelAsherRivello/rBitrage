@@ -1,7 +1,7 @@
 #pragma once
 #include <raylib.h>
 #include "client/rBitrage/actors/Actor2D.h"
-#include "client/rBitrage/Game.h"
+#include "client/rBitrage/core/Game.h"
 #include "client/rBitrage/utilities/Utilities.h"
 #include "client/rBitrage/types/FrameRenderLayer.h"
 #include "client/rBitrage/types/Transform.h"

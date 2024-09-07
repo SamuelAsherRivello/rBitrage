@@ -6,7 +6,7 @@
 #include "client/rBitrageDemos/actors/Background2D.h"
 #include "client/rBitrage/actors/Shape2D.h"
 #include "client/rBitrage/types/Shape.h"
-#include "client/rBitrage/Game.h"
+#include "client/rBitrage/core/Game.h"
 
 namespace RMC::rBitrage 
 {

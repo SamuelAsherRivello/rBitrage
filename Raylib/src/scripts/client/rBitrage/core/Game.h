@@ -1,5 +1,4 @@
 #pragma once
-#include "rBitrage.h"
 #include "client/rBitrage/types/CameraSystemMode.h"
 #include "client/rBitrage/types/World.h"
 #include "client/rBitrage/types/Screen.h"
@@ -26,8 +25,8 @@ namespace RMC::rBitrage
         void RemoveActor(Actor *actor);
 
         //Lifecycle
-        void Initialize();
-        void Initialized();
+        virtual void Initialize();
+        virtual void Initialized();
         void AddSystem(System *system);
         void RemoveSystem(System* system);
         template <typename T>

@@ -1,5 +1,5 @@
 #pragma once
-#include "client/rBitrage/Game.h"
+#include "client/rBitrage/core/Game.h"
 #include "client/rBitrage/actors/Actor2D.h"
 #include "client/rBitrage/types/FrameRenderLayer.h"
 #include <iostream>

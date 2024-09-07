@@ -1,7 +1,7 @@
 #pragma once
 #include <raylib.h>
 #include "client/rBitrage/systems/System.h"
-#include "client/rBitrage/Game.h"
+#include "client/rBitrage/core/Game.h"
 #include "client/rBitrage/types/Asset.h"
 #include <unordered_map>
 #include <string>

@@ -1,21 +1,23 @@
 
 #pragma once
-
-//rBitrage
-#include "client/rBitrage/Game.h"
+//
+#include "client/rBitrage/Game2D.h"
 #include "client/rBitrage/systems/AssetLoaderSystem.h"
 #include "client/rBitrage/systems/ApplicationSystem.h"
 #include "client/rBitrage/actors/Sprite2D.h"
+//
 #include "client/rBitrageDemos/actors/HudUI2D.h"
+#include "client/rBitrageDemos/demoXXOrbitGame2D/OrbitPlayer.h"
+//
 using namespace RMC::rBitrage;
 
 
 //Orbit
-#include "OrbitPlayer.h"
 
-int OrbitGame2D()
+
+int DemoXXOrbitGame2D()
 {
-    Game game = Game();
+    Game2D game = Game2D();
 
     //Optional: Override any defaults
     game.screen.size = { 720, 1080};
@@ -51,6 +53,7 @@ int OrbitGame2D()
     OrbitPlayer orbitPlayer = OrbitPlayer(game);
     orbitPlayer.SetSize({game.screen.size.x/7, game.screen.size.y/20, 0});
     orbitPlayer.SetOrbitCenter(game.screen.center);
+    orbitPlayer.SetIsDebug(true); //show gizmos
     game.AddActor(&orbitPlayer);
 
     // FrameRenderLayer::PostCamera

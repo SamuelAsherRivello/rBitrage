@@ -1,10 +1,9 @@
 
-#include "OrbitPlayer.h"
+#include "client/rBitrageDemos/demoXXOrbitGame2D/OrbitPlayer.h"
 namespace RMC::rBitrage 
 {
     OrbitPlayer::OrbitPlayer(Game& game) :  Sprite2D(game, "OrbitPlayer")  {
 
-        SetIsDebug(true);
         _orbitCenter = {0,0,0};
         _orbitRadius = 300;
         _velocityAngular = 0;

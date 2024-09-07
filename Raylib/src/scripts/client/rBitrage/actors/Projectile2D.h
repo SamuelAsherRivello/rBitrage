@@ -1,7 +1,7 @@
 #pragma once
 #include <raylib.h>
 #include <iostream>
-#include "client/rBitrage/Game.h"
+#include "client/rBitrage/core/Game.h"
 #include "client/rBitrage/actors/Sprite2D.h"
 
 namespace RMC::rBitrage 

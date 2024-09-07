@@ -1,11 +1,13 @@
 #include <raylib.h>
-#include "client/rBitrage/Game.h"
-#include "client/rBitrageDemos/actors/Ball2D.h"
+#include <algorithm>
+#include <memory>
+//
+#include "client/rBitrage/core/Game.h"
 #include "client/rBitrage/actors/Shape2D.h"
 #include "client/rBitrage/utilities/Random.h"
 #include "client/rBitrage/systems/CameraSystem.h"
-#include <algorithm>
-#include <memory>
+//
+#include "client/rBitrageDemos/actors/Ball2D.h"
 
 using namespace RMC::rBitrage;
 
@@ -13,7 +15,7 @@ using namespace RMC::rBitrage;
 int DemoXXStressTest2D() 
 {
     // Create Game
-    Game game = Game();
+    Game2D game = Game2D();
     game.title = "Demo XX Stress Test 2D";
     game.isDebug = true; //Show FPS
 

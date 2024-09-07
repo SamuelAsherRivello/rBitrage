@@ -1,4 +1,4 @@
-#include "client/rBitrage/Game.h"
+#include "client/rBitrage/core/Game.h"
 #include "client/rBitrage/systems/ActorSystem.h"
 #include "client/rBitrage/systems/ApplicationSystem.h"
 #include "client/rBitrage/systems/AudioSystem.h"
@@ -41,7 +41,7 @@ namespace RMC::rBitrage
     void Game::Initialize() 
     {
 
-        if (_isInitialized)
+       if (GetIsInitialized())
         {
             return;
         }
@@ -168,7 +168,7 @@ namespace RMC::rBitrage
 
     void Game::Initialized() {
 
-        if (_isInitialized)
+       if (GetIsInitialized())
         {
             return;
         }

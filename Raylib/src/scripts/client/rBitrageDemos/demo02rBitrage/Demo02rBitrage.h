@@ -1,9 +1,10 @@
 #include <raylib.h>
-#include "client/rBitrage/Game.h"
+//
+#include "client/rBitrage/rBitrage.h"
+
+//
 #include "client/rBitrageDemos/actors/Ball2D.h"
-#include "client/rBitrage/actors/Shape2D.h"
-#include "client/rBitrage/utilities/Random.h"
-#include "client/rBitrage/systems/CameraSystem.h"
+#include "client/rBitrageDemos/actors/HudUI2D.h"
 
 using namespace RMC::rBitrage;
 
@@ -17,6 +18,8 @@ using namespace RMC::rBitrage;
 //      TODO: Add hot reloading
 //      TODO: Add pooling (of arbitrary type perhaps, but Actor is the key use case for bullets)
 //      TODO: Actor DrawTexturePro supports pivot. Add it to actor and set to center by default? -- See https://docs.unity3d.com/ScriptReference/Sprite-pivot.html
+// SYSTEMS
+//      TODO: Split CameraSystem into CameraSystem2D and CameraSystem3D and remove the CameraSystemMode?
 // IMPROVEMENTS
 //      TODO: Scope how much physics we want. Alot? Import 3rd party. A little, then add concept of CollisionGroups to existing IsCollididing() and be done.
 //      TODO: Change System:OnInitialize to System:OnInitializeAsync and have game wait for it
@@ -47,7 +50,7 @@ using namespace RMC::rBitrage;
 int Demo02rBitrage() 
 {
     // Create Game
-    Game game = Game();
+    Game2D game = Game2D();
 
 
     // OPTIONAL: Set Overrides

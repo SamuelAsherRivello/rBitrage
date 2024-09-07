@@ -1,4 +1,5 @@
 #include <raylib.h>
+#include "client/rBitrage/rBitrage.h"
 #include "client/rBitrageDemos/demo01Raylib/Ball.h"
 using namespace RMC;
 
