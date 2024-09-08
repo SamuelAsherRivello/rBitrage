@@ -1,11 +1,12 @@
 #include "client/rBitrage/core/Game.h"
 #include "client/rBitrage/systems/ActorSystem.h"
 #include "client/rBitrage/systems/ApplicationSystem.h"
+#include "client/rBitrage/systems/AssetLoaderSystem.h"
 #include "client/rBitrage/systems/AudioSystem.h"
 #include "client/rBitrage/systems/CameraSystem.h"
 #include "client/rBitrage/systems/DebugSystem.h"
 #include "client/rBitrage/systems/InputSystem.h"
-#include "client/rBitrage/systems/AssetLoaderSystem.h"
+#include "client/rBitrage/systems/TweenSystem.h"
 #include "client/rBitrage/systems/PhysicsSystem.h"
 #include "client/rBitrage/systems/System.h"
 #include <algorithm>
@@ -54,6 +55,7 @@ namespace RMC::rBitrage
         AddSystem(new ActorSystem(*this));
         AddSystem(new ApplicationSystem(*this));
         AddSystem(new AudioSystem(*this));
+        AddSystem(new TweenSystem(*this));
         AddSystem(new CameraSystem(*this, CameraSystemMode::Cam2D));
         AddSystem(new InputSystem(*this));
         AddSystem(new AssetLoaderSystem(*this));

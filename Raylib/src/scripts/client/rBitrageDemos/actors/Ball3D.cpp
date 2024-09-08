@@ -3,7 +3,7 @@
 namespace RMC::rBitrage 
 {
         
-    Ball3D::Ball3D(Game& game) : Shape3D(game) { 
+    Ball3D::Ball3D(Game& game) : Shape3D(game, new SphereShapeData3D) { 
         _velocity = {0, 0, 0};
 
         //TODO: I'd like "Actor.cpp" to set once to the value that is 'whatever is the child class'
@@ -73,7 +73,7 @@ namespace RMC::rBitrage
         if (hasChangedDirection) {
             if (_game.HasSystem<AudioSystem>())
             {
-                _game.GetSystem<AudioSystem>()->PlaySound("Hit01");
+               //too noisy _game.GetSystem<AudioSystem>()->PlaySound("Hit01");
             }
         }
     }

@@ -81,6 +81,7 @@ int Demo02rBitrage()
     // FrameRenderLayer::Camera2D
     Ball2D sphere2D = Ball2D(game, "Ball01"); 
     sphere2D.SetPosition(game.world.center);
+    sphere2D.SetSize({100, 100, 100});
     Vector3 velocity = Random::GetRandomVector3({-3, -3, 0}, {3, 3, 0});
     velocity = Vector3Multiply(velocity, {200, 200, 0});
     sphere2D.SetVelocity(velocity);

@@ -50,7 +50,7 @@ namespace RMC::rBitrage
             SetVelocity(velocity);
             if (_game.HasSystem<AudioSystem>())
             {
-                //very noisey _game.GetSystem<AudioSystem>()->PlaySound("Hit01");
+                _game.GetSystem<AudioSystem>()->PlaySound("Hit01");
             }
         }
     }

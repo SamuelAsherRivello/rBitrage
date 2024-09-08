@@ -3,25 +3,29 @@
 namespace RMC::rBitrage
 {
     Shape3D::Shape3D(Game& game, const FrameRenderLayer& frameRenderLayer)
-        : Actor3D(game, "", frameRenderLayer), _shapeData2D() {}
+        : Actor3D(game, "", frameRenderLayer), _shapeData3D() 
+        {
+            std::cout << "Color 1 " << std::endl;
+        }
 
-    Shape3D::Shape3D(Game& game, ShapeData2D& shapeData2D, const FrameRenderLayer& frameRenderLayer)
+    Shape3D::Shape3D(Game& game, ShapeData3D* shapeData3D, const FrameRenderLayer& frameRenderLayer)
         : Shape3D(game, frameRenderLayer)  
     {
-        _shapeData2D = shapeData2D;
+        std::cout << "Color 2 " << shapeData3D->_color.a << std::endl;
+        _shapeData3D = new CubeShapeData3D(RED);
     }
 
-    Shape3D::~Shape3D() {}
+    Shape3D::~Shape3D() 
+    {
+        delete _shapeData3D;
+    }
 
     void Shape3D::OnFrameRender()
     {
         Actor3D::OnFrameRender();
 
-        //TODO: use shapedata3d and move this in there
-        //Do that AFTER solving 2d shapes
-        //_shapeData2D.Draw(Utilities::ToVector2(GetPosition()), Utilities::ToVector2(GetSize()));
-
-        //Temp 3d drawing
-        DrawSphereEx(_transformation.Position, _size.x, 10, 20, WHITE);
+        _shapeData3D = new CubeShapeData3D(RED);
+        _shapeData3D->Draw(GetPosition(), GetSize());
+        
     }
 }

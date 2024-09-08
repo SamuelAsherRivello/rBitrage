@@ -64,7 +64,8 @@
         "thread": "cpp",
         "cinttypes": "cpp",
         "typeinfo": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "*.m": "cpp"
     },
     "C_Cpp.default.compilerPath": "C:\\msys64\\mingw32\\bin\\g++.exe"
 }

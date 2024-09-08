@@ -4,7 +4,10 @@
 #include "client/rBitrage/Game2D.h"
 #include "client/rBitrage/systems/AssetLoaderSystem.h"
 #include "client/rBitrage/systems/ApplicationSystem.h"
+#include "client/rBitrage/systems/TweenSystem.h"
 #include "client/rBitrage/actors/Sprite2D.h"
+//
+#include "3rdParty/tweeny/tweeny/tweeny.h"
 //
 #include "client/rBitrageDemos/actors/HudUI2D.h"
 #include "client/rBitrageDemos/demoXXOrbitGame2D/OrbitPlayer.h"
@@ -12,11 +15,23 @@
 using namespace RMC::rBitrage;
 
 
-//Orbit
+bool OnStep2(int x, int y) 
+{
+    std::cout << "x: " << x << " y" << y << std::endl;
+    if (x == y) return true;
+    return false;
+}
 
+bool OnStep1(int x) 
+{
+    std::cout << "x: " << x <<std::endl;
+    return false;
+}
 
 int DemoXXOrbitGame2D()
 {
+
+
     Game2D game = Game2D();
 
     //Optional: Override any defaults
@@ -60,9 +75,20 @@ int DemoXXOrbitGame2D()
     HudUI2D hudUI = HudUI2D(game);
     game.AddActor(&hudUI);
 
+    int x = enemy.GetSize().x;
+    int y = enemy.GetSize().y;
+    int z = enemy.GetSize().z;
 
+    auto tween = game.GetSystem<TweenSystem>()->from(0, 0, 0).to(x, y, z).during(100).via(tweeny::easing::exponentialOut).onStep([&](float x, float y, float z)
+    {
+        enemy.SetSize(Vector3{x, y, z});
+        return false;
+    });
+        
+    // lambdas
     while (!game.GetSystem<ApplicationSystem>()->RaylibWindowShouldClose())
     {
+
         //Calls System:OnFrameUpdate **AND** System:OnFixedUpdate
         game.UpdateFrame();
 

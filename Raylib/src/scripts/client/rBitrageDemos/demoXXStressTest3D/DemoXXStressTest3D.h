@@ -15,16 +15,14 @@ int DemoXXStressTest3D()
 {
     // Create Game
     Game3D game = Game3D();
-    game.world.center = {0, 0, 0};
+    game.world.center = game.screen.center;
     game.world.size = {20, 20, 20};
-    game.cameraSystemMode = CameraSystemMode::Cam3D;
     game.title = "Demo XX Stress Test 3D";
     game.isDebug = true; //Show FPS
     game.world.isDebug = true; //Show grid
 
     // Initialize
     game.Initialize();
-
 
     // Assets
     AssetLoaderSystem* loaderSystem = game.GetSystem<AssetLoaderSystem>();
@@ -34,7 +32,7 @@ int DemoXXStressTest3D()
 
 
     std::vector<std::shared_ptr<Actor>> _actors;
-    for (int i = 0; i < 1000; ++i)
+    for (int i = 0; i < 100; ++i)
     {
         // FrameRenderLayer::Camera2D
         Ball3D ball3D = Ball3D(game); 

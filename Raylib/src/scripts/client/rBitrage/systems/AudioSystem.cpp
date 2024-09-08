@@ -39,9 +39,6 @@ namespace RMC::rBitrage
             std::cout << "ERROR: AudioSystem::PlaySound() failed asset" << std::endl;
             return;
         }
-
-        std::cout << assetKey << " is being played." << std::endl;
-
         //NOTE: "::" calls the raylib function. Its not recursion
         ::PlaySound(_assetLoaderSystem->GetAssetAsSound<Sound>(assetKey));
     }

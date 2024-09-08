@@ -5,7 +5,7 @@
 #include "client/rBitrage/utilities/Utilities.h"
 #include "client/rBitrage/types/FrameRenderLayer.h"
 #include "client/rBitrage/types/Transform.h"
-#include "client/rBitrage/types/Shape.h"
+#include "client/rBitrage/types/ShapeDatas.h"
 
 namespace RMC::rBitrage
 {
