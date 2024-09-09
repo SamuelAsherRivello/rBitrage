@@ -201,9 +201,9 @@ Here are some resources which may be helpful with C++ and game development.
 
 ### Samuel Asher Rivello
 
-- [Samuel Asher Rivello](https://samuel-asher-rivello.medium.com/) on Medium1
-- [Samuel Asher Rivello](https://samuel-asher-rivello.medium.com/) on Medium2
-- [Samuel Asher Rivello](https://samuel-asher-rivello.medium.com/) on Medium3
+- [C++ Gaming — 01 — Overview](https://samuel-asher-rivello.medium.com/c-gaming-01-overview-ee62d88a9c84)
+- [C++ Gaming — 02 — Raylib Project Template](https://samuel-asher-rivello.medium.com/c-gaming-02-raylib-project-template-c1c9f41df980)
+- [C++ Gaming — 03 — The rBitrage Game Engine](https://samuel-asher-rivello.medium.com/c-gaming-03-the-rbitrage-game-engine-8b83814f679c)
 
 ### Raylib
 
