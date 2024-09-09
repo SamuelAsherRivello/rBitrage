@@ -2,6 +2,7 @@
 #include "client/rBitrage/actors/Actor3D.h"
 
 
+
 namespace RMC::rBitrage 
 {
     // NEEDED? Forward declaration of Game class
@@ -10,14 +11,16 @@ namespace RMC::rBitrage
     class Model3D : public Actor3D
     {
     public:
-        Model3D(Game& game, const char *assetKey, const FrameRenderLayer& frameRenderLayer = FrameRenderLayer::Camera3D);
+        Model3D(Game& game, std::unique_ptr<ModelData3D>);
         virtual ~Model3D();
 
-        void OnFrameRender() override;
-        void SetSize(const Vector3 &size) override;
+        virtual void OnFrameUpdate(float deltaTime) override;
+        virtual void OnFrameRender() override;
 
     protected:
-        const char *_assetKey;
+        ModelData3D* _modelData3D;
+        Model _model; //pointers????
+        Texture2D _texture2D;
     };
 
 }

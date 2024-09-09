@@ -67,8 +67,8 @@ namespace RMC::rBitrage
         FrameRenderLayer _frameRenderLayer;
         Game& _game;
         Transform _transformation;
-        Vector3 _size;
-        Vector3 _pivot;
+        Vector3 _size = {1, 1, 1};
+        Vector3 _pivot = {1, 1, 1}; //TODO: what default?
 
     private:
         GUID _instanceId;

@@ -3,7 +3,9 @@
 namespace RMC::rBitrage 
 {
         
-    Projectile3D::Projectile3D(Game& game, const char *assetKey) : Model3D(game, assetKey) { 
+    Projectile3D::Projectile3D(Game& game, std::unique_ptr<ModelData3D> modelData3D) : 
+        Model3D(game, std::move(modelData3D)) 
+    { 
         _velocity = {0, 0, 0};
     }
 

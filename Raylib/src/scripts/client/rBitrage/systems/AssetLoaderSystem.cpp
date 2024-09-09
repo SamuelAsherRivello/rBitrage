@@ -16,6 +16,6 @@ namespace RMC::rBitrage
     
     void AssetLoaderSystem::LoadAllAssets()
     {
-        //TODO: instead of loading things during 'add'. Do it here instead
+        //TODO: instead of loading things during 'add' methods. Wait, and do it all here instead
     }
 } 

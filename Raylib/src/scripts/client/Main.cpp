@@ -4,6 +4,8 @@
 #include "client/rBitrageDemos/demoXXOrbitGame2D/DemoXXOrbitGame2D.h"
 #include "client/rBitrageDemos/demoXXStressTest2D/DemoXXStressTest2D.h"
 #include "client/rBitrageDemos/demoXXStressTest3D/DemoXXStressTest3D.h"
+#include "client/rBitrageDemos/demoXXModel3D/DemoXXModel3D.h"
+
 
 int main()
 {
@@ -11,13 +13,14 @@ int main()
 
     /// DEMOS - WORKING
     //return Demo01Raylib();
-    //return Demo02rBitrage();
+    return Demo02rBitrage();
     //return DemoXXShapes();        
     //return DemoXXStressTest2D();  
 
     /// DEMOS - WORK IN PROGRESS
     //return DemoXXOrbitGame2D();                        
-    return DemoXXStressTest3D();
+    //return DemoXXStressTest3D();
+    //return DemoXXModel3D();
     
     /// DEMOS - BROKEN
     //return gameCreateMain2D();

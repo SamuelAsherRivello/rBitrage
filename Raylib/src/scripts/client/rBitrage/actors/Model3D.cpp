@@ -2,35 +2,50 @@
 
 namespace RMC::rBitrage 
 {
-    Model3D::Model3D (Game& game, const char *assetKey, const FrameRenderLayer& frameRenderLayer) 
-        : Actor3D (game, assetKey, frameRenderLayer)
+    Model3D::Model3D (Game& game, std::unique_ptr<ModelData3D> modelData3D) 
+        : Actor3D (game, "", FrameRenderLayer::Camera3D), 
+        _modelData3D(modelData3D.get())
     {
-        //TODO: I call this **Again** eventhough parent does it
-        // just to trigger building the texture. Can I remove this?
-        SetSize({1, 1, 1}); //Good default for all 3D
+
+        if (!_game.HasSystem<AssetLoaderSystem>())
+        {
+            return;
+        }
+
+        if (!_game.GetSystem<AssetLoaderSystem>()->HasAsset<Model>(_modelData3D->modelAssetKey))
+        {
+            return;
+        }
+
+        _model = _game.GetSystem<AssetLoaderSystem>()->GetAssetAsModel<Model>(_modelData3D->modelAssetKey);
+        _texture2D = _game.GetSystem<AssetLoaderSystem>()->GetAssetAsTexture2D<Texture2D>(_modelData3D->textureAssetKey);
+        _model.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = _texture2D;
+
+        //TODO: Maybe make size FROM the model geometry. The make a new 'actor.Scale' that is user-settable.
+        SetSize(_modelData3D->scaleFactor); 
+     
     }
 
     Model3D::~Model3D() 
     {
-        
+    }
+
+    void Model3D::OnFrameUpdate(float deltaTime) 
+    {
+        Actor3D::OnFrameUpdate(deltaTime);
     }
 
     void Model3D::OnFrameRender() {
-
         Actor3D::OnFrameRender();
 
-        // TODO: Use transform.scale instead of size here (and also in 2d?)
-        //NOTE: I **think** that size is relative to asset an scale is relative to world unites and you need both. Yes?
-        DrawCubeV(_transformation.Position, _size, WHITE);
-        DrawCubeWiresV(_transformation.Position, _size, BLACK);
-
-    }
-
-    void Model3D::SetSize(const Vector3& size) 
-    {
-        Actor::SetSize(size);
-
-        //load 3d
-
+        if (Utilities::IsNullOrEmpty(_model)) 
+        {
+            //TODO: This if check does not work
+            return;
+        }
+        _model.transform = MatrixRotateXYZ(_transformation.Rotation);
+        DrawModel(_model, _transformation.Position, Utilities::ToVector3Average(_size).x, _modelData3D->color);
+        
     }
 }
+      

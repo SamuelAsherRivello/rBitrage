@@ -28,10 +28,8 @@ namespace RMC::rBitrage
          std::string _assetKey;
 
     };
-}
 
-namespace RMC::rBitrage 
-{
+
     template <typename T>
     class Asset : public AssetBase
     {
@@ -54,11 +52,7 @@ namespace RMC::rBitrage
         private:
             T _asset;
     };
-}
 
-
-namespace RMC::rBitrage 
-{
     class ImageAsset : public Asset<Image>
     {
         public:
@@ -66,17 +60,14 @@ namespace RMC::rBitrage
             {
                 
             }
-            ImageAsset(std::string assetKey, Image image) : Asset(assetKey, image)
+            ImageAsset(std::string assetKey, Image asset) : Asset(assetKey, asset)
             {
             }
         
         private:
 
     };
-}
 
-namespace RMC::rBitrage 
-{
     class SoundAsset : public Asset<Sound>
     {
         public:
@@ -84,7 +75,37 @@ namespace RMC::rBitrage
             {
                 
             }
-            SoundAsset(std::string assetKey, Sound image) : Asset(assetKey, image)
+            SoundAsset(std::string assetKey, Sound asset) : Asset(assetKey, asset)
+            {
+            }
+
+        private:
+
+    };
+
+    class ModelAsset : public Asset<Model>
+    {
+        public:
+            ModelAsset() : Asset()
+            {
+                
+            }
+            ModelAsset(std::string assetKey, Model asset) : Asset(assetKey, asset)
+            {
+            }
+
+        private:
+
+    };
+
+    class Texture2DAsset : public Asset<Texture2D>
+    {
+        public:
+            Texture2DAsset() : Asset()
+            {
+                
+            }
+            Texture2DAsset(std::string assetKey, Texture2D asset) : Asset(assetKey, asset)
             {
             }
 

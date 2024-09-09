@@ -1,11 +1,13 @@
 #pragma once
 #include <raylib.h>
-#include "client/rBitrage/systems/System.h"
-#include "client/rBitrage/core/Game.h"
-#include "client/rBitrage/types/Asset.h"
 #include <unordered_map>
 #include <string>
 #include <iostream>
+//
+#include "client/rBitrage/systems/System.h"
+#include "client/rBitrage/core/Game.h"
+#include "client/rBitrage/types/Asset.h"
+#include "client/rBitrage/utilities/Utilities.h"
 
 namespace RMC::rBitrage 
 {
@@ -29,6 +31,12 @@ namespace RMC::rBitrage
             template <typename T>
             T GetAssetAsSound(const char *assetKey);
 
+            template <typename T>
+            T GetAssetAsModel(const char *assetKey);
+
+            template <typename T>
+            T GetAssetAsTexture2D(const char *assetKey);
+
             void LoadAllAssets();
             
         private:
@@ -37,6 +45,8 @@ namespace RMC::rBitrage
             //WORKAROUND: Separate list for each type. Not bad.
             std::unordered_map<std::string, ImageAsset> _imageAssetsByKey;  
             std::unordered_map<std::string, SoundAsset> _soundAssetsByKey;
+            std::unordered_map<std::string, ModelAsset> _modelAssetsByKey;
+            std::unordered_map<std::string, Texture2DAsset> _texture2DAssetsByKey;
 
            
     };
@@ -60,6 +70,16 @@ namespace RMC::rBitrage
             Sound asset = LoadSound(assetPath);
             _soundAssetsByKey[std::string(assetKey)] = SoundAsset(std::string(assetKey), asset);
         }
+        else if (std::is_same<T, Model>::value) 
+        {
+            Model asset = LoadModel(assetPath);
+            _modelAssetsByKey[std::string(assetKey)] = ModelAsset(std::string(assetKey), asset);
+        }
+        else if (std::is_same<T, Texture2D>::value) 
+        {
+            Texture2D asset = LoadTexture(assetPath);
+            _texture2DAssetsByKey[std::string(assetKey)] = Texture2DAsset(std::string(assetKey), asset);
+        }
         else
         {
              std::cout << "ERROR: LoaderSystem::AddAsset() failed. Type T not supported." << std::endl;
@@ -72,6 +92,12 @@ namespace RMC::rBitrage
     template <typename T>
     bool AssetLoaderSystem::HasAsset(const char *assetKey) 
     {
+        if (Utilities::IsNullOrEmpty(assetKey))
+        {
+            std::cout << "ERROR: LoaderSystem::HasAsset() failed. assetKey must NOT be null or empty." << std::endl;
+            return false;
+        }
+
         if (std::is_same<T, Image>::value) 
         {
             return _imageAssetsByKey.find(assetKey) != _imageAssetsByKey.end();
@@ -79,6 +105,14 @@ namespace RMC::rBitrage
         else if (std::is_same<T, Sound>::value) 
         {
             return _soundAssetsByKey.find(assetKey) != _soundAssetsByKey.end();
+        }
+        else if (std::is_same<T, Model>::value) 
+        {
+            return _modelAssetsByKey.find(assetKey) != _modelAssetsByKey.end();
+        }
+        else if (std::is_same<T, Texture2D>::value) 
+        {
+            return _texture2DAssetsByKey.find(assetKey) != _texture2DAssetsByKey.end();
         }
         else
         {
@@ -124,5 +158,35 @@ namespace RMC::rBitrage
         }
     }
 
+    //TODO: Remove "As Model" and work more generically
+    template <typename T>
+    T AssetLoaderSystem::GetAssetAsModel(const char *assetKey)
+    {
+        if (std::is_same<T, Model>::value) 
+        {
+            //no copy needed?
+            return _modelAssetsByKey[std::string(assetKey)].GetAsset();
+        }
+        else
+        {
+             std::cout << "ERROR: LoaderSystem::GetAssetAsModel() failed. Type T not supported." << std::endl;
+            return T();
+        }
+    }
 
+        //TODO: Remove "As Model" and work more generically
+    template <typename T>
+    T AssetLoaderSystem::GetAssetAsTexture2D(const char *assetKey)
+    {
+        if (std::is_same<T, Texture2D>::value) 
+        {
+            //no copy needed?
+            return _texture2DAssetsByKey[std::string(assetKey)].GetAsset();
+        }
+        else
+        {
+             std::cout << "ERROR: LoaderSystem::GetAssetAsTexture2D() failed. Type T not supported." << std::endl;
+            return T();
+        }
+    }
 } 

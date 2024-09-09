@@ -25,6 +25,9 @@ namespace RMC::rBitrage
                 return (Vector3){vector2.x, vector2.y, 0};
             }
 
+
+
+
             static Vector2 ToVector2Normalized(const Vector2 vector2)
             {
                 return (Vector2)
@@ -33,10 +36,6 @@ namespace RMC::rBitrage
                     Normalize(vector2.y, 0, 1)
                 };
             }
-
-
-    
-            
 
             static Vector3 ToVector3Normalized(const Vector3 vector3)
             {
@@ -59,6 +58,7 @@ namespace RMC::rBitrage
                 float average = (vector3.x + vector3.y + vector3.z)/3.0;
                 return {average, average, average};
             }
+
 
             static float ToFloatNormalized(const float f)
             {
@@ -91,6 +91,22 @@ namespace RMC::rBitrage
                 return "[Vector2 (" + std::to_string(value.x) + ", " + std::to_string(value.y) + ")]"; 
             }
 
+            static int ToInt(float value)
+            {
+                return static_cast<int>(round(value));
+            }
 
+            static bool IsNullOrEmpty (const char* value)
+            {
+                return value == nullptr || value[0] == '\0';
+            }
+
+            static bool IsNullOrEmpty (Model& value)
+            {
+                return value.materials == nullptr || value.meshes == nullptr || value.materialCount == 0 || value.meshCount == 0;
+            }
+
+
+            
     };
 }

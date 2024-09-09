@@ -11,7 +11,7 @@ namespace RMC::rBitrage
         public:
 
             //
-            Projectile3D(Game& game, const char *assetKey);
+            Projectile3D(Game& game, std::unique_ptr<ModelData3D>);
             ~Projectile3D(); 
 
             //
