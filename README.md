@@ -6,7 +6,7 @@ Welcome! [rBitrage](https://github.com/SamuelAsherRivello/rBitrage) (aka "Arbitr
 
 <BR>
 
-Read a full [TBD](https://samuel-asher-rivello.medium.com/) Medium article about this repo.
+Read [C++ Gaming — 03 — The rBitrage Game Engine](https://samuel-asher-rivello.medium.com/c-gaming-03-the-rbitrage-game-engine-8b83814f679c) on Medium for more info.
 
 <BR>
 <BR>
