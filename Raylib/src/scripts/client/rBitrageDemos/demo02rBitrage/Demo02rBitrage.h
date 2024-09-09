@@ -22,6 +22,13 @@ using namespace RMC::rBitrage;
 // IMPROVEMENTS
 //      TODO: Scope how much physics we want. Alot? Import 3rd party. A little, then add concept of CollisionGroups to existing IsCollididing() and be done.
 //      TODO: Change System:OnInitialize to System:OnInitializeAsync and have game wait for it
+// PHILOSOPHY
+//      EAST TO LEARN
+//           TODO: Make doxygen with github actions to show full API
+//      EAST TO USE
+//           TODO: ...
+//      HARD TO MISUSE
+//           TODO: Anytime an asset key is missing, put in a runtime substitute (e.g. draw actor bounds if texture fails to load)
 // POOLING
 //      TODO: Think about a factory for actors. ActorPool.Create(ActorType) or ??
 
