@@ -1,6 +1,8 @@
 
 #pragma once
 #include <raylib.h>
+#include <guiddef.h>
+//
 #include "client/rBitrage/core/Game.h"
 #include "client/rBitrage/types/Bounds.h"
 #include "client/rBitrage/types/FrameRenderLayer.h"
@@ -52,6 +54,14 @@ namespace RMC::rBitrage
         virtual Bounds GetBounds() const;
         virtual FrameRenderLayer GetFrameRenderLayer() const;
 
+
+        //NOT VIRTUAL
+        //for comparison
+        GUID GetInstanceId();
+
+        bool operator==(const Actor& other) const;
+
+
     protected:
         const char *_assetKey;
         FrameRenderLayer _frameRenderLayer;
@@ -61,9 +71,11 @@ namespace RMC::rBitrage
         Vector3 _pivot;
 
     private:
+        GUID _instanceId;
         bool _isDebug;
         float _opacity;
         const char * _name;
+    
         
     };
    

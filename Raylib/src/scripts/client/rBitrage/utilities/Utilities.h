@@ -1,9 +1,12 @@
 
 #pragma once
-#include "client/rBitrage/types/FrameRenderLayer.h"
 #include <raylib.h>
 #include <raymath.h>
 #include <string>
+//
+#include "client/rBitrage/types/FrameRenderLayer.h"
+#include "client/rBitrage/utilities/Random.h"
+//
 #define ENUM_TO_STRING_CASE(value) case value: return #value;
 
 namespace RMC::rBitrage 
@@ -87,6 +90,7 @@ namespace RMC::rBitrage
             {
                 return "[Vector2 (" + std::to_string(value.x) + ", " + std::to_string(value.y) + ")]"; 
             }
+
 
     };
 }

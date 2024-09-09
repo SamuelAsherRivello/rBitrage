@@ -7,6 +7,7 @@
 #include "client/rBitrage/systems/DebugSystem.h"
 #include "client/rBitrage/systems/InputSystem.h"
 #include "client/rBitrage/systems/TweenSystem.h"
+#include "client/rBitrage/systems/SceneSystem.h"
 #include "client/rBitrage/systems/PhysicsSystem.h"
 #include "client/rBitrage/systems/System.h"
 #include <algorithm>
@@ -52,7 +53,7 @@ namespace RMC::rBitrage
 
         //NOTE: Order here matters...
         //      affecting order of subsequent lifecycle calls
-        AddSystem(new ActorSystem(*this));
+     
         AddSystem(new ApplicationSystem(*this));
         AddSystem(new AudioSystem(*this));
         AddSystem(new TweenSystem(*this));
@@ -60,6 +61,10 @@ namespace RMC::rBitrage
         AddSystem(new InputSystem(*this));
         AddSystem(new AssetLoaderSystem(*this));
         AddSystem(new PhysicsSystem(*this));
+
+        //TODO: Keep just one of these?
+        AddSystem(new ActorSystem(*this));
+        AddSystem(new SceneSystem(*this));
 
         if (this->isDebug) 
         {

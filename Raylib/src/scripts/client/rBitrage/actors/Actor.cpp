@@ -9,6 +9,7 @@ namespace RMC::rBitrage
         _frameRenderLayer (frameRenderLayer)
     {
         _opacity = 1;
+        _instanceId = GUID();
 
         //
         SetIsDebug(false);
@@ -128,5 +129,14 @@ namespace RMC::rBitrage
     FrameRenderLayer Actor::GetFrameRenderLayer() const  
     {
         return _frameRenderLayer;
+    }
+
+    GUID Actor::GetInstanceId()
+    {
+        return _instanceId;
+    }
+
+    bool RMC::rBitrage::Actor::operator==(const Actor& other) const {
+        return _instanceId == other._instanceId;
     }
 }

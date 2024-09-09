@@ -1,7 +1,6 @@
 #include <raylib.h>
 //
 #include "client/rBitrage/rBitrage.h"
-
 //
 #include "client/rBitrageDemos/actors/Ball2D.h"
 #include "client/rBitrageDemos/actors/HudUI2D.h"
@@ -42,8 +41,9 @@ using namespace RMC::rBitrage;
 //                              Camera2D (on)
 //                              Camera3D (off)  
 
-//                          ActorSystem
-//                              Actor (with lifecycle) ex. Sprite2D, Model3D
+//                          SceneSystem
+//                              Scene
+//                                  Actor (with lifecycle) ex. Sprite2D, Model3D
 //                          ...
 
 
@@ -88,6 +88,9 @@ int Demo02rBitrage()
     game.AddActor(&sphere2D); 
 
 
+
+
+
     // FrameRenderLayer::PostCamera
     // OPTIONAL: Add HUD UI
     HudUI2D hudUI = HudUI2D(game);
@@ -99,7 +102,9 @@ int Demo02rBitrage()
     hudUI.SetTextUpperRight(livesText);
     hudUI.SetTextLowerLeft(instructions);
     hudUI.SetTextLowerRight(extra);
-    game.AddActor(&hudUI);
+    //game.AddActor(&hudUI);
+
+    game.GetSystem<SceneSystem>()->currentScene->AddActor(&hudUI);
 
     // Demonstrate logging to VS Code terminal window
     std::cout << "\n********************" << std::endl;

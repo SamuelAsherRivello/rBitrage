@@ -47,6 +47,8 @@
 
 // #include "client/rBitrage/systems/ActorSystem.h"
 #include "client/rBitrage/systems/ApplicationSystem.h"
+#include "client/rBitrage/systems/SceneSystem.h"
+
 //#include "client/rBitrage/systems/AssetLoaderSystem.h"
 // #include "client/rBitrage/systems/AudioSystem.h"
 // #include "client/rBitrage/systems/CameraSystem.h"
