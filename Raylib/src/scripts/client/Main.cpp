@@ -11,13 +11,13 @@ int main()
 
     /// DEMOS - WORKING
     //return Demo01Raylib();
-    return Demo02rBitrage();
+    //return Demo02rBitrage();
     //return DemoXXShapes();        
     //return DemoXXStressTest2D();  
 
     /// DEMOS - WORK IN PROGRESS
     //return DemoXXOrbitGame2D();                        
-    //return DemoXXStressTest3D();
+    return DemoXXStressTest3D();
     
     /// DEMOS - BROKEN
     //return gameCreateMain2D();
