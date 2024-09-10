@@ -5,8 +5,10 @@ namespace RMC::rBitrage
 
     HudUI2D::HudUI2D(Game& game) : Actor2D(game, "", FrameRenderLayer::PostCamera) 
     { 
-        SetSize({game.screen.size.x, game.screen.size.y, 0});
-        SetPosition({game.screen.size.x/2, game.screen.size.y/2, 0});
+        //TODO: Set hudUi2d as a 'friend' in bounds so I can call this?/
+        //GetBounds().SetSize({game.screen.GetSize().x, game.screen.GetSize().y, 0});
+ 
+        SetPosition({game.screen.GetSize().x/2, game.screen.GetSize().y/2, 0});
     }
 
     HudUI2D::~HudUI2D()
@@ -17,13 +19,13 @@ namespace RMC::rBitrage
     {
         Actor2D::OnFrameRender();
 
-        const int MAGIC = _game.screen.size.x / 40; //TODO: rethink
+        const int MAGIC = _game.screen.GetSize().x / 40; //TODO: rethink
 
         int margin = MAGIC;
         int leftX = margin;
         int topY = margin;
-        int rightX = _game.screen.size.x - margin;
-        int bottomY = _game.screen.size.y - margin;
+        int rightX = _game.screen.GetSize().x - margin;
+        int bottomY = _game.screen.GetSize().y - margin;
         Color fontColor = WHITE;
         int fontSize = MAGIC;
 

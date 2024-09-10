@@ -19,7 +19,7 @@ int gameCreateSpheres2D()
  
     //Overrides
     game.cameraSystemMode = CameraSystemMode::Cam2D; //camera mode
-    game.world.size = game.screen.size;   //balls bounds off world bounds
+    game.world.GetSize() = game.screen.GetSize();   //balls bounds off world bounds
     game.isDebug = true; //show gizmos
 
     //
@@ -34,15 +34,15 @@ int gameCreateSpheres2D()
 
     // FrameRenderLayer::PreCamera
     Sprite2D background = Sprite2D(game, "Background01", FrameRenderLayer::PreCamera);
-    background.SetSize({game.screen.size.x, game.screen.size.y, 0});
-    background.SetPosition({game.screen.size.x/2, game.screen.size.y/2, 0});
+    background.ResizeAssetTo({game.screen.GetSize().x, game.screen.GetSize().y, 0});
+    background.SetPosition({game.screen.GetSize().x/2, game.screen.GetSize().y/2, 0});
     game.AddActor(&background);
  
 
     for (int i = 0; i < 10; i++)
     {
         Ball2D sphere = Ball2D(game, "Ball01");
-        sphere.SetPosition(game.world.center);
+        sphere.SetPosition(game.world.GetCenter());
 
         float x = (std::rand() % 11 - 5) * 100;
         float y = (std::rand() % 11 - 5) * 100;

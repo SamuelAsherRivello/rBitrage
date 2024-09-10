@@ -36,7 +36,7 @@ int gameCreateMain2D()
 
     //Overrides
     game.cameraSystemMode = CameraSystemMode::Cam2D;
-    game.world.size = game.screen.size;   //balls bounds off world bounds
+    game.world.GetSize() = game.screen.GetSize();   //balls bounds off world bounds
     game.isDebug = true; //show gizmos
 
     //Calls System:OnInitialize **AND** System:OnInitialized
@@ -66,26 +66,26 @@ int gameCreateMain2D()
  
     // FrameRenderLayer::PreCamera
     Sprite2D background = Sprite2D(game, "Background01", FrameRenderLayer::PreCamera);
-    background.SetSize({game.screen.size.x, game.screen.size.y, 0});
-    background.SetPosition(game.world.center);
+    background.SetSize({game.screen.GetSize().x, game.screen.GetSize().y, 0});
+    background.SetPosition(game.world.GetCenter());
     game.AddActor(&background);
 
     // FrameRenderLayer::Camera
     Cube2D cube01 = Cube2D(game);
     cube01.SetOpacity(1.0f);
-    cube01.SetPosition({game.screen.size.x/2, game.screen.size.y/2, 0});
+    cube01.SetPosition({game.screen.GetSize().x/2, game.screen.GetSize().y/2, 0});
     game.AddActor(&cube01);
 
     Cube2D cube02 = Cube2D(game);
     cube02.SetOpacity(0.5f);
     cube02.SetPivot({0,0,0}); // upper left
-    cube02.SetPosition({game.screen.size.x/2 + 300, game.screen.size.y/2, 0});
+    cube02.SetPosition({game.screen.GetSize().x/2 + 300, game.screen.GetSize().y/2, 0});
     game.AddActor(&cube02);
 
     Cube2D cube03 = Cube2D(game);
     cube03.SetOpacity(.25f);
     cube03.SetPivot({1, 1, 1}); // lower right
-    cube03.SetPosition({game.screen.size.x/2 + 600, game.screen.size.y/2, 0});
+    cube03.SetPosition({game.screen.GetSize().x/2 + 600, game.screen.GetSize().y/2, 0});
     game.AddActor(&cube03);
 
 
@@ -94,24 +94,24 @@ int gameCreateMain2D()
 
 
     Ball2D sphere01 = Ball2D(game, "Ball01");
-    sphere01.SetPosition({game.screen.size.x/4, game.screen.size.y/4, 0});
+    sphere01.SetPosition({game.screen.GetSize().x/4, game.screen.GetSize().y/4, 0});
     sphere01.SetVelocity({100, 200, 0});
     game.AddActor(&sphere01);
 
     Ball2D sphere02 = Ball2D(game, "Ball01");
-    sphere02.SetPosition({game.screen.size.x/3, game.screen.size.y/3, 0});
+    sphere02.SetPosition({game.screen.GetSize().x/3, game.screen.GetSize().y/3, 0});
     sphere02.SetVelocity({-200, 100, 0});
     game.AddActor(&sphere02);
 
     Sprite2D boundary = Sprite2D(game, "Boundary01");
-    boundary.SetSize({game.world.size});
-    boundary.SetPosition(game.world.center);
+    boundary.SetSize({game.world.GetSize()});
+    boundary.SetPosition(game.world.GetCenter());
     game.AddActor(&boundary);
 
     // FrameRenderLayer::PostCamera
     Sprite2D foreground = Sprite2D(game, "Foreground01", FrameRenderLayer::PostCamera);
-    foreground.SetSize({game.screen.size.x, game.screen.size.y, 0});
-    foreground.SetPosition({game.screen.size.x/2, game.screen.size.y/2, 0});
+    foreground.SetSize({game.screen.GetSize().x, game.screen.GetSize().y, 0});
+    foreground.SetPosition({game.screen.GetSize().x/2, game.screen.GetSize().y/2, 0});
     game.AddActor(&foreground);
 
     // FrameRenderLayer::PostCamera

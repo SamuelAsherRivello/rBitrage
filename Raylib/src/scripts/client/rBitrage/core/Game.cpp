@@ -48,7 +48,7 @@ namespace RMC::rBitrage
             return;
         }
 
-        InitWindow(screen.size.x, screen.size.y, title);
+        InitWindow(screen.GetSize().x, screen.GetSize().y, title);
         SetTargetFPS(targetFPS);
 
         //NOTE: Order here matters...
@@ -163,10 +163,14 @@ namespace RMC::rBitrage
 
             //Fullscreen
             Action fullscreenAction;
-            //IsDown
             fullscreenAction.AddBinding(ActionType::IsPressed, []() { return IsKeyPressed(KEY_F); });
-            //
             inputSystem->AddAction("fullscreen", fullscreenAction);
+
+            //Debug
+            Action debugAction;
+            debugAction.AddBinding(ActionType::IsPressed, []() { return IsKeyPressed(KEY_GRAVE); }); //backtick
+            debugAction.AddBinding(ActionType::IsDown, []() { return IsKeyDown(KEY_GRAVE); }); //backtick
+            inputSystem->AddAction("debug", debugAction);
         }
 
         Initialized();

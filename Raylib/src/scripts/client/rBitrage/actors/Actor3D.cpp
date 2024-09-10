@@ -9,7 +9,6 @@ namespace RMC::rBitrage
         //GOOD DEFAULT FOR 3d like units. But think differently for 2d default
         //TODO: Think about adding 'Scale', separate from 'Size' like unity?
         //Measurement is like UNITS
-        SetSize({1, 1, 1});
     }
 
 

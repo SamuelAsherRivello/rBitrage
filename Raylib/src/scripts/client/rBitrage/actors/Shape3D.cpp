@@ -25,7 +25,7 @@ namespace RMC::rBitrage
         Actor3D::OnFrameRender();
 
         _shapeData3D = new CubeShapeData3D(RED);
-        _shapeData3D->Draw(GetPosition(), GetSize());
+        _shapeData3D->Draw(GetPosition(), GetBounds().GetSize());
         
     }
 }

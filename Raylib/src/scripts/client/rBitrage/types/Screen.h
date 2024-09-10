@@ -16,12 +16,17 @@ namespace RMC::rBitrage
                     //TODO: Is -1 a good 'ignore me' value?
                     { width, height, -1 },
 
-                    //DEFAULT: For sccreen will be upper left. Done!
-                    { 0.0f, 0.0f, 0.0f }
-                )
+                    //DEFAULT: For screen will be upper left. Done!
+                    { 0.0f, 0.0f, 0.0f   })
             {
             }
             bool isDebug = false;
+
+            //Subclass allows more public access than parent
+            void SetSize(Vector3 size) 
+            { 
+                Bounds::SetSize(size);
+            }
 
         private:
 

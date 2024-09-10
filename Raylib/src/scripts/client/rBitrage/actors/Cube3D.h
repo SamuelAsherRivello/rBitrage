@@ -14,7 +14,6 @@ namespace RMC::rBitrage
         virtual ~Cube3D();
 
         void OnFrameRender() override;
-        void SetSize(const Vector3 &size) override;
 
     protected:
         const char *_assetKey;

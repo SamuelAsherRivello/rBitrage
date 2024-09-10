@@ -38,19 +38,12 @@ namespace RMC::rBitrage
         virtual Vector3 GetRotation() const;
         virtual void SetRotation(const Vector3 &position);
 
-        virtual void SetPivot(const Vector3& pivot);
-        virtual Vector3 GetPivot() const;
-
         virtual const char* GetName() const;
         virtual void SetName(const char* name);
 
         virtual Game& GetGame() const;
         virtual Transform& GetTransform();
 
-
-        //
-        virtual Vector3 GetSize() const;
-        virtual void SetSize(const Vector3 &size);
 
         //
         virtual float GetOpacity();
@@ -61,8 +54,10 @@ namespace RMC::rBitrage
         virtual void SetIsDebug(bool isDebug);
 
         //
-        virtual Bounds GetBounds() const;
+        virtual Bounds GetBounds();
         virtual FrameRenderLayer GetFrameRenderLayer() const;
+
+   
 
 
         //NOT VIRTUAL
@@ -78,13 +73,14 @@ namespace RMC::rBitrage
         Game& _game;
         Transform _transform;
         Vector3 _size = {1, 1, 1};
-        Vector3 _pivot = {1, 1, 1}; //TODO: what default?
+
 
     private:
         GUID _instanceId;
         bool _isDebug;
         float _opacity;
         const char * _name;
+        Bounds _bounds;
     
         
     };

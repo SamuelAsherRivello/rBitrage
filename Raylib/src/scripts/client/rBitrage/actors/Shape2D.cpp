@@ -20,6 +20,6 @@ namespace RMC::rBitrage
     {
         Actor2D::OnFrameRender();
 
-        _shapeData2D->Draw(Utilities::ToVector2(GetPosition()), Utilities::ToVector2(GetSize()));
+        _shapeData2D->Draw(Utilities::ToVector2(GetPosition()), Utilities::ToVector2(GetBounds().GetSize()));
     }
 }

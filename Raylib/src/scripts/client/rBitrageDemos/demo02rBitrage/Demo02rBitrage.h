@@ -17,8 +17,10 @@ int Demo02rBitrage()
     // OPTIONAL: Set Overrides
     game.cameraSystemMode = CameraSystemMode::Cam2D;
     game.title = "Demo 02 rBitrage";
-    game.screen.size = game.world.size = {1920, 1080, 0};
-    game.screen.center = game.world.center = {1920/2, 1080/2, 0};
+    game.screen.SetSize({1920, 1080, 0});
+    game.world.SetSize({1920, 1080, 0});
+    game.screen.SetPivotAtCenter();
+    game.world.SetPivotAtCenter();
     game.isDebug = true;                  //true, show ANY gizmos
     game.screen.isDebug = true;           //true, show THIS gizmo
     game.world.isDebug = true;            //true, show THIS gizmo
@@ -28,28 +30,36 @@ int Demo02rBitrage()
     game.Initialize();
 
 
+      // Demonstrate logging to VS Code terminal window
+    std::cout << "\n********************" << std::endl;
+    std::cout << "   Hello World!       " << std::endl;
+    std::cout << "********************\n" << std::endl;
+
+
     // Assets
     AssetLoaderSystem* loaderSystem = game.GetSystem<AssetLoaderSystem>();
     loaderSystem->AddAsset<Image>("Ball01", "src/assets/images/Ball01.png");
     loaderSystem->AddAsset<Sound>("Hit01", "src/assets/audio/sfx/Hit01.wav");
     loaderSystem->LoadAllAssets();
 
-    std::cout << "Assets Loaded\n" << std::endl;
+   std::vector<std::shared_ptr<Actor>> _actors;
+    //for (int i = 0; i < 2; ++i)
+    //{
+        // FrameRenderLayer::Camera2D
+        Ball2D actor = Ball2D(game, "Ball01"); 
+        actor.SetPosition(game.world.GetCenter());
+        actor.SetIsDebug(true);
+        game.AddActor(&actor); 
 
+        Vector3 velocity = Random::GetRandomVector3({-3, -3, -3}, {3, 3, 3});
+        velocity = Vector3Multiply(velocity, {100, 100, 100});
+        actor.SetVelocity(velocity);
 
-     std::vector<Actor*> _actors;
-
-    // FrameRenderLayer::Camera2D
-    Ball2D sphere2D = Ball2D(game, "Ball01"); 
-    sphere2D.SetPosition(game.world.center);
-    sphere2D.SetSize({100, 100, 100});
-    Vector3 velocity = Random::GetRandomVector3({-3, -3, 0}, {3, 3, 0});
-    velocity = Vector3Multiply(velocity, {200, 200, 0});
-    sphere2D.SetVelocity(velocity);
-    game.AddActor(&sphere2D); 
-
-
-
+        auto actorSharedPointer = std::make_shared<Ball2D>(actor);
+        _actors.push_back(actorSharedPointer);
+        game.AddActor(actorSharedPointer.get()); 
+    //}
+    Ball2D& actor01 = static_cast<Ball2D&>(*_actors.at(0));
 
 
     // FrameRenderLayer::PostCamera
@@ -67,10 +77,7 @@ int Demo02rBitrage()
 
     game.GetSystem<SceneSystem>()->currentScene->AddActor(&hudUI);
 
-    // Demonstrate logging to VS Code terminal window
-    std::cout << "\n********************" << std::endl;
-    std::cout << "   Hello World!       " << std::endl;
-    std::cout << "********************\n" << std::endl;
+  
 
 
     // Game Loop - Click escape to close window
@@ -79,11 +86,12 @@ int Demo02rBitrage()
         // Input - Click spacebar to reset ball position
         if (game.GetSystem<InputSystem>()->IsActionPressed("action"))
         {
-            sphere2D.SetPosition(game.world.center);
+            actor01.SetPosition(game.world.GetCenter());
+        
 
             Vector3 velocity = Random::GetRandomVector3({-3, -3, 0}, {3, 3, 0});
             velocity = Vector3Multiply(velocity, {200, 200, 0});
-            sphere2D.SetVelocity(velocity);
+            actor01.SetVelocity(velocity);
         }
 
 

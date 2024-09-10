@@ -7,7 +7,9 @@
 #include "client/rBitrage/Game3D.h"
 #include "client/rBitrage/utilities/Random.h"
 #include "client/rBitrage/systems/CameraSystem.h"
-//
+#include "client/rBitrage/systems/ApplicationSystem.h"
+
+#include "client/rBitrageDemos/actors/HudUI2D.h"
 #include "client/rBitrageDemos/actors/Duck3D.h"
 
 using namespace RMC::rBitrage;
@@ -17,8 +19,6 @@ int DemoXXModel3D()
 {
     // Create Game
     Game3D game = Game3D();
-    game.world.center = game.screen.center;
-    game.world.size = {2, 2, 2};
     game.title = "Demo XX Model 3D";
     game.isDebug = true; //Show FPS
     game.world.isDebug = true; //Show grid
@@ -43,7 +43,7 @@ int DemoXXModel3D()
     {
         // FrameRenderLayer::Camera2D
         Duck3D actor = Duck3D(game); 
-        actor.SetPosition(game.world.center);
+        actor.SetPosition(game.world.GetCenter());
         game.AddActor(&actor); 
 
         Vector3 velocity = Random::GetRandomVector3({-3, -3, -3}, {3, 3, 3});
@@ -76,7 +76,7 @@ int DemoXXModel3D()
             for (auto& actor : _actors)
             {
                 actor->SetRotation({0, 0, 0});
-                actor->SetPosition(game.world.center);
+                actor->SetPosition(game.world.GetCenter());
             }
         }
 

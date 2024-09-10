@@ -7,15 +7,28 @@ namespace RMC::rBitrage
         : Actor (game, assetKey, frameRenderLayer)
     {
 
-         //GOOD DEFAULT FOR 2d like pixels. But think differently for 3d default
-        //TODO: Think about adding 'Scale', separate from 'Size' like unity?
-        //Measurement is like PIXELS
-        SetSize({32, 32, 32});
     }
 
 
     Actor2D::~Actor2D() 
     {
     }
+
+    /*
+    * Resize the Actor ASSET to this size
+    */
+    void Actor2D::ResizeAsset(const Vector3& size) 
+    {
+        //override as needed
+    }
+
+    /*
+    * Resize the Actor ASSET to the ASSET original size
+    */
+    void Actor2D::ResizeAsset() 
+    {
+        //override as needed
+    }
+
 
 }

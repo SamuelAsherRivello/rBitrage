@@ -22,7 +22,7 @@ namespace RMC::rBitrage
         _model.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = _texture2D;
 
         //TODO: Maybe make size FROM the model geometry. The make a new 'actor.Scale' that is user-settable.
-        SetSize(_modelData3D->scaleFactor); 
+        //SetSize(_modelData3D->scaleFactor); 
      
     }
 

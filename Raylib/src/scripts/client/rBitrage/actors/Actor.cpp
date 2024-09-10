@@ -13,7 +13,6 @@ namespace RMC::rBitrage
 
         //
         SetIsDebug(false);
-        SetPivot({0.5f, 0.5f, 0.5}); //center pivot by default
         SetName(typeid(this).name());
         SetPosition({0,0,0});
        
@@ -26,6 +25,7 @@ namespace RMC::rBitrage
 
     void Actor::OnInitialize() 
     {
+          GetBounds().SetSize({1, 2, 3});
     }
 
 
@@ -70,17 +70,6 @@ namespace RMC::rBitrage
         return _transform.Rotation;
     }
 
-    void Actor::SetPivot(const Vector3& pivot) 
-    {
-        _pivot = Utilities::ToVector3Normalized(pivot);
-    }
-
-    Vector3 Actor::GetPivot() const 
-    {
-        return _pivot;
-    }
-    
-
     void Actor::SetRotation(const Vector3& position) 
     {
         _transform.Rotation = position;
@@ -117,28 +106,18 @@ namespace RMC::rBitrage
          _opacity = Utilities::ToFloatNormalized(opacity);
     }
 
-    Vector3 Actor::GetSize() const 
-    {
-        return _size;
-    }
 
-    void Actor::SetSize(const Vector3& size) 
+    Bounds Actor::GetBounds() 
     {
-        _size = size;
-    }
-
-    Bounds Actor::GetBounds() const  
-    {
-        return {
-                    {_transform.Position.x, _transform.Position.y, _transform.Position.z}, 
-                    {_size.x, _size.y, _size.z}
-                };
+        return _bounds;
     }
 
     FrameRenderLayer Actor::GetFrameRenderLayer() const  
     {
         return _frameRenderLayer;
     }
+
+
 
     GUID Actor::GetInstanceId()
     {

@@ -24,11 +24,4 @@ namespace RMC::rBitrage
 
     }
 
-    void Cube3D::SetSize(const Vector3& size) 
-    {
-        Actor::SetSize(size);
-
-        //load 3d
-
-    }
 }

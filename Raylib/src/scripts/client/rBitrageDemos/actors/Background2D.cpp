@@ -9,8 +9,8 @@ namespace RMC::rBitrage
         _shapeData2D = new RectangleShapeData2D(color);
 
         //Background automatically always covers the screen
-        SetSize(_game.world.size);
-        SetPosition(game.world.center);
+        ResizeAsset(_game.world.GetSize());
+        SetPosition(game.world.GetCenter());
     }
 
     Background2D::~Background2D() {}

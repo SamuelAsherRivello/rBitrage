@@ -18,7 +18,7 @@ int gameCreateSpheres3D()
 
     //Overrides
     game.cameraSystemMode = CameraSystemMode::Cam3D;
-    game.world.size = game.screen.size;   //balls bounds off world bounds
+    game.world.GetSize() = game.screen.GetSize();   //balls bounds off world bounds
     game.isDebug = true; //show gizmos
 
     //
@@ -35,7 +35,7 @@ int gameCreateSpheres3D()
     {
         std::cout << "Sphere " << i << std::endl;
         Model3D sphere = Model3D(game, "");
-        sphere.SetPosition(game.world.center);
+        sphere.SetPosition(game.world.GetCenter());
 
         // float x = (std::rand() % 11 - 5) * 100;
         // float y = (std::rand() % 11 - 5) * 100;

@@ -16,6 +16,10 @@ namespace RMC::rBitrage
             Actor2D(Game& game, const char *assetKey, const FrameRenderLayer& frameRenderLayer = FrameRenderLayer::Camera2D);
             virtual ~Actor2D();
 
+            //
+             virtual void ResizeAsset(const Vector3 &size);
+             virtual void ResizeAsset();
+
         protected:
     };
 

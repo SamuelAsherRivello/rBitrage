@@ -1,5 +1,7 @@
 #pragma once
 #include "client/rBitrage/systems/System.h"
+#include "client/rBitrage/systems/InputSystem.h"
+
 #include "client/rBitrage/systems/CameraSystem.h"
 #include "client/rBitrage/types/CameraSystemMode.h"
 #include "client/rBitrage/actors/Actor.h"
@@ -11,6 +13,7 @@ namespace RMC::rBitrage
         public:
             DebugSystem(Game& game);
             void OnInitialize() override;
+            void OnInitialized() override;
             void OnFixedUpdate(float fixedDeltaTime) override;
             void OnFrameUpdate(float deltaTime) override;
             void OnFrameRender(const FrameRenderLayer& frameRenderLayer) override;

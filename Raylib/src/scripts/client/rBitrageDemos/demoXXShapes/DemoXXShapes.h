@@ -33,14 +33,14 @@ int DemoXXShapes()
 
 
     Shape2D rectangleShape2D = Shape2D(game, new RectangleShapeData2D());
-    rectangleShape2D.SetSize({200, 200, 200});
-    rectangleShape2D.SetPosition(Vector3Add(game.world.center, Vector3{-200, 0, 0}));
+    rectangleShape2D.GetTransform().Scale = {200, 200, 200};
+    rectangleShape2D.SetPosition(Vector3Add(game.world.GetCenter(), Vector3{-200, 0, 0}));
     game.AddActor(&rectangleShape2D); 
 
 
     Shape2D circleShape2D = Shape2D(game, new CircleShapeData2D());
-    circleShape2D.SetSize({200, 200, 200});
-    circleShape2D.SetPosition(Vector3Add(game.world.center, Vector3{200, 0, 0}));
+    circleShape2D.GetTransform().Scale = {200, 200, 200};
+    circleShape2D.SetPosition(Vector3Add(game.world.GetCenter(), Vector3{200, 0, 0}));
     game.AddActor(&circleShape2D); 
 
     
@@ -57,7 +57,7 @@ int DemoXXShapes()
     std::cout << "\n********************" << std::endl;
     std::cout << "   Hello World!       " << std::endl;
     std::cout << "********************\n" << std::endl;
-    std::cout << Utilities::ToString(game.world.center) << std::endl;
+    std::cout << Utilities::ToString(game.world.GetCenter()) << std::endl;
     
     // Game Loop - Click escape to close window
     while (!game.GetSystem<ApplicationSystem>()->RaylibWindowShouldClose())

@@ -15,8 +15,6 @@ int DemoXXStressTest3D()
 {
     // Create Game
     Game3D game = Game3D();
-    game.world.center = game.screen.center;
-    game.world.size = {20, 20, 20};
     game.title = "Demo XX Stress Test 3D";
     game.isDebug = true; //Show FPS
     game.world.isDebug = true; //Show grid
@@ -36,7 +34,7 @@ int DemoXXStressTest3D()
     {
         // FrameRenderLayer::Camera2D
         Ball3D ball3D = Ball3D(game); 
-        ball3D.SetPosition(game.world.center);
+        ball3D.SetPosition(game.world.GetCenter());
         
         Vector3 velocity = Random::GetRandomVector3({-3, -3, -3}, {3, 3, 3});
         velocity = Vector3Multiply(velocity, {1, 1, 1});

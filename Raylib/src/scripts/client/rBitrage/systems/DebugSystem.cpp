@@ -18,6 +18,13 @@ namespace RMC::rBitrage
 
     }
 
+    void DebugSystem::OnInitialized() 
+    {
+
+        
+
+    }
+
 
     void DebugSystem::OnFixedUpdate(float fixedDeltaTime) 
     {
@@ -28,6 +35,15 @@ namespace RMC::rBitrage
     void DebugSystem::OnFrameUpdate(float deltaTime) 
     {
         // std::cout << "OnFrameUpdate(" << deltaTime << ")" << std::endl;
+
+        if (_game.HasSystem<InputSystem>())
+        {
+            if (_game.GetSystem<InputSystem>()->IsActionDown("debug"))
+            {
+                std::cout << "DebugSystem Mouse " << Utilities::ToString(GetMousePosition()) << std::endl;
+            }
+        }
+
     }
 
 
@@ -89,15 +105,16 @@ namespace RMC::rBitrage
 //1
     void DebugSystem::DrawWorldSizeHalf() 
     {
-        Rectangle worldRect = {_game.world.center.x, _game.world.center.y, _game.world.size.x, _game.world.size.y};
-        DrawCrosshairsAtCenterRectangle(worldRect, .5, _worldStroke, _worldColor);  
+        Rectangle rect = _game.world.ToRectangleAtCenter();
+        std::cout << "DRAW WORLD " << Utilities::ToString(rect) << std::endl;
+        DrawCrosshairsAtCenterRectangle(rect, .5, _worldStroke, PURPLE);  
 
     }
 
     void DebugSystem::DrawScreenSizeHalf() 
     {
-        Rectangle screenRect = {_game.screen.center.x, _game.screen.center.y, _game.screen.size.x, _game.screen.size.y};
-        DrawCrosshairsAtCenterRectangle(screenRect, 1.0, _screenStroke, _screenColor); //GREEN
+        Rectangle rect = _game.screen.ToRectangleAtCenter();
+        DrawCrosshairsAtCenterRectangle(rect, 1.0, _screenStroke, _screenColor); //GREEN
 
     }
 
@@ -120,30 +137,30 @@ namespace RMC::rBitrage
 
     void DebugSystem::DrawScreenBounds() 
     {
-        DrawRectangleLinesEx({0, 0, _game.screen.size.x, _game.screen.size.y}, _screenStroke, _screenColor);
+        DrawRectangleLinesEx({0, 0, _game.screen.GetSize().x, _game.screen.GetSize().y}, _screenStroke, _screenColor);
     }
 
     void DebugSystem::DrawWorldBounds() 
     {
-        DrawRectangleLinesEx({0, 0, _game.world.size.x, _game.world.size.y}, _worldStroke, _worldColor);
+        DrawRectangleLinesEx({0, 0, _game.world.GetSize().x, _game.world.GetSize().y}, _worldStroke, _worldColor);
     }
 
 
     void DebugSystem::DrawActorBounds(Actor* actor) 
     {
-        DrawCrosshairsAtCenterRectangle(actor->GetBounds().ToRectangle(), 1.0, 4, GREEN);
+        DrawCrosshairsAtCenterRectangle(actor->GetBounds().ToRectangleAtCenter(), 1.0, 4, GREEN);
     }
 
     //2
     void DebugSystem::DrawActorPivot(Actor* actor)
     {
         // Calculate the offset from the actor's center to the pivot point
-        float offsetX = actor->GetPivot().x * actor->GetBounds().size.x;
-        float offsetY = actor->GetPivot().y * actor->GetBounds().size.y;
+        float offsetX = actor->GetBounds().GetPivot().x * actor->GetBounds().GetSize().x;
+        float offsetY = actor->GetBounds().GetPivot().y * actor->GetBounds().GetSize().y;
 
         DrawCircle(
-            actor->GetBounds().center.x + offsetX, 
-            actor->GetBounds().center.y + offsetY, 
+            actor->GetBounds().GetCenter().x + offsetX, 
+            actor->GetBounds().GetCenter().y + offsetY, 
             _pivotRadius, 
             PURPLE);
     }
@@ -152,8 +169,8 @@ namespace RMC::rBitrage
     void DebugSystem::DrawActorCenter(Actor* actor) 
     {
         DrawRectangle(
-            actor->GetBounds().center.x - _centerRadius/2, 
-            actor->GetBounds().center.y - _centerRadius/2, 
+            actor->GetBounds().GetCenter().x - _centerRadius/2, 
+            actor->GetBounds().GetCenter().y - _centerRadius/2, 
             _centerRadius, 
             _centerRadius, 
             WHITE);

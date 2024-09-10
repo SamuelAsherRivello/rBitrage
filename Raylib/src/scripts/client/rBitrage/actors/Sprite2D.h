@@ -24,7 +24,8 @@ namespace RMC::rBitrage
         virtual ~Sprite2D();
 
         void OnFrameRender() override;
-        void SetSize(const Vector3 &size) override;
+        void ResizeAsset(const Vector3 &size) override;
+        void ResizeAsset() override;
 
     protected:
         Texture2D _texture; 

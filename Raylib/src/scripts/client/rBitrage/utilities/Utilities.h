@@ -84,15 +84,23 @@ namespace RMC::rBitrage
                 return std::to_string((double)value);
             }
 
+            static std::string ToString(Vector2 value)
+            {
+                return "[Vector2 (" + std::to_string(value.x) + ", " + std::to_string(value.y) + ")]"; 
+            }
+
+
             static std::string ToString(Vector3 value)
             {
                 return "[Vector3 (" + std::to_string(value.x) + ", " + std::to_string(value.y) + ", " + std::to_string(value.z) + ")]"; 
             }
 
-            static std::string ToString(Vector2 value)
+
+            static std::string ToString(Rectangle value)
             {
-                return "[Vector2 (" + std::to_string(value.x) + ", " + std::to_string(value.y) + ")]"; 
+                return "[Rectangle (" + std::to_string(value.x) + ", " + std::to_string(value.y) + ", " + std::to_string(value.width) + ", " + std::to_string(value.height) + ")]"; 
             }
+
 
             static std::string ToString(GUID value)
             {

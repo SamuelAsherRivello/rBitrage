@@ -9,8 +9,7 @@ namespace RMC::rBitrage
         public:
             Duck3D(Game& game);
             virtual ~Duck3D();
-
-            virtual void OnFrameUpdate(float deltaTime) override;
+            void OnFrameUpdate(float deltaTime) override;
 
         protected:
     };

@@ -19,8 +19,10 @@ namespace RMC::rBitrage
         if (cameraSystemMode != CameraSystemMode::Cam3D)
         {
             //By default look at the center of the world
-            camera2D.target = Utilities::ToVector2(_game.world.center);
-            camera2D.offset = {_game.world.size.x / 2,_game.world.size.y / 2};
+            camera2D.target = Utilities::ToVector2(_game.world.GetCenter());
+
+            //TODO: Should offset be based on SCREEN not WORLD?
+            camera2D.offset = {_game.world.GetSize().x / 2,_game.world.GetSize().y / 2};
             camera2D.rotation = 0.0f;
             camera2D.zoom = 1;
         }
@@ -29,7 +31,7 @@ namespace RMC::rBitrage
         {
             camera3D = Camera3D();
             camera3D.position = {20, 20, 20};
-            camera3D.target = _game.world.center;
+            camera3D.target = _game.world.GetCenter();
             camera3D.up = (Vector3){ 0.0f, 1.0f, 0.0f };
             camera3D.fovy = 60.0;
             camera3D.projection = CAMERA_PERSPECTIVE;

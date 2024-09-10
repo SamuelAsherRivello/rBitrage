@@ -37,7 +37,7 @@ int DemoXXStressTest2D()
 
         // FrameRenderLayer::Camera2D
         Ball2D ball2D2 = Ball2D(game, "Ball01"); 
-        ball2D2.SetPosition(game.world.center);
+        ball2D2.SetPosition(game.world.GetCenter());
         
         Vector3 velocity2 = Random::GetRandomVector3({-3, -3, 0}, {3, 3, 0});
         velocity2 = Vector3Multiply(velocity2, {200, 200, 0});
@@ -50,7 +50,7 @@ int DemoXXStressTest2D()
 
           // FrameRenderLayer::Camera2D
         Ball2D ball2D = Ball2D(game, "Ball01"); 
-        ball2D.SetPosition(game.world.center);
+        ball2D.SetPosition(game.world.GetCenter());
         
         Vector3 velocity = Random::GetRandomVector3({-3, -3, 0}, {3, 3, 0});
         velocity = Vector3Multiply(velocity, {200, 200, 0});
