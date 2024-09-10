@@ -58,14 +58,14 @@ namespace RMC::rBitrage
         // Update player position using trigonometry
         _velocityAngular += _accelerationAngularInput * deltaTime;
 
-        _transformation.Position.x = _orbitCenter.x + sin(_velocityAngular) * _orbitRadius;
-        _transformation.Position.y = _orbitCenter.y + cos(_velocityAngular) * _orbitRadius;
+        _transform.Position.x = _orbitCenter.x + sin(_velocityAngular) * _orbitRadius;
+        _transform.Position.y = _orbitCenter.y + cos(_velocityAngular) * _orbitRadius;
 
         // Calculate the angle in radians
-        float deltaX = _orbitCenter.x - _transformation.Position.x;
-        float deltaY = _orbitCenter.y - _transformation.Position.y;
+        float deltaX = _orbitCenter.x - _transform.Position.x;
+        float deltaY = _orbitCenter.y - _transform.Position.y;
         float angleToCenter = atan2(deltaY, deltaX) * (180.0 / PI) + 90;
-        _transformation.Rotation.z = angleToCenter;
+        _transform.Rotation.z = angleToCenter;
 
     }
 

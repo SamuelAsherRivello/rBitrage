@@ -43,8 +43,8 @@ namespace RMC::rBitrage
             //TODO: This if check does not work
             return;
         }
-        _model.transform = MatrixRotateXYZ(_transformation.Rotation);
-        DrawModel(_model, _transformation.Position, Utilities::ToVector3Average(_size).x, _modelData3D->color);
+        _model.transform = MatrixRotateXYZ(_transform.Rotation);
+        DrawModel(_model, _transform.Position, Utilities::ToVector3Average(_size).x, _modelData3D->color);
         
     }
 }

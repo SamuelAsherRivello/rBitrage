@@ -15,8 +15,8 @@ namespace RMC::rBitrage
     {
         Sprite2D::OnFrameUpdate(deltaTime);
 
-        _transformation.Position.x += _velocity.x * deltaTime;
-        _transformation.Position.y += _velocity.y * deltaTime;
+        _transform.Position.x += _velocity.x * deltaTime;
+        _transform.Position.y += _velocity.y * deltaTime;
     }
 
     Vector3 Projectile2D::GetVelocity() const 

@@ -40,9 +40,9 @@ namespace RMC::rBitrage
             (
                 _texture, 
                 {0, 0, static_cast<float>(_texture.width), static_cast<float>(_texture.height)}, 
-                {_transformation.Position.x, _transformation.Position.y, static_cast<float>(_texture.width), static_cast<float>(_texture.height)},
+                {_transform.Position.x, _transform.Position.y, static_cast<float>(_texture.width), static_cast<float>(_texture.height)},
                 {Vector2Multiply({static_cast<float>(_texture.width), static_cast<float>(_texture.height)}, Utilities::ToVector2(_pivot))},
-                _transformation.Rotation.z, 
+                _transform.Rotation.z, 
                 CLITERAL(Color){ 255, 255, 255, opacity }
             );
         

@@ -18,7 +18,7 @@ int DemoXXModel3D()
     // Create Game
     Game3D game = Game3D();
     game.world.center = game.screen.center;
-    game.world.size = {20, 20, 20};
+    game.world.size = {2, 2, 2};
     game.title = "Demo XX Model 3D";
     game.isDebug = true; //Show FPS
     game.world.isDebug = true; //Show grid
@@ -38,11 +38,25 @@ int DemoXXModel3D()
     loaderSystem->LoadAllAssets();
 
 
-    // FrameRenderLayer::Camera2D
-    Duck3D model3D = Duck3D(game); 
-    model3D.SetPosition(game.world.center);
-    game.AddActor(&model3D); 
+   std::vector<std::shared_ptr<Actor>> _actors;
+    for (int i = 0; i < 100; ++i)
+    {
+        // FrameRenderLayer::Camera2D
+        Duck3D actor = Duck3D(game); 
+        actor.SetPosition(game.world.center);
+        game.AddActor(&actor); 
 
+        Vector3 velocity = Random::GetRandomVector3({-3, -3, -3}, {3, 3, 3});
+        velocity = Vector3Multiply(velocity, {1, 1, 1});
+        actor.SetVelocity(velocity);
+
+        auto actorSharedPointer = std::make_shared<Duck3D>(actor);
+        _actors.push_back(actorSharedPointer);
+        game.AddActor(actorSharedPointer.get()); 
+    }
+
+
+  
 
     // FrameRenderLayer::PostCamera
     // OPTIONAL: Add HUD UI
@@ -59,18 +73,22 @@ int DemoXXModel3D()
         // Input - Click spacebar to reset rotation
         if (game.GetSystem<InputSystem>()->IsActionPressed("action"))
         {
-            model3D.SetRotation({0,0,0});
+            for (auto& actor : _actors)
+            {
+                actor->SetRotation({0, 0, 0});
+                actor->SetPosition(game.world.center);
+            }
         }
 
 
         // Move
         game.UpdateFrame();
-        int rotationY = Utilities::ToInt(model3D.GetRotation().y * RAD2DEG);
+        int rotationY = Utilities::ToInt(_actors.at(0)->GetRotation().y * RAD2DEG);
         std::string rotationYString = Utilities::ToString(rotationY);
         hudUI.SetTextUpperRight(("Rotation: " + rotationYString).c_str());
 
         // Draw
-        game.RenderFrame();
+        game.RenderFrame(); 
     
 
     }

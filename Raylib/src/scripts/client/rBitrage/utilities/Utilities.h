@@ -3,6 +3,9 @@
 #include <raylib.h>
 #include <raymath.h>
 #include <string>
+#include <sstream>
+#include <iomanip>  
+#include <guiddef.h>
 //
 #include "client/rBitrage/types/FrameRenderLayer.h"
 #include "client/rBitrage/utilities/Random.h"
@@ -89,6 +92,24 @@ namespace RMC::rBitrage
             static std::string ToString(Vector2 value)
             {
                 return "[Vector2 (" + std::to_string(value.x) + ", " + std::to_string(value.y) + ")]"; 
+            }
+
+            static std::string ToString(GUID value)
+            {
+                std::stringstream ss;
+                ss << "[GUID (" << std::hex << std::uppercase
+                   << std::setw(8) << std::setfill('0') << value.Data1 << "-"
+                   << std::setw(4) << std::setfill('0') << value.Data2 << "-"
+                   << std::setw(4) << std::setfill('0') << value.Data3 << "-"
+                   << std::setw(2) << std::setfill('0') << static_cast<int>(value.Data4[0])
+                   << std::setw(2) << std::setfill('0') << static_cast<int>(value.Data4[1])
+                   << "-";
+                for (int i = 2; i < 8; ++i)
+                {
+                    ss << std::setw(2) << std::setfill('0') << static_cast<int>(value.Data4[i]);
+                }
+                ss << ")]";
+                return ss.str();
             }
 
             static int ToInt(float value)

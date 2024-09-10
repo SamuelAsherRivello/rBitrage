@@ -19,6 +19,10 @@
   - TODO: Change System:OnInitialize to System:OnInitializeAsync and have game wait for it
 - TYPES
   - TODO: rotation is now stored in radians. Convert SOME/ALL to degrees? Make wrap from -360 to 360?
+- INTERFACES
+  - TODO: Make a ILifecycle implemented by System, Actor, and Mixin. I think they coincidentally share the same API
+- RENDERING
+  - TODO: Add 3d Lights (via shaders) as an actor subclass? https://www.raylib.com/examples/shaders/loader.html?name=shaders_basic_lighting
 - PHILOSOPHY
   - EAST TO LEARN
     - TODO: Make doxygen with github actions to show full API

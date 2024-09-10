@@ -57,17 +57,17 @@ namespace RMC::rBitrage
 
     Vector3 Actor::GetPosition() const 
     {
-        return _transformation.Position;
+        return _transform.Position;
     }
 
     void Actor::SetPosition(const Vector3& position) 
     {
-        _transformation.Position = position;
+        _transform.Position = position;
     }
 
     Vector3 Actor::GetRotation() const 
     {
-        return _transformation.Rotation;
+        return _transform.Rotation;
     }
 
     void Actor::SetPivot(const Vector3& pivot) 
@@ -83,7 +83,16 @@ namespace RMC::rBitrage
 
     void Actor::SetRotation(const Vector3& position) 
     {
-        _transformation.Rotation = position;
+        _transform.Rotation = position;
+    }
+
+    Game& Actor::GetGame() const
+    {
+        return _game;
+    }
+    Transform& Actor::GetTransform()
+    {
+        return _transform;
     }
 
     bool Actor::GetIsDebug() const 
@@ -121,7 +130,7 @@ namespace RMC::rBitrage
     Bounds Actor::GetBounds() const  
     {
         return {
-                    {_transformation.Position.x, _transformation.Position.y, _transformation.Position.z}, 
+                    {_transform.Position.x, _transform.Position.y, _transform.Position.z}, 
                     {_size.x, _size.y, _size.z}
                 };
     }

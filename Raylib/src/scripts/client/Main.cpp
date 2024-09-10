@@ -7,20 +7,26 @@
 #include "client/rBitrageDemos/demoXXModel3D/DemoXXModel3D.h"
 
 
+/*
+
+    This is the main entry point for the application.
+    Uncomment exactly one demo below to see it.
+
+*/
 int main()
 {
-
-
-    /// DEMOS - WORKING
+    /// PRIMARY DEMOS - WORKING WELL
     //return Demo01Raylib();
-    return Demo02rBitrage();
+    //return Demo02rBitrage();
+
+    /// SECONDARY DEMOS - WORKING WELL
     //return DemoXXShapes();        
     //return DemoXXStressTest2D();  
 
     /// DEMOS - WORK IN PROGRESS
     //return DemoXXOrbitGame2D();                        
     //return DemoXXStressTest3D();
-    //return DemoXXModel3D();
+    return DemoXXModel3D();
     
     /// DEMOS - BROKEN
     //return gameCreateMain2D();

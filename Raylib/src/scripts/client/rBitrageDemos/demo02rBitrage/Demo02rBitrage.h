@@ -63,7 +63,7 @@ int Demo02rBitrage()
     hudUI.SetTextUpperRight(livesText);
     hudUI.SetTextLowerLeft(instructions);
     hudUI.SetTextLowerRight(extra);
-    //game.AddActor(&hudUI);
+    game.AddActor(&hudUI);
 
     game.GetSystem<SceneSystem>()->currentScene->AddActor(&hudUI);
 
@@ -76,7 +76,6 @@ int Demo02rBitrage()
     // Game Loop - Click escape to close window
     while (!game.GetSystem<ApplicationSystem>()->RaylibWindowShouldClose())
     {
-
         // Input - Click spacebar to reset ball position
         if (game.GetSystem<InputSystem>()->IsActionPressed("action"))
         {

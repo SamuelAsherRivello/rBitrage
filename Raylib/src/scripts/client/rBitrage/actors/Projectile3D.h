@@ -3,6 +3,7 @@
 #include <iostream>
 #include "client/rBitrage/core/Game.h"
 #include "client/rBitrage/actors/Model3D.h"
+#include "client/rBitrage/mixins/Mixins.h"
 
 namespace RMC::rBitrage 
 {
@@ -23,5 +24,6 @@ namespace RMC::rBitrage
 
         private:
             Vector3 _velocity; 
+            //std::unique_ptr<PositionVelocityBoundsMixin> _positionVelocityBoundsMixin;
         };
 }

@@ -5,7 +5,7 @@
         {
             "label": "Build and Execute",
             "type": "shell",
-            "command": "clear && echo '\n******************************************' && echo 'Build and Execute Via: ./.vscode/task.json' && echo '******************************************\n' && mingw32-make bin/app && mingw32-make execute",
+            "command": "clear && echo '\n******************************************' && echo 'Build and Execute Via: ./.vscode/task.json' && echo '******************************************\n' && mingw32-make",
             "group": {
                 "kind": "build",
                 "isDefault": true

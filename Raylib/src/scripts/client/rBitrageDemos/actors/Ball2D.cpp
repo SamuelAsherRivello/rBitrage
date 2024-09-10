@@ -22,25 +22,25 @@ namespace RMC::rBitrage
         Vector3 velocity = GetVelocity();
 
         bool hasChangedDirection = false;
-        if (velocity.x < 0 && _transformation.Position.x - _size.x/2 <= minX)
+        if (velocity.x < 0 && _transform.Position.x - _size.x/2 <= minX)
         {
             velocity.x *= -1;
             hasChangedDirection = true;
         }
             
-        else if (velocity.x > 0 && _transformation.Position.x + _size.x/2 >= maxX)
+        else if (velocity.x > 0 && _transform.Position.x + _size.x/2 >= maxX)
         {
             velocity.x *= -1;
             hasChangedDirection = true;
         }
          
-        if (velocity.y < 0 && _transformation.Position.y - _size.y/2 <= minY)
+        if (velocity.y < 0 && _transform.Position.y - _size.y/2 <= minY)
         {
             velocity.y *= -1;
             hasChangedDirection = true;
         }
             
-        else if (velocity.y > 0 && _transformation.Position.y + _size.y/2 >= maxY)
+        else if (velocity.y > 0 && _transform.Position.y + _size.y/2 >= maxY)
         {
             velocity.y *= -1;
             hasChangedDirection = true;

@@ -17,9 +17,9 @@ namespace RMC::rBitrage
     void Ball3D::OnFrameUpdate(float deltaTime)
     {
         Shape3D::OnFrameUpdate(deltaTime);
-        _transformation.Position.x += _velocity.x * deltaTime;
-        _transformation.Position.y += _velocity.y * deltaTime;
-        _transformation.Position.z += _velocity.z * deltaTime;
+        _transform.Position.x += _velocity.x * deltaTime;
+        _transform.Position.y += _velocity.y * deltaTime;
+        _transform.Position.z += _velocity.z * deltaTime;
 
         const float minX = _game.world.GetMin().x;
         const float maxX = _game.world.GetMax().x;
@@ -31,39 +31,39 @@ namespace RMC::rBitrage
         bool hasChangedDirection = false;
 
         //x
-        if (_velocity.x < 0 && _transformation.Position.x - _size.x/2 <= minX)
+        if (_velocity.x < 0 && _transform.Position.x - _size.x/2 <= minX)
         {
             _velocity.x *= -1;
             hasChangedDirection = true;
         }
             
-        else if (_velocity.x > 0 && _transformation.Position.x + _size.x/2 >= maxX)
+        else if (_velocity.x > 0 && _transform.Position.x + _size.x/2 >= maxX)
         {
             _velocity.x *= -1;
             hasChangedDirection = true;
         }
          
         //y
-        if (_velocity.y < 0 && _transformation.Position.y - _size.y/2 <= minY)
+        if (_velocity.y < 0 && _transform.Position.y - _size.y/2 <= minY)
         {
             _velocity.y *= -1;
             hasChangedDirection = true;
         }
             
-        else if (_velocity.y > 0 && _transformation.Position.y + _size.y/2 >= maxY)
+        else if (_velocity.y > 0 && _transform.Position.y + _size.y/2 >= maxY)
         {
             _velocity.y *= -1;
             hasChangedDirection = true;
         }
 
         //z
-        if (_velocity.z < 0 && _transformation.Position.z - _size.z/2 <= minZ)
+        if (_velocity.z < 0 && _transform.Position.z - _size.z/2 <= minZ)
         {
             _velocity.z *= -1;
             hasChangedDirection = true;
         }
             
-        else if (_velocity.z > 0 && _transformation.Position.z + _size.z/2 >= maxZ)
+        else if (_velocity.z > 0 && _transform.Position.z + _size.z/2 >= maxZ)
         {
             _velocity.z *= -1;
             hasChangedDirection = true;

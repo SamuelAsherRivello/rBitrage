@@ -19,8 +19,8 @@ namespace RMC::rBitrage
 
         // TODO: Use transform.scale instead of size here (and also in 2d?)
         //NOTE: I **think** that size is relative to asset an scale is relative to world unites and you need both. Yes?
-        DrawCubeV(_transformation.Position, _size, WHITE);
-        DrawCubeWiresV(_transformation.Position, _size, BLACK);
+        DrawCubeV(_transform.Position, _size, WHITE);
+        DrawCubeWiresV(_transform.Position, _size, BLACK);
 
     }
 

@@ -21,10 +21,16 @@ namespace RMC::rBitrage
         Actor(Game& game, const char *_assetKey, const FrameRenderLayer& frameRenderLayer = FrameRenderLayer::Camera2D);
         virtual ~Actor();
 
+
+        //KEEP AS VIRTUAL...
+
         virtual void OnInitialize();
         virtual void OnFixedUpdate(float fixedDeltaTime);
         virtual void OnFrameUpdate(float deltaTime);
         virtual void OnFrameRender();
+
+
+        //MANY BELOW *MAYBE* DON'T NEED TO BE VIRTUAL? (pUT IN 2 GROUPS, YES/NO AND CHANGE IT)
 
         virtual Vector3 GetPosition() const;
         virtual void SetPosition(const Vector3& position);
@@ -37,6 +43,10 @@ namespace RMC::rBitrage
 
         virtual const char* GetName() const;
         virtual void SetName(const char* name);
+
+        virtual Game& GetGame() const;
+        virtual Transform& GetTransform();
+
 
         //
         virtual Vector3 GetSize() const;
@@ -66,7 +76,7 @@ namespace RMC::rBitrage
         const char *_assetKey;
         FrameRenderLayer _frameRenderLayer;
         Game& _game;
-        Transform _transformation;
+        Transform _transform;
         Vector3 _size = {1, 1, 1};
         Vector3 _pivot = {1, 1, 1}; //TODO: what default?
 

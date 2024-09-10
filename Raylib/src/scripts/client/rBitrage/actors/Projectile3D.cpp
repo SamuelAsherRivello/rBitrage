@@ -4,9 +4,15 @@ namespace RMC::rBitrage
 {
         
     Projectile3D::Projectile3D(Game& game, std::unique_ptr<ModelData3D> modelData3D) : 
-        Model3D(game, std::move(modelData3D)) 
+        Model3D(game, std::move(modelData3D))
     { 
         _velocity = {0, 0, 0};
+
+        /*
+        ,
+        _positionVelocityBoundsMixin(std::make_unique<PositionVelocityBoundsMixin>(*this, &_velocity))
+        */
+        
     }
 
     Projectile3D::~Projectile3D()
@@ -17,8 +23,15 @@ namespace RMC::rBitrage
     {
         Model3D::OnFrameUpdate(deltaTime);
 
-        _transformation.Position.x += _velocity.x * deltaTime;
-        _transformation.Position.y += _velocity.y * deltaTime;
+        //Move
+        _transform.Position.x += _velocity.x * deltaTime;
+        _transform.Position.y += _velocity.y * deltaTime;
+        _transform.Position.z += _velocity.z * deltaTime;
+
+        //Checkbounds (Experimental "Mixin" API)
+        //_positionVelocityBoundsMixin->OnFrameUpdate(deltaTime);
+
+
     }
 
     Vector3 Projectile3D::GetVelocity() const 
