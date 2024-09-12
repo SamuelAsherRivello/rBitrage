@@ -9,6 +9,9 @@
 rwildcard = $(wildcard $1$2) $(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2))
 platformpth = $(subst /,$(PATHSEP),$1)
 
+# Added by srivello
+CXXFLAGS ?= -std=c++17 -Wall -Wextra -pedantic
+
 # Set global macros
 buildDir := bin
 executable := app
@@ -49,7 +52,7 @@ else
 	# Set UNIX macros
 	THEN := ;
 	PATHSEP := /
-	MKDIR := mkdir -p
+	MKDIR := -mkdir -p
 	RM := rm -rf
 	COPY = cp $1$(PATHSEP)$3 $2
 endif
@@ -89,8 +92,9 @@ $(target): $(objects)
 
 # Compile objects to the build directory
 $(buildDir)/%.o: src/%.cpp Makefile
-	$(MKDIR) $(call platformpth, $(@D))
-	$(CXX) -MMD -MP -c $(compileFlags) $< -o $@ $(CXXFLAGS)
+	@$(MKDIR) $(call platformpth, $(@D))
+	@$(CXX) -MMD -MP -c $(compileFlags) $< -o $@
+	@echo "$@"
 
 # Run the executable
 execute:
