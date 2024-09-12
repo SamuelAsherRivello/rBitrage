@@ -26,7 +26,7 @@ int DemoXXModel3D()
     // Initialize
     game.Initialize();
 
-    // Demonstrate logging to VS Code terminal window
+    // Log a message to VS Code terminal window
     std::cout << "\n********************" << std::endl;
     std::cout << "   Hello World!       " << std::endl;
     std::cout << "********************\n" << std::endl;

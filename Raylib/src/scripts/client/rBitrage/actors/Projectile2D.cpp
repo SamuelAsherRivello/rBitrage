@@ -1,4 +1,5 @@
 #include "client/rBitrage/actors/Projectile2D.h"
+#include "Projectile2D.h"
 
 namespace RMC::rBitrage 
 {
@@ -19,7 +20,7 @@ namespace RMC::rBitrage
         _transform.Position.y += _velocity.y * deltaTime;
     }
 
-    Vector3 Projectile2D::GetVelocity() const 
+    Vector3& Projectile2D::GetVelocity() 
     {
         return _velocity;
     }

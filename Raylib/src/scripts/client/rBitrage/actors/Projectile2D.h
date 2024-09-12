@@ -17,8 +17,9 @@ namespace RMC::rBitrage
             //
             void OnFrameUpdate(float fixedDeltaTime) override;
 
+            Vector3& GetVelocity();
+
             //
-            Vector3 GetVelocity() const;
             void SetVelocity(const Vector3& velocity);
 
         private:

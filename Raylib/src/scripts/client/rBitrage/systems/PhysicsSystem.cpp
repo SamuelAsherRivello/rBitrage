@@ -25,7 +25,13 @@ namespace RMC::rBitrage
         for (Actor* otherActor : _game.GetActors())
         {
             if (actor == otherActor) continue;
-            if (CheckCollisionRecs(actor->GetBounds().ToRectangleAtCenter(), otherActor->GetBounds().ToRectangleAtCenter()))
+
+            //TODO: Change these 5 lines to 1 line. Workaround because of const??
+            Bounds bounds1 = actor->GetBoundsGlobal();
+            Bounds bounds2 = actor->GetBoundsGlobal();
+            const Rectangle rectangle1 = bounds1.ToRectangle();
+            const Rectangle rectangle2 = bounds2.ToRectangle();
+            if (CheckCollisionRecs(rectangle1, rectangle2))
             {
                 return true; // collision detected
             }

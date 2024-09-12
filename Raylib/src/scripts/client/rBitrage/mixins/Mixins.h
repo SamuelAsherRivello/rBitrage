@@ -60,8 +60,8 @@ namespace RMC::rBitrage
     {
     public:
 
-        PositionVelocityBoundsMixin(Actor& actor, Vector3* velocityPtr) 
-            : Mixin(actor), _velocityPtr(velocityPtr)
+        PositionVelocityBoundsMixin(Actor& actor, Vector3& velocityRef) 
+            : Mixin(actor), _velocityRef(velocityRef)
         {
         }
 
@@ -86,56 +86,66 @@ namespace RMC::rBitrage
         void OnFrameUpdate(float deltaTime) 
         {
 
-            const float minX = _actor.GetGame().world.GetMin().x;
-            const float maxX = _actor.GetGame().world.GetMax().x;
-            const float minY = _actor.GetGame().world.GetMin().y;
-            const float maxY = _actor.GetGame().world.GetMax().y;
+            //TODO: move this to the mixin.h
+            const float worldMinX = _actor.GetGame().world.GetMin().x;
+            const float worldMinY = _actor.GetGame().world.GetMin().y;
+            const float worldMinZ = _actor.GetGame().world.GetMin().z;
+            //
+            const float worldMaxX = _actor.GetGame().world.GetMax().x;
+            const float worldMaxY = _actor.GetGame().world.GetMax().y;
+            const float worldMaxZ = _actor.GetGame().world.GetMax().z;
 
-       
+            //
+            Bounds actorBoundsGlobal = _actor.GetBoundsGlobal();
+            const float actorMinX = actorBoundsGlobal.GetMin().x;
+            const float actorMinY = actorBoundsGlobal.GetMin().y;
+            const float actorMinZ = actorBoundsGlobal.GetMin().z;
+            //
+            const float actorMaxX = actorBoundsGlobal.GetMax().x;
+            const float actorMaxY = actorBoundsGlobal.GetMax().y;
+            const float actorMaxZ = actorBoundsGlobal.GetMax().z;
 
-            Vector3 velocityCopy = *_velocityPtr;
+            Vector3 nextVelocity = _velocityRef;
+
             bool hasChangedDirection = false;
-            if (velocityCopy.x < 0 && _actor.GetPosition().x - _actor.GetBounds().GetSize().x/2 <= minX)
+            if (actorMinX < worldMinX)
             {
-                velocityCopy.x *= -1;
+                nextVelocity.x *= -1;
                 hasChangedDirection = true;
             }
                 
-            else if (velocityCopy.x > 0 && _actor.GetPosition().x + _actor.GetBounds().GetSize().x/2 >= maxX)
+            else if (actorMaxX >= worldMaxX)
             {
-                velocityCopy.x *= -1;
+        
+                nextVelocity.x *= -1;
                 hasChangedDirection = true;
             }
             
-            if (velocityCopy.y < 0 && _actor.GetPosition().y - _actor.GetBounds().GetSize().y/2 <= minY)
+            if (actorMinY < worldMinY)
             {
-                velocityCopy.y *= -1;
+                nextVelocity.y *= -1;
                 hasChangedDirection = true;
             }
-                
-            else if (velocityCopy.y > 0 && _actor.GetPosition().y + _actor.GetBounds().GetSize().y/2 >= maxY)
+            else if (actorMaxY >= worldMaxY)
             {
-                velocityCopy.y *= -1;
-                hasChangedDirection = true;
-            }
-
-            if (velocityCopy.z < 0 && _actor.GetPosition().z - _actor.GetBounds().GetSize().z/2 <= minY)
-            {
-                velocityCopy.z *= -1;
-                hasChangedDirection = true;
-            }
-                
-            else if (velocityCopy.z > 0 && _actor.GetPosition().z + _actor.GetBounds().GetSize().z/2 >= maxY)
-            {
-                velocityCopy.z *= -1;
+                nextVelocity.y *= -1;
                 hasChangedDirection = true;
             }
 
-            std::cout << Utilities::ToString(_actor.GetInstanceId()) << " and " << Utilities::ToString(*_velocityPtr) << " and " << hasChangedDirection << std::endl;
-
+            //TODO: Enable this for 3d, maybe harmlessly keep it for 2D too, if it works
+            // if (actorMinZ < worldMinZ)
+            // {
+            //     nextVelocity.z *= -1;
+            //     hasChangedDirection = true;
+            // }
+            // else if (actorMaxZ >= worldMaxZ)
+            // {
+            //     nextVelocity.z *= -1;
+            //     hasChangedDirection = true;
+            // }
 
             if (hasChangedDirection) {
-                *_velocityPtr = velocityCopy;
+                _velocityRef = nextVelocity;
             }
         }
 
@@ -146,6 +156,6 @@ namespace RMC::rBitrage
         }
 
     private:
-        Vector3* _velocityPtr;
+        Vector3& _velocityRef;
     };
 }

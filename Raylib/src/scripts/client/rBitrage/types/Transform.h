@@ -12,6 +12,6 @@ namespace RMC::rBitrage
             //This is euler
             Vector3 Rotation = {0, 0, 0};
             Vector3 Position = {0, 0, 0}; 
-            Vector3 Scale = {0, 0, 0}; 
+            Vector3 Scale = {1, 1, 1}; 
     };
 }

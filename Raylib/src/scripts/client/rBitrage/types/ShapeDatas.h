@@ -6,6 +6,7 @@
 
 namespace RMC::rBitrage 
 {
+    Vector2 RBITRAGE_SHAPE2D_SIZE_DEFAULT = {100, 100};
     Color RBITRAGE_SHAPE2D_ERROR_COLOR = MAGENTA;
     Color RBITRAGE_SHAPE3D_ERROR_COLOR = MAGENTA;
     //
@@ -21,30 +22,37 @@ namespace RMC::rBitrage
     class ShapeData2D
     {
         public:
-            ShapeData2D() : _color (RBITRAGE_SHAPE2D_ERROR_COLOR)
+            ShapeData2D() : _color (RBITRAGE_SHAPE2D_ERROR_COLOR),  _size(RBITRAGE_SHAPE2D_SIZE_DEFAULT)
             {
             }
-            ShapeData2D(Color color) 
+            ShapeData2D(Color color) :  _size(RBITRAGE_SHAPE2D_SIZE_DEFAULT)
             {
                 _color = color;
             }
+            ShapeData2D(Color color, Vector2 size) 
+            {
+                _color = color;
+                _size = size;
+            }
+            Vector2 GetSize() const { return Vector2(_size); } //TODO: do I need to return copy like this?
             virtual void Draw (Vector2 position, Vector2 size) const
             {
                 DrawCircleV(position, size.x, _color);
             }
         protected:
             Color _color;
+            Vector2 _size;
     };
 
     class CircleShapeData2D : public ShapeData2D
     {
         public:
-            CircleShapeData2D(Color color = RBITRAGE_SHAPE2D_DEFAULT_COLOR) : ShapeData2D(color) {}
+            CircleShapeData2D(Color color = RBITRAGE_SHAPE2D_DEFAULT_COLOR, float radius = RBITRAGE_SHAPE2D_SIZE_DEFAULT.x) : ShapeData2D(color, {radius, radius}) {}
             void Draw (Vector2 position, Vector2 size) const override
             {
                 //Raylib draws circles CENTERED on the position. GOOD!
                 //I choose to average x/y into radius. Users must pass x==y for predictable results
-                DrawCircleV(position, Utilities::ToVector2Average({size.x, size.y}).x, _color);
+                DrawCircleV(position, size.x, _color);
 
             }
     };
@@ -75,7 +83,7 @@ namespace RMC::rBitrage
             {
                 _color = color;
             }
-            virtual void Draw (Vector3 position, Vector3 size) const
+            virtual void Draw (Vector3 position, Vector3 size) const //TODO: ass size(1,1,1) by default?
             {
                 DrawSphereWires(position, Utilities::ToVector3Average(size).x, 10, 20, _color);
             }

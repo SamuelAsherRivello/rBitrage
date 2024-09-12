@@ -3611,7 +3611,7 @@ Texture2D LoadTexture(const char *fileName)
 // NOTE: image is not unloaded, it must be done manually
 Texture2D LoadTextureFromImage(Image image)
 {
-    Texture2D texture = { 0 };
+    Texture2D texture = {0};
 
     if ((image.width != 0) && (image.height != 0))
     {

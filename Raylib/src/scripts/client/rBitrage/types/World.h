@@ -13,14 +13,19 @@ namespace RMC::rBitrage
             /**
              * The world of 2D or 3D actors
              */
-            World(float width, float height, float depth) : Bounds( 
+            World(float width, float height, float depth) : Bounds
+                ( 
+                    //TODO: Finite is good default (in 2d g), but maybe make infinite an option
+                    //Size
+                    { width, height, -1 },
 
-                //TODO: Finite is good default (in 2d g), but maybe make infinite an option
-                { width, height, depth },
+                     //Center
+                    { width/2, height/2, -1/2 },
 
-                 //DEFAULT: The pivot is at the midway of the size
-                { width/2, height/2, depth/2  })
-
+                    //Pivot
+                    { width/2, height/2, -1/2 }
+                    
+                    )
             {
             }
 

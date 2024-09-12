@@ -2,6 +2,7 @@
 #include <raylib.h>
 #include "client/rBitrage/actors/Projectile2D.h"
 #include "client/rBitrage/systems/AudioSystem.h"
+#include "client/rBitrage/mixins/Mixins.h"
 #include <iostream>
 
 namespace RMC::rBitrage 
@@ -18,5 +19,8 @@ namespace RMC::rBitrage
             void OnFrameUpdate(float deltaTime) override;
 
         private:
+
+            //Experimental way to 'pepper in' functionality without inheritance. TBD if I like it or not
+            PositionVelocityBoundsMixin _mixin;
         };
 }

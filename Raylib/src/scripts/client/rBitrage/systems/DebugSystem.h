@@ -33,22 +33,26 @@ namespace RMC::rBitrage
 
             void DrawActorCenterAtGlobal(Actor *actor);
 
+            void DrawActorExtentsAtGlobal(Actor *actor);
+
             //
-            void DrawActorBoundsFromCenterAtGlobal(Actor* actor);
-            void DrawActorPivot(Actor *actor);
-            void DrawActorPosition(Actor *actor);
+            void DrawActorBoundsAtGlobal(Actor* actor);
+            void DrawActorPositionAtGlobal(Actor *actor);
+            void DrawActorPivotAtGlobal(Actor *actor);
 
         private:
-            Color _actorColor = ORANGE;
+            Color _actorColorPrimary = ORANGE;
+            Color _actorColorSecondary = WHITE;
             Color _worldColor = BLUE;
             Color _screenColor = GREEN;
             float _centerRadius = 10;
             float _pivotRadius = 10;
-            float _worldStroke = 10;
-            float _screenStroke = 4;
+            float _worldStroke = 5;
+            float _screenStroke = 2.5;
+            float _crosshairScale = 1.0f;
             //
             Vector2 _fontPositionOffset = {10, 10};
-            float _fontSize = 20; 
+            float _labelFontSize = 20; 
     };
 
 } 

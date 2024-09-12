@@ -9,6 +9,11 @@ namespace RMC::rBitrage
         : Shape2D(game, frameRenderLayer)  
     {
         _shapeData2D = shapeData2D;
+
+        //TODO: Why is this 2 lines? Because of const or &? 
+        auto size = Utilities::ToVector3(_shapeData2D->GetSize());
+        GetBoundsLocal().SetSize(size);
+
     }
 
     Shape2D::~Shape2D() 
@@ -20,6 +25,10 @@ namespace RMC::rBitrage
     {
         Actor2D::OnFrameRender();
 
-        _shapeData2D->Draw(Utilities::ToVector2(GetPosition()), Utilities::ToVector2(GetBounds().GetSize()));
+        _shapeData2D->Draw
+        (
+            Utilities::ToVector2(GetBoundsGlobal().GetCenter()), 
+            Utilities::ToVector2(GetBoundsGlobal().GetSize())
+        );
     }
 }

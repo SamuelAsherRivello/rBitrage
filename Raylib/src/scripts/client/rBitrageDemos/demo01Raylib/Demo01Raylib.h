@@ -22,12 +22,13 @@ int Demo01Raylib()
     // Create Ball
     const char* assetPath = "./src/assets/images/Ball01.png";
     Vector2 position = { screenWidth / 2, screenHeight / 2 };
-    Vector2 velocity = { 700, 500 };
+    float speed = 450;
+    Vector2 velocity = { speed, speed };
     float radius = 3;
     Ball ball(assetPath, position, velocity, radius);
 
 
-    // Demonstrate logging to VS Code terminal window
+    // Log a message to VS Code terminal window
     std::cout << "\n********************" << std::endl;
     std::cout << "   Hello World!       " << std::endl;
     std::cout << "********************\n" << std::endl;

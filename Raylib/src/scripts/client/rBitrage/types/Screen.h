@@ -14,12 +14,20 @@ namespace RMC::rBitrage
             Screen(float width, float height) : Bounds
                 ( 
                     //TODO: Is -1 a good 'ignore me' value?
+                    //Size
                     { width, height, -1 },
 
-                    //DEFAULT: For screen will be upper left. Done!
-                    { 0.0f, 0.0f, 0.0f   })
+                     //TODO: Is -1 a good 'ignore me' value?
+                     //Center
+                    { width/2, height/2, -1/2 },
+
+                    //TODO: Is -1 a good 'ignore me' value?
+                    //Pivot
+                    { width/2, height/2, -1/2 }
+                    )
             {
             }
+
             bool isDebug = false;
 
             //Subclass allows more public access than parent

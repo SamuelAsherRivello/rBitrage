@@ -105,7 +105,7 @@ namespace RMC::rBitrage
 
            static std::string ToString(Bounds value)
             {
-                return "[Bounds (" +  Utilities::ToString(value.ToRectangleAtCenter()) + ", Pivot=" + Utilities::ToString(value.GetPivot()) + ")]"; 
+                return "[Bounds (Size=" +  Utilities::ToString(value.GetSize()) + ", Center=" + Utilities::ToString(value.GetCenter()) + ", Pivot=" + Utilities::ToString(value.GetPivot()) + ")]"; 
             }
 
 

@@ -103,15 +103,19 @@ namespace RMC::rBitrage
 //1
     void DebugSystem::DrawWorldSizeHalf() 
     {
-        Rectangle rect = _game.world.ToRectangleAtCenter();
-        RenderCrosshairsAtRectangleCenter(rect, .5, _worldStroke, PURPLE);  
+        Rectangle rect = _game.world.ToRectangle(); 
+        
+        //TODO: fix drawing of this since rect changed?
+        RenderCrosshairsAtRectangleCenter(rect, _crosshairScale, _worldStroke, _worldColor, "World Center");  
 
     }
 
     void DebugSystem::DrawScreenSizeHalf() 
     {
-        Rectangle rect = _game.screen.ToRectangleAtCenter();
-        RenderCrosshairsAtRectangleCenter(rect, 1.0, _screenStroke, _screenColor); //GREEN
+        Rectangle rect = _game.screen.ToRectangle();
+
+         //TODO: fix drawing of this since rect changed?
+        RenderCrosshairsAtRectangleCenter(rect, .2, _crosshairScale, _screenColor, "Screen Center");  
 
     }
 
@@ -130,61 +134,92 @@ namespace RMC::rBitrage
     void DebugSystem::DrawActor(Actor* actor) 
     {
         //Ignore actor layer, draw it here
-        DrawActorPivot(actor);
-        DrawActorPosition(actor);
-        DrawActorBoundsFromCenterAtGlobal(actor);
+        DrawActorPivotAtGlobal(actor);
         DrawActorCenterAtGlobal(actor);
+        DrawActorPositionAtGlobal(actor);
+        //
+        DrawActorBoundsAtGlobal(actor);
+        DrawActorExtentsAtGlobal(actor);
+        
     }
 
-
-    void DebugSystem::DrawActorCenterAtGlobal(Actor* actor) 
+    void DebugSystem::DrawActorPivotAtGlobal(Actor* actor)
     {
-        //TODO: use actual bounds
-        Rectangle r = {
-            actor->GetPosition().x, 
-            actor->GetPosition().y, 
-            actor->GetBounds().GetSize().x, 
-            actor->GetBounds().GetSize().y};
 
-        RenderCrosshairsAtRectangleCenter(r, 1.0, 4, _actorColor, "C. Cross");
-
-    }
-
-     void DebugSystem::DrawActorBoundsFromCenterAtGlobal(Actor* actor) 
-    {
-        RenderBoxAtRectangle(
-            {
-                actor->GetPosition().x + actor->GetBounds().GetCenter().x,
-                actor->GetPosition().y + actor->GetBounds().GetCenter().y,
-                actor->GetBounds().GetSize().x,
-                actor->GetBounds().GetSize().y,
-            }
-            , 
-            4.0f, 
-            _actorColor,
-            "Actor Bounds (Center)");
-
-    }
-
-    //2
-    void DebugSystem::DrawActorPivot(Actor* actor)
-    {
+        //Pivot is not global, so add position to it
         RenderCircleAtPoint(
-            Utilities::ToVector2(Vector3Add(actor->GetPosition(), actor->GetBounds().GetPivot())), 
+            Utilities::ToVector2(Vector3Add(actor->GetBoundsGlobal().GetPivot(), actor->GetPosition())),
             _centerRadius, 
-            _actorColor, 
+            _actorColorPrimary, 
             "Actor Pivot");
     }
 
-    void DebugSystem::DrawActorPosition(Actor* actor) 
+
+    //TODO: Remove this after testing?
+    void DebugSystem::DrawActorCenterAtGlobal(Actor* actor) 
+    {
+         RenderCircleAtPoint(
+            Utilities::ToVector2(actor->GetBoundsGlobal().GetCenter()),
+             5.0f, 
+             DARKGREEN, 
+             "Actor Position");
+
+    }
+  
+    //TODO: Remove this after testing?
+    void DebugSystem::DrawActorPositionAtGlobal(Actor* actor) 
     {
         RenderCircleAtPoint(
-            Utilities::ToVector2(actor->GetPosition()), 
-            _centerRadius, 
-            _actorColor, 
-            "                   Actor Center");
+            Utilities::ToVector2(actor->GetPosition()),
+             5.0f, 
+             DARKGREEN, 
+             "Actor Position");
+
     }
 
+     void DebugSystem::DrawActorBoundsAtGlobal(Actor* actor) 
+    {
+         RenderBoxAtRectangle
+        (
+            {
+                actor->GetPosition().x - (actor->GetScaledSize().x)/2,
+                actor->GetPosition().y - (actor->GetScaledSize().y)/2,
+                actor->GetScaledSize().x ,
+                actor->GetScaledSize().y 
+            }, 
+            10.0f, 
+            _actorColorPrimary,
+            "Actor Bounds (Global)"
+        );
+
+    }
+
+
+
+
+    void DebugSystem::DrawActorExtentsAtGlobal(Actor* actor) 
+    {
+        auto boundsGlobal = actor->GetBoundsGlobal();
+
+        RenderCircleAtPoint
+            (
+                Utilities::ToVector2(boundsGlobal.GetMin()), 
+                5, 
+                RED, 
+                "Min"
+            );
+
+          RenderCircleAtPoint
+            (
+                Utilities::ToVector2(boundsGlobal.GetMax()), 
+                5, 
+                RED, 
+                "Max"
+            );
+
+    }
+
+    
 
 
     /////////////////////////////////////////////////////////////////////
@@ -196,25 +231,33 @@ namespace RMC::rBitrage
 
     }
 
-     void DebugSystem::RenderCrosshairsAtRectangleCenter(Rectangle rectangle, float scale, float thick, Color color, const char* label)
+    void DebugSystem::RenderCrosshairsAtRectangleCenter(Rectangle rectangle, float scale, float thick, Color color, const char* label)
     {
         //HORIZONTAL - TODO: Draw from mid left to mid right
         DrawLineEx(
-            {rectangle.x,                   rectangle.y + rectangle.height/2},
-            {rectangle.x + rectangle.width, rectangle.y + rectangle.height/2}, 
+            {rectangle.x + (rectangle.width / 2) * (1 - scale), 
+            rectangle.y + rectangle.height/2},
+            {rectangle.x + (rectangle.width / 2) * (1 + scale), 
+            rectangle.y + rectangle.height/2}, 
             thick, 
             color);
         
         //VERTICAL - TODO: draw from mid top to mid bottom
         DrawLineEx(
-            {rectangle.x + rectangle.width/2, rectangle.y},
-            {rectangle.x + rectangle.width/2, rectangle.y + rectangle.height}, 
+            {rectangle.x + rectangle.width/2, 
+            rectangle.y + (rectangle.height / 2) * (1 - scale)},
+            {rectangle.x + rectangle.width/2, 
+            rectangle.y + (rectangle.height / 2) * (1 + scale)}, 
             thick, 
             color);
 
         if (!Utilities::IsNullOrEmpty(label))
         {
-            DrawText(label, rectangle.x + _fontPositionOffset.x, rectangle.y + _fontPositionOffset.y, _fontSize, color);
+            DrawText(label, 
+            (rectangle.x + rectangle.width/2) + _fontPositionOffset.x, 
+            (rectangle.y + rectangle.height/2) + _fontPositionOffset.y, 
+            _labelFontSize, 
+            color);
         }
     }
 
@@ -233,7 +276,7 @@ namespace RMC::rBitrage
                 label, 
                 rectangle.x + rectangle.width + _fontPositionOffset.x, 
                 rectangle.y + rectangle.height + _fontPositionOffset.y, 
-                _fontSize, 
+                _labelFontSize, 
                 color
             );
         }
@@ -249,7 +292,7 @@ namespace RMC::rBitrage
         DrawCircleV(point, radius, color);
         if (!Utilities::IsNullOrEmpty(label))
         {
-            DrawText(label, point.x + _fontPositionOffset.x, point.y + _fontPositionOffset.y, _fontSize, color);
+            DrawText(label, point.x + _fontPositionOffset.x, point.y + _fontPositionOffset.y, _labelFontSize, color);
         }
     }
 } 

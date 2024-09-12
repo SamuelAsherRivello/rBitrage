@@ -27,7 +27,7 @@ namespace RMC::rBitrage
         const float maxY = _game.world.GetMax().y;
         const float minZ = _game.world.GetMin().z;
         const float maxZ = _game.world.GetMax().z;
-        const Vector3 size = GetBounds().GetSize();
+        const Vector3 size = GetBoundsLocal().GetSize();
 
         bool hasChangedDirection = false;
 

@@ -132,8 +132,7 @@ namespace RMC::rBitrage
         {
             //TODO: use copy?
             //for now We do a copy since resizing (by user, a moment later) would break shared images. 
-            Image copy = ImageCopy(_imageAssetsByKey[std::string(assetKey)].GetAsset());
-            return copy;
+            return ImageCopy(_imageAssetsByKey[std::string(assetKey)].GetAsset());
         }
         else
         {

@@ -35,23 +35,45 @@ namespace RMC::rBitrage
         }
 
         unsigned char opacity = 255 * GetOpacity();
-        //
-        const auto scale = GetScale();
-        const auto position = GetPosition();
-        const auto bounds = GetBounds();
-        const auto size = bounds.GetSize();
-        const auto pivot = bounds.GetPivot();
+        const auto boundsGlobal = GetBoundsGlobal();
+ 
+        //printf("GLOBAL SIZE: %f\n", scaledSize.x);
 
+        //TODO: use parameters to draw hte sprite so it rotates from it center
+        //NEW
         DrawTexturePro
-            (
-                _texture, 
-                {0, 0, static_cast<float>(_texture.width), static_cast<float>(_texture.height)}, 
-                {position.x, position.y, size.x , size.y },
-                {pivot.x, pivot.y},
-                _transform.Rotation.z, 
-                CLITERAL(Color){ 255, 255, 255, opacity }
-            );
-        
+        (
+            _texture,
+
+            //Source
+            {
+                0, 
+                0, 
+                static_cast<float>(_texture.width), 
+                static_cast<float>(_texture.height)
+            },
+
+            //Destination
+            {
+                boundsGlobal.GetCenter().x, 
+                boundsGlobal.GetCenter().y, 
+                boundsGlobal.GetSize().x, 
+                boundsGlobal.GetSize().y 
+            },
+            
+            //Origin
+            {
+                boundsGlobal.GetPivot().x * boundsGlobal.GetSize().x, 
+                boundsGlobal.GetPivot().y * boundsGlobal.GetSize().y
+            }, 
+
+            //Rotation
+            _transform.Rotation.z,
+
+            //Color
+            CLITERAL(Color){ 255, 255, 255, opacity }
+        );
+
     }
 
     void Sprite2D::ResizeAsset() 
@@ -83,11 +105,8 @@ namespace RMC::rBitrage
             return;
         }
 
-        //TODO: Find better 'ignore me' value than -1/-1/-1 since that's too common
         if (Vector3Equals(size, Vector3Null))
         {
-            //TODO: Resize to original size. This may not be needed since we load fresh right before
-            //but we may move where the load happens, so keep this here?
             ImageResize(&image, image.width, image.height);  
         }
         else
@@ -99,6 +118,8 @@ namespace RMC::rBitrage
 
         //Always set the bounds based on the new asset size
         auto v = Utilities::ToVector3({(float)_texture.width, (float)_texture.height});
-        GetBounds().SetSize(v);
+        GetBoundsLocal().SetSize(v);
+
+        printf("AFTER %f, GLOBAL SIZE: %f * %f = %f \n", GetBoundsLocal().GetSize().x, GetScale().x, GetBoundsLocal().GetSize().x, GetBoundsGlobal().GetSize().x);
     }
 }

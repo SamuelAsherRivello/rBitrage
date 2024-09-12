@@ -18,7 +18,7 @@ namespace RMC::rBitrage
             virtual ~Shape2D();
             
             void OnFrameRender() override;
-
+            
         protected:
             ShapeData2D* _shapeData2D;
     };

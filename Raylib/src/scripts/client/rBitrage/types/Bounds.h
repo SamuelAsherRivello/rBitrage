@@ -19,6 +19,7 @@ namespace RMC::rBitrage
             // Make Actor a friend so it can access private methods
             friend class Actor;
             friend class Sprite2D;
+            friend class Shape2D;
         
             Bounds() 
             {
@@ -26,40 +27,55 @@ namespace RMC::rBitrage
             }
 
 
-            Bounds(Vector3 size, Vector3 pivot)
+            //Remove float after migration
+            Bounds(Vector3 size, Vector3 center, Vector3 pivot)
             {
-                this->SetSize(size);
-                this->_pivot = pivot; 
+                this->_size = size;
+                this->_center = center;
+                this->_pivot = pivot;
             }
 
 
-            Vector3 GetMin()
+            const Vector3 GetMin()
             {
-                return {_center.x - (_size.x / 2), _center.y - (_size.y / 2), _center.z - (_size.z / 2)};
+                return 
+                {
+                    _center.x - (_size.x / 2),
+                    _center.y - (_size.y / 2), 
+                    _center.z - (_size.z / 2)
+                };
             }
 
-            Vector3 GetMax()
+            const Vector3 GetMax()
             {
-                return {_center.x + (_size.x / 2), _center.y + (_size.y / 2), _center.z + (_size.z /2 )};
+                return 
+                {
+                    _center.x + (_size.x / 2) ,
+                    _center.y + (_size.y / 2) , 
+                    _center.z + (_size.z / 2) ,
+                };
+            }
+
+            const Rectangle ToRectangle() 
+            {
+                float minX = GetMin().x;
+                float maxX = GetMax().x;
+                float minY = GetMin().y;
+                float maxY = GetMax().y;
+
+                return {minX, minY, maxX - minX, maxY - minY};
             }
             
 
-            Rectangle ToRectangleAtCenter() 
-            {
-                return {_center.x, _center.y, _size.x, _size.y};
-            }
-
-
             // Pivot 
-            Vector3 GetPivot() const { return _pivot; }
+            Vector3 GetPivot() const { return Vector3(_pivot);; }
             void SetPivot(Vector3 pivot) { this->_pivot = pivot; }
-            void SetPivotAtCenter() { this->_pivot = this->_center; }
 
             // Center 
-            Vector3 GetCenter() const { return _center; }
+            Vector3 GetCenter() const { return Vector3(_center); }
 
             // Size 
-            Vector3 GetSize() const { return _size; }
+            Vector3 GetSize() const { return Vector3(_size); } //TODO: do I need to return copy like this?
 
 
         
@@ -67,6 +83,8 @@ namespace RMC::rBitrage
 
             //This is protected and cannot be called from outside the class.
             //Despite what the intellisense says
+            //Devs cannot do this from OUTSIDE
+            //Only the internals of actor can do it
             void SetSize(Vector3& size) 
             { 
                 this->_size = size; 
@@ -75,8 +93,8 @@ namespace RMC::rBitrage
 
         private:
 
-            Vector3 _pivot = {0, 0, 0}; //upper left is default
-            Vector3 _center = {0.5f, 0.5f, 0.5f}; //half of size is default
+            Vector3 _pivot = {0.5f, 0.5f, 0.5f}; //Normalized in unscaled bounds. In Middle by default
+            Vector3 _center = {0.5f, 0.5f, 0.5f}; //Normalized in unscaled bounds. In Middle by default
             Vector3 _size = {1,1,1}; //1 is the default size.
 
     };

@@ -268,7 +268,7 @@ void DrawCircle(int centerX, int centerY, float radius, Color color)
 // NOTE: On OpenGL 3.3 and ES2 we use QUADS to avoid drawing order issues
 void DrawCircleV(Vector2 center, float radius, Color color)
 {
-    DrawCircleSector(center, radius, 0, 360, 36, color);
+    DrawCircleSector(center, 20, 0, 360, 36, color);
 }
 
 // Draw a piece of a circle

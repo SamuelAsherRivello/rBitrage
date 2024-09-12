@@ -48,6 +48,17 @@ namespace RMC::rBitrage
                 };
             }
 
+            // template <typename T>
+            // static T GetRandomArrayValue(T array[], int size)
+            // {
+            //     if (size != 3)
+            //         throw std::invalid_argument("GetRandomArrayValue: Input array must have exactly 3 elements.");
+                
+            //     int index = GetRandomInt(0, size - 1);
+            //     return array[index];
+            // }
+
+
         private:
             static float constexpr INT_TO_FLOAT_FACTOR = 1000;
             

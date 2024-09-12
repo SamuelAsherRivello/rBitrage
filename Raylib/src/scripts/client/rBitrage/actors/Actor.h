@@ -5,6 +5,7 @@
 //
 #include "client/rBitrage/core/Game.h"
 #include "client/rBitrage/types/Bounds.h"
+#include "client/rBitrage/types/Bounds.h"
 #include "client/rBitrage/types/FrameRenderLayer.h"
 #include "client/rBitrage/types/Transform.h"
 #include "client/rBitrage/utilities/Utilities.h"
@@ -41,6 +42,7 @@ namespace RMC::rBitrage
         virtual Vector3 GetScale() const;
         virtual void SetScale(const Vector3 &value);
 
+        const Vector3 GetScaledSize() ;
 
         virtual const char* GetName() const;
         virtual void SetName(const char* name);
@@ -56,10 +58,9 @@ namespace RMC::rBitrage
         virtual void SetIsDebug(bool isDebug);
 
         //
-        virtual Bounds& GetBounds();
+        virtual Bounds& GetBoundsLocal();
+        const Bounds GetBoundsGlobal();
         virtual FrameRenderLayer GetFrameRenderLayer() const;
-
-       
 
         //NOT VIRTUAL
         //for comparison
@@ -80,7 +81,7 @@ namespace RMC::rBitrage
         bool _isDebug;
         float _opacity;
         const char * _name;
-        Bounds* _bounds;
+        Bounds* _boundsLocal;
     
         
     };

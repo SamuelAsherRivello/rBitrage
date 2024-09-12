@@ -1,24 +1,31 @@
 #include <raylib.h>
 //
-#include "client/rBitrage/Game2D.h"
-#include "client/rBitrage/actors/Shape2D.h"
-#include "client/rBitrage/systems/CameraSystem.h"
+#include "client/rBitrage/rBitrage.h"
 //
-#include "client/rBitrageDemos/actors/Ball2D.h"
-#include "client/rBitrageDemos/actors/Background2D.h"
-
 using namespace RMC::rBitrage;
-
 
 int DemoXXShapes() 
 {
     // Create Game
     Game2D game = Game2D();
+
+
+    // OPTIONAL: Set Overrides
+    game.cameraSystemMode = CameraSystemMode::Cam2D;
     game.title = "Demo XX Shapes";
+    game.isDebug = true;                  //true, show ANY gizmos
+    game.screen.isDebug = true;           //true, show THIS gizmo
+    game.world.isDebug = true;            //true, show THIS gizmo
 
 
     // Initialize
     game.Initialize();
+
+
+    // Log a message to VS Code terminal window
+    std::cout << "\n********************" << std::endl;
+    std::cout << "   Hello World!       " << std::endl;
+    std::cout << "********************\n" << std::endl;
 
 
     // Assets
@@ -26,42 +33,36 @@ int DemoXXShapes()
     loaderSystem->LoadAllAssets();
 
 
-
-    // FrameRenderLayer::Camera2D
-    Background2D background2D = Background2D(game);
-    game.AddActor(&background2D); 
-
-
-    Shape2D rectangleShape2D = Shape2D(game, new RectangleShapeData2D());
-    rectangleShape2D.SetScale({200, 200, 200});
-    rectangleShape2D.SetPosition(Vector3Add(game.world.GetCenter(), Vector3{-200, 0, 0}));
-    game.AddActor(&rectangleShape2D); 
-
-
-    Shape2D circleShape2D = Shape2D(game, new CircleShapeData2D());
-    circleShape2D.SetScale({200, 200, 200});
-    circleShape2D.SetPosition(Vector3Add(game.world.GetCenter(), Vector3{200, 0, 0}));
+    // Actors
+    CircleShapeData2D* shapeData2D = new CircleShapeData2D(RED, 50);
+    Shape2D circleShape2D = Shape2D(game, shapeData2D);
+    circleShape2D.SetIsDebug(true);
+    circleShape2D.SetPosition(Vector3Add(game.world.GetCenter(), Vector3{0, 0, 0}));
     game.AddActor(&circleShape2D); 
 
-    
+
+
+    // FrameRenderLayer::PostCamera
     // OPTIONAL: Add HUD UI
     HudUI2D hudUI = HudUI2D(game);
-    hudUI.SetTextUpperLeft("");
-    hudUI.SetTextUpperRight("");
-    hudUI.SetTextLowerLeft("");
-    hudUI.SetTextLowerRight(game.title);
+    const char* scoreText = "";
+    const char* livesText = "";
+    const char* instructions = "";
+    const char* extra = game.title;
+    hudUI.SetTextUpperLeft(scoreText);
+    hudUI.SetTextUpperRight(livesText);
+    hudUI.SetTextLowerLeft(instructions);
+    hudUI.SetTextLowerRight(extra);
     game.AddActor(&hudUI);
 
 
-    // Demonstrate logging to VS Code terminal window
-    std::cout << "\n********************" << std::endl;
-    std::cout << "   Hello World!       " << std::endl;
-    std::cout << "********************\n" << std::endl;
-    std::cout << Utilities::ToString(game.world.GetCenter()) << std::endl;
-    
     // Game Loop - Click escape to close window
     while (!game.GetSystem<ApplicationSystem>()->RaylibWindowShouldClose())
     {
+        // Input - Click spacebar to reset ball position
+        if (game.GetSystem<InputSystem>()->IsActionPressed("action"))
+        {
+        }
 
         // Move
         game.UpdateFrame();

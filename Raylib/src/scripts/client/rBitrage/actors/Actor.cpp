@@ -1,5 +1,4 @@
 #include "client/rBitrage/actors/Actor.h"
-#include "Actor.h"
 
 
 namespace RMC::rBitrage 
@@ -8,7 +7,7 @@ namespace RMC::rBitrage
         _game (game), 
         _assetKey (assetKey),
         _frameRenderLayer (frameRenderLayer),
-        _bounds(new Bounds())
+        _boundsLocal(new Bounds())
     {
         _opacity = 1;
         _instanceId = GUID();
@@ -69,7 +68,7 @@ namespace RMC::rBitrage
     Vector3 Actor::GetScale() const  { return _transform.Scale; }
     void Actor::SetScale(const Vector3& value)  { _transform.Scale = value; }
 
-
+    const Vector3 Actor::GetScaledSize() { return Vector3Multiply(GetBoundsLocal().GetSize(), _transform.Scale); }
 
 
     bool Actor::GetIsDebug() const 
@@ -95,9 +94,35 @@ namespace RMC::rBitrage
     }
 
 
-    Bounds& Actor::GetBounds() 
+    //NOTE: This is unscaled bounds in local space
+    Bounds& Actor::GetBoundsLocal() 
     {
-        return *_bounds;
+        return *_boundsLocal;
+    }
+
+    //NOTE: This is scaled bounds in world space
+    const Bounds Actor::GetBoundsGlobal() 
+    {
+        Bounds boundsLocal = Bounds(
+            boundsLocal.GetSize(),
+            boundsLocal.GetCenter(),
+            boundsLocal.GetPivot()
+            );
+
+        auto b =  Bounds
+            (
+                //local, scaled
+                Vector3Multiply(GetScale(), GetBoundsLocal().GetSize()), 
+
+                //global, unscaled
+                GetPosition(), 
+
+                //local, unscaled
+                GetBoundsLocal().GetPivot()
+            );
+
+
+            return b;
     }
 
 
