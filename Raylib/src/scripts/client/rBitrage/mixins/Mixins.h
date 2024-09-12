@@ -95,37 +95,37 @@ namespace RMC::rBitrage
 
             Vector3 velocityCopy = *_velocityPtr;
             bool hasChangedDirection = false;
-            if (velocityCopy.x < 0 && _actor.GetTransform().Position.x - _actor.GetBounds().GetSize().x/2 <= minX)
+            if (velocityCopy.x < 0 && _actor.GetPosition().x - _actor.GetBounds().GetSize().x/2 <= minX)
             {
                 velocityCopy.x *= -1;
                 hasChangedDirection = true;
             }
                 
-            else if (velocityCopy.x > 0 && _actor.GetTransform().Position.x + _actor.GetBounds().GetSize().x/2 >= maxX)
+            else if (velocityCopy.x > 0 && _actor.GetPosition().x + _actor.GetBounds().GetSize().x/2 >= maxX)
             {
                 velocityCopy.x *= -1;
                 hasChangedDirection = true;
             }
             
-            if (velocityCopy.y < 0 && _actor.GetTransform().Position.y - _actor.GetBounds().GetSize().y/2 <= minY)
+            if (velocityCopy.y < 0 && _actor.GetPosition().y - _actor.GetBounds().GetSize().y/2 <= minY)
             {
                 velocityCopy.y *= -1;
                 hasChangedDirection = true;
             }
                 
-            else if (velocityCopy.y > 0 && _actor.GetTransform().Position.y + _actor.GetBounds().GetSize().y/2 >= maxY)
+            else if (velocityCopy.y > 0 && _actor.GetPosition().y + _actor.GetBounds().GetSize().y/2 >= maxY)
             {
                 velocityCopy.y *= -1;
                 hasChangedDirection = true;
             }
 
-            if (velocityCopy.z < 0 && _actor.GetTransform().Position.z - _actor.GetBounds().GetSize().z/2 <= minY)
+            if (velocityCopy.z < 0 && _actor.GetPosition().z - _actor.GetBounds().GetSize().z/2 <= minY)
             {
                 velocityCopy.z *= -1;
                 hasChangedDirection = true;
             }
                 
-            else if (velocityCopy.z > 0 && _actor.GetTransform().Position.z + _actor.GetBounds().GetSize().z/2 >= maxY)
+            else if (velocityCopy.z > 0 && _actor.GetPosition().z + _actor.GetBounds().GetSize().z/2 >= maxY)
             {
                 velocityCopy.z *= -1;
                 hasChangedDirection = true;

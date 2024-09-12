@@ -2,6 +2,9 @@
 
 namespace RMC::rBitrage 
 {
+    //TODO: Is there a better way to do a null vector?
+    const Vector3 Vector3Null = { std::numeric_limits<float>::max(), std::numeric_limits<float>::max(), std::numeric_limits<float>::max() };
+
     Sprite2D::Sprite2D(Game& game, const char *assetKey, const FrameRenderLayer& frameRenderLayer) 
         : Actor2D (game, assetKey, frameRenderLayer)
     {
@@ -32,15 +35,19 @@ namespace RMC::rBitrage
         }
 
         unsigned char opacity = 255 * GetOpacity();
-
-      //std::cout << Utilities::ToString(GetTransform().Position) << _assetKey << std::endl;
+        //
+        const auto scale = GetScale();
+        const auto position = GetPosition();
+        const auto bounds = GetBounds();
+        const auto size = bounds.GetSize();
+        const auto pivot = bounds.GetPivot();
 
         DrawTexturePro
             (
                 _texture, 
                 {0, 0, static_cast<float>(_texture.width), static_cast<float>(_texture.height)}, 
-                {_transform.Position.x, _transform.Position.y, static_cast<float>(_texture.width), static_cast<float>(_texture.height)},
-                {Vector2Multiply({static_cast<float>(_texture.width), static_cast<float>(_texture.height)}, Utilities::ToVector2(GetBounds().GetPivot()))},
+                {position.x, position.y, size.x , size.y },
+                {pivot.x, pivot.y},
                 _transform.Rotation.z, 
                 CLITERAL(Color){ 255, 255, 255, opacity }
             );
@@ -49,7 +56,7 @@ namespace RMC::rBitrage
 
     void Sprite2D::ResizeAsset() 
     {
-        ResizeAsset({-1, -1, -1});
+        ResizeAsset(Vector3Null);
     }
 
     void Sprite2D::ResizeAsset(const Vector3& size) 
@@ -76,14 +83,22 @@ namespace RMC::rBitrage
             return;
         }
 
-        std::cout << "++++LoadTextureFromImage() " << image.width << " and " << image.height << " for " << _assetKey << std::endl;
-
         //TODO: Find better 'ignore me' value than -1/-1/-1 since that's too common
-        if (Vector3Equals(size, {-1, -1, -1}))
+        if (Vector3Equals(size, Vector3Null))
+        {
+            //TODO: Resize to original size. This may not be needed since we load fresh right before
+            //but we may move where the load happens, so keep this here?
+            ImageResize(&image, image.width, image.height);  
+        }
+        else
         {
             ImageResize(&image, size.x, size.y);  
         }
+
         _texture = LoadTextureFromImage(image);
 
+        //Always set the bounds based on the new asset size
+        auto v = Utilities::ToVector3({(float)_texture.width, (float)_texture.height});
+        GetBounds().SetSize(v);
     }
 }

@@ -2,6 +2,7 @@
 #pragma once
 #include <raylib.h>
 #include <raymath.h>
+#include <iostream>
 
 namespace RMC::rBitrage 
 {
@@ -14,13 +15,12 @@ namespace RMC::rBitrage
     {
         public:
 
+            // TODO: Find a better way to give ALL subclasses of actor a friend
             // Make Actor a friend so it can access private methods
             friend class Actor;
+            friend class Sprite2D;
         
-            Bounds() : 
-                _size({1,1,1}), // will be set by actor-child to match asset (sprite/model)
-                _center({0.5, 0.5, 0.5 }),
-                _pivot({0.5, 0.5, 0.5}) //center (good default for 3d. For 2d?)
+            Bounds() 
             {
             
             }
@@ -61,10 +61,13 @@ namespace RMC::rBitrage
             // Size 
             Vector3 GetSize() const { return _size; }
 
+
         
         protected:
-            // Size - Subclass will set this to match asset (sprite/model)
-            void SetSize(Vector3 size) 
+
+            //This is protected and cannot be called from outside the class.
+            //Despite what the intellisense says
+            void SetSize(Vector3& size) 
             { 
                 this->_size = size; 
                 this->_center = Vector3Multiply(this->_size, {0.5f, 0.5f, 0.5f});
@@ -72,9 +75,9 @@ namespace RMC::rBitrage
 
         private:
 
-            Vector3 _pivot;
-            Vector3 _center;
-            Vector3 _size;
+            Vector3 _pivot = {0, 0, 0}; //upper left is default
+            Vector3 _center = {0.5f, 0.5f, 0.5f}; //half of size is default
+            Vector3 _size = {1,1,1}; //1 is the default size.
 
     };
 }

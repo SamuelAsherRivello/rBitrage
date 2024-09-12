@@ -20,15 +20,23 @@ namespace RMC::rBitrage
 
             void DrawWorldSizeHalf();
             void DrawScreenSizeHalf();
-            void DrawCrosshairsAtCenterRectangle(Rectangle rectangle, float scale, float thick, Color color);
+            void RenderCrosshairsAtRectangleCenter(Rectangle rectangle, float scale, float thick, Color color);
+            void RenderCrosshairsAtRectangleCenter(Rectangle rectangle, float scale, float thick, Color color, const char *label);
+            void RenderBoxAtRectangle(Rectangle rectangle, float thick, Color color);
+            void RenderBoxAtRectangle(Rectangle rectangle, float thick, Color color, const char * label);
+            void RenderCircleAtPoint(Vector2 point, float radius, Color color);
+            void RenderCircleAtPoint(Vector2 point, float radius, Color color, const char *label);
             void DrawScreenBounds();
-
             void DrawWorldBounds();
 
+            void DrawActor(Actor *actor);
+
+            void DrawActorCenterAtGlobal(Actor *actor);
+
             //
-            void DrawActorBounds(Actor* actor);
+            void DrawActorBoundsFromCenterAtGlobal(Actor* actor);
             void DrawActorPivot(Actor *actor);
-            void DrawActorCenter(Actor *actor);
+            void DrawActorPosition(Actor *actor);
 
         private:
             Color _actorColor = ORANGE;
@@ -38,6 +46,9 @@ namespace RMC::rBitrage
             float _pivotRadius = 10;
             float _worldStroke = 10;
             float _screenStroke = 4;
+            //
+            Vector2 _fontPositionOffset = {10, 10};
+            float _fontSize = 20; 
     };
 
 } 

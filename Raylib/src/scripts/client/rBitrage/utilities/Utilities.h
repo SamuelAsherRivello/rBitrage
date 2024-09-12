@@ -9,7 +9,9 @@
 //
 #include "client/rBitrage/types/FrameRenderLayer.h"
 #include "client/rBitrage/utilities/Random.h"
+#include "client/rBitrage/types/Bounds.h"
 //
+//TODO: What is this? should this be done next to the  enum itself?
 #define ENUM_TO_STRING_CASE(value) case value: return #value;
 
 namespace RMC::rBitrage 
@@ -100,6 +102,12 @@ namespace RMC::rBitrage
             {
                 return "[Rectangle (" + std::to_string(value.x) + ", " + std::to_string(value.y) + ", " + std::to_string(value.width) + ", " + std::to_string(value.height) + ")]"; 
             }
+
+           static std::string ToString(Bounds value)
+            {
+                return "[Bounds (" +  Utilities::ToString(value.ToRectangleAtCenter()) + ", Pivot=" + Utilities::ToString(value.GetPivot()) + ")]"; 
+            }
+
 
 
             static std::string ToString(GUID value)

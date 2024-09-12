@@ -1,4 +1,5 @@
 #include "client/rBitrage/actors/Actor.h"
+#include "Actor.h"
 
 
 namespace RMC::rBitrage 
@@ -6,7 +7,8 @@ namespace RMC::rBitrage
     Actor::Actor(Game& game, const char *assetKey, const FrameRenderLayer& frameRenderLayer) :
         _game (game), 
         _assetKey (assetKey),
-        _frameRenderLayer (frameRenderLayer)
+        _frameRenderLayer (frameRenderLayer),
+        _bounds(new Bounds())
     {
         _opacity = 1;
         _instanceId = GUID();
@@ -25,7 +27,6 @@ namespace RMC::rBitrage
 
     void Actor::OnInitialize() 
     {
-          GetBounds().SetSize({1, 2, 3});
     }
 
 
@@ -53,36 +54,23 @@ namespace RMC::rBitrage
     {
         _name = name;
     }
-
-
-    Vector3 Actor::GetPosition() const 
-    {
-        return _transform.Position;
-    }
-
-    void Actor::SetPosition(const Vector3& position) 
-    {
-        _transform.Position = position;
-    }
-
-    Vector3 Actor::GetRotation() const 
-    {
-        return _transform.Rotation;
-    }
-
-    void Actor::SetRotation(const Vector3& position) 
-    {
-        _transform.Rotation = position;
-    }
-
     Game& Actor::GetGame() const
     {
         return _game;
     }
-    Transform& Actor::GetTransform()
-    {
-        return _transform;
-    }
+
+
+    Vector3 Actor::GetPosition() const  { return _transform.Position; }
+    void Actor::SetPosition(const Vector3& value)  { _transform.Position = value; }
+
+    Vector3 Actor::GetRotation() const  { return _transform.Rotation; }
+    void Actor::SetRotation(const Vector3& value)  { _transform.Rotation = value; }
+
+    Vector3 Actor::GetScale() const  { return _transform.Scale; }
+    void Actor::SetScale(const Vector3& value)  { _transform.Scale = value; }
+
+
+
 
     bool Actor::GetIsDebug() const 
     {
@@ -107,10 +95,11 @@ namespace RMC::rBitrage
     }
 
 
-    Bounds Actor::GetBounds() 
+    Bounds& Actor::GetBounds() 
     {
-        return _bounds;
+        return *_bounds;
     }
+
 
     FrameRenderLayer Actor::GetFrameRenderLayer() const  
     {
@@ -119,7 +108,7 @@ namespace RMC::rBitrage
 
 
 
-    GUID Actor::GetInstanceId()
+    GUID Actor::GetInstanceId() const
     {
         return _instanceId;
     }

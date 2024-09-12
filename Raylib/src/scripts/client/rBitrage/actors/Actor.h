@@ -33,17 +33,19 @@ namespace RMC::rBitrage
         //MANY BELOW *MAYBE* DON'T NEED TO BE VIRTUAL? (pUT IN 2 GROUPS, YES/NO AND CHANGE IT)
 
         virtual Vector3 GetPosition() const;
-        virtual void SetPosition(const Vector3& position);
+        virtual void SetPosition(const Vector3& value);
         
         virtual Vector3 GetRotation() const;
-        virtual void SetRotation(const Vector3 &position);
+        virtual void SetRotation(const Vector3 &value);
+
+        virtual Vector3 GetScale() const;
+        virtual void SetScale(const Vector3 &value);
+
 
         virtual const char* GetName() const;
         virtual void SetName(const char* name);
 
         virtual Game& GetGame() const;
-        virtual Transform& GetTransform();
-
 
         //
         virtual float GetOpacity();
@@ -54,15 +56,14 @@ namespace RMC::rBitrage
         virtual void SetIsDebug(bool isDebug);
 
         //
-        virtual Bounds GetBounds();
+        virtual Bounds& GetBounds();
         virtual FrameRenderLayer GetFrameRenderLayer() const;
 
-   
-
+       
 
         //NOT VIRTUAL
         //for comparison
-        GUID GetInstanceId();
+        GUID GetInstanceId() const;
 
         bool operator==(const Actor& other) const;
 
@@ -72,7 +73,6 @@ namespace RMC::rBitrage
         FrameRenderLayer _frameRenderLayer;
         Game& _game;
         Transform _transform;
-        Vector3 _size = {1, 1, 1};
 
 
     private:
@@ -80,7 +80,7 @@ namespace RMC::rBitrage
         bool _isDebug;
         float _opacity;
         const char * _name;
-        Bounds _bounds;
+        Bounds* _bounds;
     
         
     };

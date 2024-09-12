@@ -44,6 +44,10 @@
 // #include "client/rBitrage/actors/Sphere2D.h"
 // #include "client/rBitrage/actors/Sphere3D.h"
 
+#include "client/rBitrageDemos/actors/Ball2D.h"
+#include "client/rBitrageDemos/actors/HudUI2D.h"
+#include "client/rBitrage/actors/Shape2D.h"
+
 
 // #include "client/rBitrage/systems/ActorSystem.h"
 #include "client/rBitrage/systems/ApplicationSystem.h"
@@ -51,7 +55,7 @@
 
 //#include "client/rBitrage/systems/AssetLoaderSystem.h"
 // #include "client/rBitrage/systems/AudioSystem.h"
-// #include "client/rBitrage/systems/CameraSystem.h"
+ #include "client/rBitrage/systems/CameraSystem.h"
 // #include "client/rBitrage/systems/DebugSystem.h"
 // #include "client/rBitrage/systems/InputSystem.h"
 // #include "client/rBitrage/systems/PhysicsSystem.h"

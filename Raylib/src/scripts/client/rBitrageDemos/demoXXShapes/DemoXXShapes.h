@@ -33,13 +33,13 @@ int DemoXXShapes()
 
 
     Shape2D rectangleShape2D = Shape2D(game, new RectangleShapeData2D());
-    rectangleShape2D.GetTransform().Scale = {200, 200, 200};
+    rectangleShape2D.SetScale({200, 200, 200});
     rectangleShape2D.SetPosition(Vector3Add(game.world.GetCenter(), Vector3{-200, 0, 0}));
     game.AddActor(&rectangleShape2D); 
 
 
     Shape2D circleShape2D = Shape2D(game, new CircleShapeData2D());
-    circleShape2D.GetTransform().Scale = {200, 200, 200};
+    circleShape2D.SetScale({200, 200, 200});
     circleShape2D.SetPosition(Vector3Add(game.world.GetCenter(), Vector3{200, 0, 0}));
     game.AddActor(&circleShape2D); 
 

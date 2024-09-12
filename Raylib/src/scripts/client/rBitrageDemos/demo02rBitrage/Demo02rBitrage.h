@@ -2,8 +2,7 @@
 //
 #include "client/rBitrage/rBitrage.h"
 //
-#include "client/rBitrageDemos/actors/Ball2D.h"
-#include "client/rBitrageDemos/actors/HudUI2D.h"
+
 
 using namespace RMC::rBitrage;
 
@@ -18,9 +17,7 @@ int Demo02rBitrage()
     game.cameraSystemMode = CameraSystemMode::Cam2D;
     game.title = "Demo 02 rBitrage";
     game.screen.SetSize({1920, 1080, 0});
-    game.world.SetSize({1920, 1080, 0});
-    game.screen.SetPivotAtCenter();
-    game.world.SetPivotAtCenter();
+    game.world.SetSize({555, 555, 0});
     game.isDebug = true;                  //true, show ANY gizmos
     game.screen.isDebug = true;           //true, show THIS gizmo
     game.world.isDebug = true;            //true, show THIS gizmo
@@ -46,20 +43,46 @@ int Demo02rBitrage()
     //for (int i = 0; i < 2; ++i)
     //{
         // FrameRenderLayer::Camera2D
-        Ball2D actor = Ball2D(game, "Ball01"); 
+        Ball2D* actorPtr = new Ball2D(game, "Ball01"); 
+        Ball2D actor = *actorPtr;
         actor.SetPosition(game.world.GetCenter());
         actor.SetIsDebug(true);
         game.AddActor(&actor); 
 
-        Vector3 velocity = Random::GetRandomVector3({-3, -3, -3}, {3, 3, 3});
-        velocity = Vector3Multiply(velocity, {100, 100, 100});
-        actor.SetVelocity(velocity);
+        actor.SetScale({2, 2, 2});
+        actor.GetBounds().SetPivot({-0.5f, -0.5f, -0.5f});
 
-        auto actorSharedPointer = std::make_shared<Ball2D>(actor);
-        _actors.push_back(actorSharedPointer);
-        game.AddActor(actorSharedPointer.get()); 
+        Vector3 velocity2 = Random::GetRandomVector3({-3, -3, -3}, {3, 3, 3});
+        velocity2 = Vector3Multiply(velocity2, {100, 100, 100});
+        actor.SetVelocity(velocity2);
+
+        auto actorSharedPointer2 = std::make_shared<Ball2D>(actor);
+        _actors.push_back(actorSharedPointer2);
+        game.AddActor(actorSharedPointer2.get()); 
+
+        //         // FrameRenderLayer::Camera2D
+        // Ball2D actor = Ball2D(game, "Ball01"); 
+        // actor.SetPosition(game.world.GetCenter());
+        // actor.SetIsDebug(true);
+        // game.AddActor(&actor); 
+        // actor.GetBounds().SetSize({25, 25, 25});
+
+        // Vector3 velocity = Random::GetRandomVector3({-3, -3, -3}, {3, 3, 3});
+        // velocity = Vector3Multiply(velocity, {100, 100, 100});
+        // actor.SetVelocity(velocity);
+
+        // auto actorSharedPointer = std::make_shared<Ball2D>(actor);
+        // _actors.push_back(actorSharedPointer);
+        // game.AddActor(actorSharedPointer.get()); 
     //}
+
+
     Ball2D& actor01 = static_cast<Ball2D&>(*_actors.at(0));
+
+    Shape2D circleShape2D = Shape2D(game, new CircleShapeData2D());
+    circleShape2D.SetScale({200, 200, 200});
+    circleShape2D.SetPosition(Vector3Add(game.world.GetCenter(), Vector3{0, 0, 0}));
+    //game.AddActor(&circleShape2D); 
 
 
     // FrameRenderLayer::PostCamera
@@ -73,9 +96,9 @@ int Demo02rBitrage()
     hudUI.SetTextUpperRight(livesText);
     hudUI.SetTextLowerLeft(instructions);
     hudUI.SetTextLowerRight(extra);
-    game.AddActor(&hudUI);
+    //game.AddActor(&hudUI);
 
-    game.GetSystem<SceneSystem>()->currentScene->AddActor(&hudUI);
+    //game.GetSystem<SceneSystem>()->currentScene->AddActor(&hudUI);
 
   
 
@@ -87,13 +110,22 @@ int Demo02rBitrage()
         if (game.GetSystem<InputSystem>()->IsActionPressed("action"))
         {
             actor01.SetPosition(game.world.GetCenter());
-        
 
             Vector3 velocity = Random::GetRandomVector3({-3, -3, 0}, {3, 3, 0});
             velocity = Vector3Multiply(velocity, {200, 200, 0});
             actor01.SetVelocity(velocity);
+
+            //std::cout << "b1: " << Utilities::ToString(actor01.GetBounds()) << std::endl;
         }
 
+        
+
+        if (game.GetSystem<InputSystem>()->IsActionPressed("debug"))
+        {
+            game.GetSystem<CameraSystem>()->camera2D.zoom = .1;
+            game.GetSystem<CameraSystem>()->camera2D.offset = {0,0};
+            game.GetSystem<CameraSystem>()->camera2D.target = GetMousePosition();
+        }
 
         // Move
         game.UpdateFrame();

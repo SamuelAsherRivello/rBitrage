@@ -27,43 +27,44 @@ namespace RMC::rBitrage
         const float maxY = _game.world.GetMax().y;
         const float minZ = _game.world.GetMin().z;
         const float maxZ = _game.world.GetMax().z;
+        const Vector3 size = GetBounds().GetSize();
 
         bool hasChangedDirection = false;
 
         //x
-        if (_velocity.x < 0 && _transform.Position.x - _size.x/2 <= minX)
+        if (_velocity.x < 0 && _transform.Position.x - size.x/2 <= minX)
         {
             _velocity.x *= -1;
             hasChangedDirection = true;
         }
             
-        else if (_velocity.x > 0 && _transform.Position.x + _size.x/2 >= maxX)
+        else if (_velocity.x > 0 && _transform.Position.x + size.x/2 >= maxX)
         {
             _velocity.x *= -1;
             hasChangedDirection = true;
         }
          
         //y
-        if (_velocity.y < 0 && _transform.Position.y - _size.y/2 <= minY)
+        if (_velocity.y < 0 && _transform.Position.y - size.y/2 <= minY)
         {
             _velocity.y *= -1;
             hasChangedDirection = true;
         }
             
-        else if (_velocity.y > 0 && _transform.Position.y + _size.y/2 >= maxY)
+        else if (_velocity.y > 0 && _transform.Position.y + size.y/2 >= maxY)
         {
             _velocity.y *= -1;
             hasChangedDirection = true;
         }
 
         //z
-        if (_velocity.z < 0 && _transform.Position.z - _size.z/2 <= minZ)
+        if (_velocity.z < 0 && _transform.Position.z - size.z/2 <= minZ)
         {
             _velocity.z *= -1;
             hasChangedDirection = true;
         }
             
-        else if (_velocity.z > 0 && _transform.Position.z + _size.z/2 >= maxZ)
+        else if (_velocity.z > 0 && _transform.Position.z + size.z/2 >= maxZ)
         {
             _velocity.z *= -1;
             hasChangedDirection = true;

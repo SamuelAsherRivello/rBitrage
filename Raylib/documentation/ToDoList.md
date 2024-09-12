@@ -55,3 +55,28 @@ Main file
                         └── Actor (with lifecycle) ex. Sprite2D, Model3D
                 └── ...
 ```
+
+
+## GENERAL C++ SYNTAX NOTES
+
+### Return types
+
+What is the best way to return something from a function?
+
+1. `Bounds Actor::GetBounds()`
+
+This function returns a copy of the actor's bounds, allowing the caller to modify or use the returned value independently without affecting the original bounds in the actor. This approach is suitable when the caller needs a temporary copy of the bounds, but it can lead to unnecessary memory allocation and copying.
+
+2. `Bounds& Actor::GetBounds()`
+
+This function returns a reference to the actor's bounds, providing direct access to the original value within the actor. By using a reference, the caller can modify or read the actor's bounds without creating an extra copy, which is essential when working with complex data structures that need to be updated in place.
+
+3. `Bounds Actor::GetBounds()*`
+
+This function returns a pointer to the actor's bounds, allowing the caller to access and potentially modify the original value within the actor. However, using pointers can lead to ownership issues, dangling pointers, or memory leaks if not managed properly. Pointers should be used with caution and only when necessary, as they require more care to ensure memory safety.
+
+| **Return Type** | Read         | Write        | Must Mem. Manage |
+| --- | --- | --- | --- |
+| `Bounds`    | •              |                    |                  |
+| `Bounds&`   | •              | •                |                   |
+| `Bounds*`   | •              | •                | •                 |
