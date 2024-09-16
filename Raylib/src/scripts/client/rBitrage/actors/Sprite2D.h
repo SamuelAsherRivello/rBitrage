@@ -23,7 +23,7 @@ namespace RMC::rBitrage
         Sprite2D(Game& game, const char *assetKey, const FrameRenderLayer& frameRenderLayer = FrameRenderLayer::Camera2D);
         virtual ~Sprite2D();
 
-        void OnFrameRender() override;
+        void OnFrameRender(const FrameRenderLayer &frameRenderLayer) override;
         void ResizeAsset(const Vector3 &size) override;
         void ResizeAsset() override;
 

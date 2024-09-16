@@ -16,8 +16,8 @@ namespace RMC::rBitrage
             Shape2D(Game& game, ShapeData2D* shapeData2D, const FrameRenderLayer& frameRenderLayer = FrameRenderLayer::Camera2D);
 
             virtual ~Shape2D();
-            
-            void OnFrameRender() override;
+
+            void OnFrameRender(const FrameRenderLayer &frameRenderLayer) override;
             
         protected:
             ShapeData2D* _shapeData2D;

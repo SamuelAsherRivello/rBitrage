@@ -9,6 +9,8 @@
 #include "client/rBitrage/types/FrameRenderLayer.h"
 #include "client/rBitrage/types/Transform.h"
 #include "client/rBitrage/utilities/Utilities.h"
+#include "client/rBitrage/interfaces/Ilifecycle.h"
+
 #include <iostream>
 
 namespace RMC::rBitrage 
@@ -16,23 +18,23 @@ namespace RMC::rBitrage
     // NEEDED? Forward declaration of Game class
     class Game;
 
-    class Actor
+    class Actor : public ILifecycle
     {
     public:
         Actor(Game& game, const char *_assetKey, const FrameRenderLayer& frameRenderLayer = FrameRenderLayer::Camera2D);
         virtual ~Actor();
 
 
-        //KEEP AS VIRTUAL...
+        //INTERFACE: ILifecycle
+        virtual void OnInitialize() override; //setup "me"
+        virtual void OnInitialized() override; //setup 'dependencies"
+        virtual void OnFixedUpdate(float fixedDeltaTime)  override;
+        virtual void OnFrameUpdate(float deltaTime)  override;
+        virtual void OnFrameRender(const FrameRenderLayer& frameRenderLayer) override;  
 
-        virtual void OnInitialize();
-        virtual void OnFixedUpdate(float fixedDeltaTime);
-        virtual void OnFrameUpdate(float deltaTime);
-        virtual void OnFrameRender();
 
-
+        //OTHER
         //MANY BELOW *MAYBE* DON'T NEED TO BE VIRTUAL? (pUT IN 2 GROUPS, YES/NO AND CHANGE IT)
-
         virtual Vector3 GetPosition() const;
         virtual void SetPosition(const Vector3& value);
         

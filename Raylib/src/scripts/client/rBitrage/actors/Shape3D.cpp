@@ -1,4 +1,5 @@
 #include "client/rBitrage/actors/Shape3D.h"
+#include "Shape3D.h"
 
 namespace RMC::rBitrage
 {
@@ -20,9 +21,9 @@ namespace RMC::rBitrage
         delete _shapeData3D;
     }
 
-    void Shape3D::OnFrameRender()
+    void Shape3D::OnFrameRender(const FrameRenderLayer& frameRenderLayer)
     {
-        Actor3D::OnFrameRender();
+        Actor3D::OnFrameRender(frameRenderLayer);
 
         _shapeData3D = new CubeShapeData3D(RED);
         _shapeData3D->Draw(GetPosition(), GetBoundsLocal().GetSize());

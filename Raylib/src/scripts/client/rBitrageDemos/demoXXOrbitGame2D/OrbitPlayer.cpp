@@ -1,5 +1,6 @@
 
 #include "client/rBitrageDemos/demoXXOrbitGame2D/OrbitPlayer.h"
+#include "OrbitPlayer.h"
 namespace RMC::rBitrage 
 {
     OrbitPlayer::OrbitPlayer(Game& game) :  Sprite2D(game, "OrbitPlayer")  {
@@ -69,9 +70,9 @@ namespace RMC::rBitrage
 
     }
 
-    void OrbitPlayer::OnFrameRender()
+    void OrbitPlayer::OnFrameRender(const FrameRenderLayer& frameRenderLayer)
     {
-        Sprite2D::OnFrameRender();
+        Sprite2D::OnFrameRender(frameRenderLayer);
     }
 
 

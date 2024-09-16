@@ -17,7 +17,8 @@ namespace RMC::rBitrage
             //
             void OnFixedUpdate(float fixedDeltaTime) override;
             void OnFrameUpdate(float deltaTime) override;
-            void OnFrameRender() override;
+            void OnFrameRender(const FrameRenderLayer &frameRenderLayer) override;
+
 
             Vector3 GetOrbitCenter() const;
             void SetOrbitCenter(const Vector3& orbitCenter);

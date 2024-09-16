@@ -56,7 +56,7 @@ namespace RMC::rBitrage
         {
             if (actor->GetFrameRenderLayer() == frameRenderLayer)
             {
-                actor->OnFrameRender();
+                actor->OnFrameRender(frameRenderLayer);
             }
         }
     }

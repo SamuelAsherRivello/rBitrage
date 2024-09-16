@@ -1,4 +1,5 @@
 #include "client/rBitrage/actors/Sprite2D.h"
+#include "Sprite2D.h"
 
 namespace RMC::rBitrage 
 {
@@ -25,9 +26,9 @@ namespace RMC::rBitrage
         std::cout << "Exiting Actor destructor" << std::endl;
     }
 
-    void Sprite2D::OnFrameRender() {
+    void Sprite2D::OnFrameRender(const FrameRenderLayer& frameRenderLayer) {
 
-        Actor2D::OnFrameRender();
+        Actor2D::OnFrameRender(frameRenderLayer);
 
         if (strlen(_assetKey) == 0)
         {

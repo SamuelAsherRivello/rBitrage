@@ -14,7 +14,7 @@ namespace RMC::rBitrage
         ~Cube2D(); 
         void OnFixedUpdate(float fixedDeltaTime) override;
         void OnFrameUpdate(float deltaTime) override;
-        void OnFrameRender() override;
+        void OnFrameRender(const FrameRenderLayer& frameRenderLayer) override;
     
 
     private:

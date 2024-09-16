@@ -82,9 +82,9 @@ namespace RMC::rBitrage
 
     }
 
-    void Cube2D::OnFrameRender()
+    void Cube2D::OnFrameRender(const FrameRenderLayer& frameRenderLayer)
     {
-        Sprite2D::OnFrameRender();
+        Sprite2D::OnFrameRender(frameRenderLayer);
 
         //TODO: If/when collision is added to actor, then move this drawing to debugsystem
         if (_isCollision)

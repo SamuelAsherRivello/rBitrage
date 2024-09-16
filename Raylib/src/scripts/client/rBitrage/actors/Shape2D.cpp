@@ -1,4 +1,5 @@
 #include "client/rBitrage/actors/Shape2D.h"
+#include "Shape2D.h"
 
 namespace RMC::rBitrage
 {
@@ -21,9 +22,9 @@ namespace RMC::rBitrage
         delete _shapeData2D;
     }
 
-    void Shape2D::OnFrameRender()
+    void Shape2D::OnFrameRender(const FrameRenderLayer& frameRenderLayer)
     {
-        Actor2D::OnFrameRender();
+        Actor2D::OnFrameRender(frameRenderLayer);
 
         _shapeData2D->Draw
         (

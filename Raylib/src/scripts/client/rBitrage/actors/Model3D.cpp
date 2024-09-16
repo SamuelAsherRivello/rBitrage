@@ -1,4 +1,5 @@
 #include "client/rBitrage/actors/Model3D.h"
+#include "Model3D.h"
 
 namespace RMC::rBitrage 
 {
@@ -35,8 +36,8 @@ namespace RMC::rBitrage
         Actor3D::OnFrameUpdate(deltaTime);
     }
 
-    void Model3D::OnFrameRender() {
-        Actor3D::OnFrameRender();
+    void Model3D::OnFrameRender(const FrameRenderLayer& frameRenderLayer) {
+        Actor3D::OnFrameRender(frameRenderLayer);
 
         if (Utilities::IsNullOrEmpty(_model)) 
         {

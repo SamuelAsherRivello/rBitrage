@@ -1,4 +1,5 @@
 #include "client/rBitrageDemos/actors/HudUI2D.h"
+#include "HudUI2D.h"
 
 namespace RMC::rBitrage 
 {
@@ -15,9 +16,9 @@ namespace RMC::rBitrage
     {
     }
 
-    void HudUI2D::OnFrameRender()
+    void HudUI2D::OnFrameRender(const FrameRenderLayer& frameRenderLayer)
     {
-        Actor2D::OnFrameRender();
+        Actor2D::OnFrameRender(frameRenderLayer);
 
         const int MAGIC = _game.screen.GetSize().x / 40; //TODO: rethink
 

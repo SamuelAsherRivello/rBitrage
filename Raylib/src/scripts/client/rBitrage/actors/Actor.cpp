@@ -1,14 +1,14 @@
 #include "client/rBitrage/actors/Actor.h"
-
+#include "Actor.h"
 
 namespace RMC::rBitrage 
 {
     Actor::Actor(Game& game, const char *assetKey, const FrameRenderLayer& frameRenderLayer) :
-        _game (game), 
-        _assetKey (assetKey),
-        _frameRenderLayer (frameRenderLayer),
-        _boundsLocal(new Bounds())
-    {
+            _game (game), 
+            _assetKey (assetKey),
+            _frameRenderLayer (frameRenderLayer),
+            _boundsLocal(new Bounds())
+        {
         _opacity = 1;
         _instanceId = GUID();
 
@@ -28,6 +28,11 @@ namespace RMC::rBitrage
     {
     }
 
+    void Actor::OnInitialized() 
+    {
+    }
+
+
 
     void Actor::OnFixedUpdate(float fixedDeltaTime) 
     {
@@ -37,7 +42,7 @@ namespace RMC::rBitrage
     {
     }
 
-    void Actor::OnFrameRender() 
+    void Actor::OnFrameRender(const FrameRenderLayer& frameRenderLayer) 
     {
     }
 

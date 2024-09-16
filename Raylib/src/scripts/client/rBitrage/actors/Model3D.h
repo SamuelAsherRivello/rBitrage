@@ -15,7 +15,7 @@ namespace RMC::rBitrage
         virtual ~Model3D();
 
         virtual void OnFrameUpdate(float deltaTime) override;
-        virtual void OnFrameRender() override;
+        virtual void OnFrameRender(const FrameRenderLayer &frameRenderLayer) override;
 
     protected:
         ModelData3D* _modelData3D;

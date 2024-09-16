@@ -1,4 +1,5 @@
 #include "client/rBitrage/actors/Cube3D.h"
+#include "Cube3D.h"
 
 namespace RMC::rBitrage 
 {
@@ -13,9 +14,9 @@ namespace RMC::rBitrage
         
     }
 
-    void Cube3D::OnFrameRender() {
+    void Cube3D::OnFrameRender(const FrameRenderLayer& frameRenderLayer) {
 
-        Actor3D::OnFrameRender();
+        Actor3D::OnFrameRender(frameRenderLayer);
 
         // TODO: Use transform.scale instead of size here (and also in 2d?)
         //NOTE: I **think** that size is relative to asset an scale is relative to world unites and you need both. Yes?

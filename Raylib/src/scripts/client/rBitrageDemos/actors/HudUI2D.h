@@ -10,8 +10,9 @@ namespace RMC::rBitrage
     {
     public:
         HudUI2D(Game& game);
-        ~HudUI2D(); 
-        void OnFrameRender() override;
+        ~HudUI2D();
+        void OnFrameRender(const FrameRenderLayer &frameRenderLayer) override;
+
 
         void SetTextUpperLeft(const char*);
         void SetTextUpperRight(const char*);

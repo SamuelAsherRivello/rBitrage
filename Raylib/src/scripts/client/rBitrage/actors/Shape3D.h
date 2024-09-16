@@ -17,7 +17,7 @@ namespace RMC::rBitrage
 
             virtual ~Shape3D();
 
-            void OnFrameRender() override;
+            void OnFrameRender(const FrameRenderLayer &frameRenderLayer) override;
             
         protected:
             ShapeData3D* _shapeData3D;
