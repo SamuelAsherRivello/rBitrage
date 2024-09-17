@@ -4,6 +4,11 @@
 //
 using namespace RMC::rBitrage;
 
+void Ball_OnBounced() 
+{
+    std::cout << "Ball_OnBounced()" << std::endl;
+}
+
 
 int Demo02rBitrage() 
 {
@@ -35,7 +40,7 @@ int Demo02rBitrage()
 
     // Actors
     std::vector<std::shared_ptr<Actor>> actors;
-    for (float i = 1; i < 2; ++i)
+    for (float i = 0; i < 1; ++i)
     {
         // FrameRenderLayer::Camera2D
         auto actor = std::make_shared<Ball2D>(game, "Ball");
@@ -52,6 +57,9 @@ int Demo02rBitrage()
         Vector3 velocity = Random::GetRandomVector3({-3, -3, -3}, {3, 3, 3});
         velocity = Vector3Multiply(velocity, {200, 200, 200});
         actor->SetVelocity(velocity);
+
+        // EVENT
+        actor->OnBounce.AddListener(Ball_OnBounced);
     }
 
 

@@ -1,14 +1,10 @@
 #pragma once
 #include <raylib.h>
-
+#include <iostream>
 
 //WARNING: I commented these out because ORDERING is critical and I could not figure it out
 
 //TODO: Decide if this is helpful or not. If not, remove this file from 100% of #includes...
-
-
-
-
 
 
 
@@ -35,6 +31,8 @@
 // #include "client/rBitrage/types/Screen.h"
 // #include "client/rBitrage/types/Transform.h"
 // #include "client/rBitrage/types/World.h"
+#include "client/rBitrage/types/Event.h"
+
 
 // #include "client/rBitrage/actors/Actor.h"
 // #include "client/rBitrage/actors/Sprite2D.h"

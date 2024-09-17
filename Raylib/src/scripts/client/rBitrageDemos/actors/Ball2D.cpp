@@ -28,18 +28,14 @@ namespace RMC::rBitrage
         //Did it bounce? Play sound
         if (!Vector3Equals(GetVelocity(), velocityBefore))
         {
+
+            OnBounce.Invoke(); 
+
             if (_game.HasSystem<AudioSystem>())
             {
                 _game.GetSystem<AudioSystem>()->PlaySound("Hit01");
             }
         }
-
-
-    /*
-    play sound
-        
-                
-                */
 
         
     }
