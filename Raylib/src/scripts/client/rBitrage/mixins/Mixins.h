@@ -16,7 +16,7 @@ namespace RMC::rBitrage
 
         ~Mixin() 
         {
-            std::cout << "Mixin destroy " << std::endl;
+            //std::cout << "Mixin destroy " << std::endl;
         }
 
 
@@ -56,6 +56,7 @@ namespace RMC::rBitrage
       
     };
 
+    //This is an experimental way to add functionality modularly without a full component system (yet)
     class PositionVelocityBoundsMixin : public Mixin
     {
     public:
@@ -132,19 +133,22 @@ namespace RMC::rBitrage
                 hasChangedDirection = true;
             }
 
-            //TODO: Enable this for 3d, maybe harmlessly keep it for 2D too, if it works
-            // if (actorMinZ < worldMinZ)
-            // {
-            //     nextVelocity.z *= -1;
-            //     hasChangedDirection = true;
-            // }
-            // else if (actorMaxZ >= worldMaxZ)
-            // {
-            //     nextVelocity.z *= -1;
-            //     hasChangedDirection = true;
-            // }
 
-            if (hasChangedDirection) {
+            if (actorMinZ < worldMinZ)
+            {
+                //std::cout << "OUT" << actorMinZ << " < " << worldMinZ << std::endl;
+                nextVelocity.z *= -1;
+                hasChangedDirection = true;
+            }
+            else if (actorMaxZ >= worldMaxZ)
+            {
+                //std::cout << "OUT" << actorMaxZ << " >= " << worldMaxZ << std::endl;
+                nextVelocity.z *= -1;
+                hasChangedDirection = true;
+            }
+
+            if (hasChangedDirection) 
+            {
                 _velocityRef = nextVelocity;
             }
         }

@@ -17,13 +17,13 @@ namespace RMC::rBitrage
                 ( 
                     //TODO: Finite is good default (in 2d g), but maybe make infinite an option
                     //Size
-                    { width, height, -1 },
+                    { width, height, depth },
 
                      //Center
-                    { width/2, height/2, -1/2 },
+                    { width/2, height/2, depth/2 },
 
                     //Pivot
-                    { width/2, height/2, -1/2 }
+                    { width/2, height/2, depth/2 }
                     
                     )
             {

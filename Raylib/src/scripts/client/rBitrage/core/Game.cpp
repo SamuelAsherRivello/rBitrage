@@ -20,7 +20,7 @@ namespace RMC::rBitrage
         screen(1920, 1080), 
         
         //DEFAULT: The world matches the screen, plus depth (at least for 2D this makes sense as default)
-        world(1920, 1080, 1080) 
+        world(1920, 1080, 1080) //TODO: Use 1920, 1080, 1080.
 
         {
 

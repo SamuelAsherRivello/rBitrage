@@ -3,17 +3,23 @@
 
 namespace RMC::rBitrage
 {
+    //NOTE: We need 2 constructors here. One for the default constructor and one for the copy constructor.
     Shape3D::Shape3D(Game& game, const FrameRenderLayer& frameRenderLayer)
-        : Actor3D(game, "", frameRenderLayer), _shapeData3D() 
-        {
-            std::cout << "Color 1 " << std::endl;
-        }
+        : Actor3D(game, "", frameRenderLayer), _shapeData3D(new SphereShapeData3D()) 
+    {
+    }
 
     Shape3D::Shape3D(Game& game, ShapeData3D* shapeData3D, const FrameRenderLayer& frameRenderLayer)
         : Shape3D(game, frameRenderLayer)  
     {
-        std::cout << "Color 2 " << shapeData3D->_color.a << std::endl;
-        _shapeData3D = new CubeShapeData3D(RED);
+        
+        _shapeData3D = new SphereShapeData3D(RED);
+
+         //TODO: Why is this 2 lines? Because of const or &? 
+        Vector3 size = _shapeData3D->GetSize();
+
+        SetScale({1, 1, 1});
+        GetBoundsLocal().SetSize(size);
     }
 
     Shape3D::~Shape3D() 
@@ -25,8 +31,7 @@ namespace RMC::rBitrage
     {
         Actor3D::OnFrameRender(frameRenderLayer);
 
-        _shapeData3D = new CubeShapeData3D(RED);
-        _shapeData3D->Draw(GetPosition(), GetBoundsLocal().GetSize());
+        _shapeData3D->Draw(GetPosition(), GetBoundsGlobal().GetSize());
         
     }
 }

@@ -29,16 +29,16 @@ namespace RMC::rBitrage
             void DrawScreenBounds();
             void DrawWorldBounds();
 
-            void DrawActor(Actor *actor);
+            void DrawActor2D(Actor *actor);
 
-            void DrawActorCenterAtGlobal(Actor *actor);
+            void DrawActorCenterAtGlobal2D(Actor *actor);
 
-            void DrawActorExtentsAtGlobal(Actor *actor);
+            void DrawActorExtentsAtGlobal3D(Actor *actor);
 
             //
-            void DrawActorBoundsAtGlobal(Actor* actor);
-            void DrawActorPositionAtGlobal(Actor *actor);
-            void DrawActorPivotAtGlobal(Actor *actor);
+            void DrawActorBoundsAtGlobal2D(Actor* actor);
+            void DrawActorPositionAtGlobal2D(Actor *actor);
+            void DrawActorPivotAtGlobal2D(Actor *actor);
 
         private:
             Color _actorColorPrimary = ORANGE;

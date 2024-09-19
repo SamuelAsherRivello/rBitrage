@@ -35,9 +35,9 @@ namespace RMC::rBitrage
                 _size = size;
             }
             Vector2 GetSize() const { return Vector2(_size); } //TODO: do I need to return copy like this?
-            virtual void Draw (Vector2 position, Vector2 size) const
+            virtual void Draw (Vector2 position, Vector2 sizeScaled) const
             {
-                DrawCircleV(position, size.x, _color);
+                DrawCircleV(position, sizeScaled.x, _color);
             }
         protected:
             Color _color;
@@ -48,11 +48,11 @@ namespace RMC::rBitrage
     {
         public:
             CircleShapeData2D(Color color = RBITRAGE_SHAPE2D_DEFAULT_COLOR, float radius = RBITRAGE_SHAPE2D_SIZE_DEFAULT.x) : ShapeData2D(color, {radius, radius}) {}
-            void Draw (Vector2 position, Vector2 size) const override
+            void Draw (Vector2 position, Vector2 sizeScaled) const override
             {
                 //Raylib draws circles CENTERED on the position. GOOD!
                 //I choose to average x/y into radius. Users must pass x==y for predictable results
-                DrawCircleV(position, size.x, _color);
+                DrawCircleV(position, sizeScaled.x, _color);
 
             }
     };
@@ -61,10 +61,10 @@ namespace RMC::rBitrage
     {
         public:
             RectangleShapeData2D(Color color = RBITRAGE_SHAPE2D_DEFAULT_COLOR) : ShapeData2D(color) {}
-            void Draw (Vector2 position, Vector2 size) const override
+            void Draw (Vector2 position, Vector2 sizeScaled) const override
             {
                 //Raylib draws rectangles NOT-CENTERED on the position. BAD! Adjusted here.
-                DrawRectangleV({position.x - size.x/2, position.y - size.y/2}, size, _color);
+                DrawRectangleV({position.x - sizeScaled.x/2, position.y - sizeScaled.y/2}, sizeScaled, _color);
             }
     };
 
@@ -76,19 +76,23 @@ namespace RMC::rBitrage
     class ShapeData3D
     {
         public:
-            ShapeData3D() : _color (RBITRAGE_SHAPE3D_ERROR_COLOR) 
+            ShapeData3D() : _color (RBITRAGE_SHAPE3D_ERROR_COLOR), _size({1,1,1})
             {
             }
-            ShapeData3D(Color color) 
+            ShapeData3D(Color color) : _size({1,1,1})
             {
                 _color = color;
             }
-            virtual void Draw (Vector3 position, Vector3 size) const //TODO: ass size(1,1,1) by default?
+            Vector3 GetSize() const { return Vector3(_size); } //TODO: do I need to return copy like this?
+            Color GetColor() const { return _color;}; 
+            virtual void Draw (Vector3 position, Vector3 sizeScaled) const //TODO: ass size(1,1,1) by default?
             {
-                DrawSphereWires(position, Utilities::ToVector3Average(size).x, 10, 20, _color);
+                DrawSphereWires(position, Utilities::ToVector3Average(sizeScaled).x, 10, 20, _color);
             }
-            Color _color;
+         
         protected:
+            Vector3 _size;
+            Color _color;
             
     };
 
@@ -96,9 +100,9 @@ namespace RMC::rBitrage
     {
         public:
             SphereShapeData3D(Color color = RBITRAGE_SHAPE3D_DEFAULT_COLOR) : ShapeData3D(color) {}
-            void Draw (Vector3 position, Vector3 size) const override
+            void Draw (Vector3 position, Vector3 sizeScaled) const override
             {
-                 DrawSphere(position, Utilities::ToVector3Average(size).x, _color);
+                 DrawSphere(position, Utilities::ToVector3Average(sizeScaled).x, _color);
             }
     };
 
@@ -106,9 +110,9 @@ namespace RMC::rBitrage
     {
         public:
             CubeShapeData3D(Color color = RBITRAGE_SHAPE3D_DEFAULT_COLOR) : ShapeData3D(color) {}
-            void Draw (Vector3 position, Vector3 size) const override
+            void Draw (Vector3 position, Vector3 sizeScaled) const override
             {
-                 DrawCubeV(position, size, _color);
+                 DrawCubeV(position, sizeScaled, _color);
             }
     };
 

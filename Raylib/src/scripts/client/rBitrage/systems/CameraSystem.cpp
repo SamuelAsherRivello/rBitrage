@@ -29,8 +29,16 @@ namespace RMC::rBitrage
    
         if (cameraSystemMode != CameraSystemMode::Cam2D)
         {
+            //TODO: What is a good default position for the camera? 
+            //IDEA: Center
+            Vector3 cameraPosition = _game.world.GetCenter();
+            //IDEA: Plus world size
+            cameraPosition = Vector3Add(cameraPosition, { _game.world.GetSize().x,_game.world.GetSize().y, _game.world.GetSize().z});
+            //IDEA: Plus some magic offset
+            cameraPosition = Vector3Add(cameraPosition, {-1200, -1200, -1200}); //TODO: Reduce/remove this
+
             camera3D = Camera3D();
-            camera3D.position = {20, 20, 20};
+            camera3D.position = cameraPosition;
             camera3D.target = _game.world.GetCenter();
             camera3D.up = (Vector3){ 0.0f, 1.0f, 0.0f };
             camera3D.fovy = 60.0;

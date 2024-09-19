@@ -20,6 +20,7 @@ namespace RMC::rBitrage
             friend class Actor;
             friend class Sprite2D;
             friend class Shape2D;
+            friend class Shape3D;
         
             Bounds() 
             {

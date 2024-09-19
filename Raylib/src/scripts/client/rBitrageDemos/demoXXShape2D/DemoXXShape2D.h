@@ -4,15 +4,14 @@
 //
 using namespace RMC::rBitrage;
 
-int DemoXXShapes() 
+int DemoXXShape2D() 
 {
     // Create Game
     Game2D game = Game2D();
 
 
     // OPTIONAL: Set Overrides
-    game.cameraSystemMode = CameraSystemMode::Cam2D;
-    game.title = "Demo XX Shapes";
+    game.title = "Demo XX Shape2D";
     game.isDebug = true;                  //true, show ANY gizmos
     game.screen.isDebug = true;           //true, show THIS gizmo
     game.world.isDebug = true;            //true, show THIS gizmo

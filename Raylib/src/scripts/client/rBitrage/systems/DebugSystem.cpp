@@ -77,6 +77,17 @@ namespace RMC::rBitrage
             {
                 DrawWorldSizeHalf();
                 DrawWorldBounds();
+
+                //Draw box around actors for debugging
+                for (Actor* actor : _game.GetActors()) 
+                {
+
+                    if (!actor->GetIsDebug())
+                    {
+                        continue;
+                    }
+                    DrawActor2D(actor);
+                }
             }
             
         }
@@ -88,16 +99,7 @@ namespace RMC::rBitrage
             DrawScreenBounds();
         }
 
-        //Draw box around actors for debugging
-        for (Actor* actor : _game.GetActors()) {
-
-            if (!actor->GetIsDebug())
-            {
-                continue;
-            }
-            DrawActor(actor);
-
-        }
+ 
     }
 
 //1
@@ -131,19 +133,19 @@ namespace RMC::rBitrage
         DrawRectangleLinesEx({0, 0, _game.world.GetSize().x, _game.world.GetSize().y}, _worldStroke, _worldColor);
     }
 
-    void DebugSystem::DrawActor(Actor* actor) 
+    void DebugSystem::DrawActor2D(Actor* actor) 
     {
         //Ignore actor layer, draw it here
-        DrawActorPivotAtGlobal(actor);
-        DrawActorCenterAtGlobal(actor);
-        DrawActorPositionAtGlobal(actor);
+        DrawActorPivotAtGlobal2D(actor);
+        DrawActorCenterAtGlobal2D(actor);
+        DrawActorPositionAtGlobal2D(actor);
         //
-        DrawActorBoundsAtGlobal(actor);
-        DrawActorExtentsAtGlobal(actor);
+        DrawActorBoundsAtGlobal2D(actor);
+        DrawActorExtentsAtGlobal3D(actor);
         
     }
 
-    void DebugSystem::DrawActorPivotAtGlobal(Actor* actor)
+    void DebugSystem::DrawActorPivotAtGlobal2D(Actor* actor)
     {
 
         //Pivot is not global, so add position to it
@@ -156,7 +158,7 @@ namespace RMC::rBitrage
 
 
     //TODO: Remove this after testing?
-    void DebugSystem::DrawActorCenterAtGlobal(Actor* actor) 
+    void DebugSystem::DrawActorCenterAtGlobal2D(Actor* actor) 
     {
          RenderCircleAtPoint(
             Utilities::ToVector2(actor->GetBoundsGlobal().GetCenter()),
@@ -167,7 +169,7 @@ namespace RMC::rBitrage
     }
   
     //TODO: Remove this after testing?
-    void DebugSystem::DrawActorPositionAtGlobal(Actor* actor) 
+    void DebugSystem::DrawActorPositionAtGlobal2D(Actor* actor) 
     {
         RenderCircleAtPoint(
             Utilities::ToVector2(actor->GetPosition()),
@@ -177,7 +179,7 @@ namespace RMC::rBitrage
 
     }
 
-     void DebugSystem::DrawActorBoundsAtGlobal(Actor* actor) 
+     void DebugSystem::DrawActorBoundsAtGlobal2D(Actor* actor) 
     {
          RenderBoxAtRectangle
         (
@@ -197,7 +199,7 @@ namespace RMC::rBitrage
 
 
 
-    void DebugSystem::DrawActorExtentsAtGlobal(Actor* actor) 
+    void DebugSystem::DrawActorExtentsAtGlobal3D(Actor* actor) 
     {
         auto boundsGlobal = actor->GetBoundsGlobal();
 

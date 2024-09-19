@@ -24,7 +24,7 @@ namespace RMC::rBitrage
 
         private:
 
-            //Experimental way to 'pepper in' functionality without inheritance. TBD if I like it or not
+            //Experimental: See class comment
             PositionVelocityBoundsMixin _mixin;
         
         };

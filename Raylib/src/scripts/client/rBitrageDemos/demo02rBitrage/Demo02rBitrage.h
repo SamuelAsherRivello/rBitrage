@@ -17,9 +17,8 @@ int Demo02rBitrage()
 
 
     // OPTIONAL: Set Overrides
-    game.cameraSystemMode = CameraSystemMode::Cam2D;
     game.title = "Demo 02 rBitrage";
-
+    const int ACTORS_COUNT_MAX = 1;
 
     // Initialize
     game.Initialize();
@@ -40,7 +39,7 @@ int Demo02rBitrage()
 
     // Actors
     std::vector<std::shared_ptr<Actor>> actors;
-    for (float i = 0; i < 1; ++i)
+    for (float i = 0; i < ACTORS_COUNT_MAX; ++i)
     {
         // FrameRenderLayer::Camera2D
         auto actor = std::make_shared<Ball2D>(game, "Ball");

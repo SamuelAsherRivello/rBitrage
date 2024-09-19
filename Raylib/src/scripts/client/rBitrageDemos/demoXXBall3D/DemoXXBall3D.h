@@ -2,21 +2,23 @@
 //
 #include "client/rBitrage/rBitrage.h"
 //
-
-
 using namespace RMC::rBitrage;
 
 
-int DemoXXStressTest2D() 
+
+
+int DemoXXBall3D() 
 {
     // Create Game
-    Game2D game = Game2D();
+    Game3D game = Game3D();
 
 
     // OPTIONAL: Set Overrides
-    game.cameraSystemMode = CameraSystemMode::Cam2D;
-    game.title = "Demo XX Stress Test";
-
+    game.title = "Demo XX Ball3D";
+    game.isDebug = true;
+    //game.world.isDebug = true;
+    //game.screen.isDebug = true;
+    const int ACTORS_COUNT_MAX = 100;
 
     // Initialize
     game.Initialize();
@@ -30,29 +32,32 @@ int DemoXXStressTest2D()
 
     // Assets
     AssetLoaderSystem* loaderSystem = game.GetSystem<AssetLoaderSystem>();
-    loaderSystem->AddAsset<Image>("Ball", "src/assets/images/Ball02.png");
+    loaderSystem->AddAsset<Image>("Ball", "src/assets/images/Ball01.png");
     loaderSystem->AddAsset<Sound>("Hit01", "src/assets/audio/sfx/Hit01.wav");
     loaderSystem->LoadAllAssets();
 
 
     // Actors
     std::vector<std::shared_ptr<Actor>> actors;
-    for (float i = 1; i < 22; ++i)
+    for (float i = 0; i < ACTORS_COUNT_MAX; ++i)
     {
+
         // FrameRenderLayer::Camera2D
-        auto actor = std::make_shared<Ball2D>(game, "Ball");
+        auto actor = std::make_shared<Ball3D>(game);
         actors.push_back(actor);
         game.AddActor(actor.get());
         
         // CLASS Properties
+        float scale = Random::GetRandomFloat(20, 50);
+        actor->SetScale({scale, scale, scale});
         actor->SetPosition(game.world.GetCenter());
-        actor->SetScale({0.5, 0.5, 0.5});
         actor->SetIsDebug(true);
 
         // SUBCLASS Properties
-        Vector3 velocity2 = Random::GetRandomVector3({-3, -3, -3}, {3, 3, 3});
-        velocity2 = Vector3Multiply(velocity2, {200, 200, 200});
-        actor->SetVelocity(velocity2);
+        Vector3 velocity = Random::GetRandomVector3({-3, -3, -3}, {3, 3, 3});
+        velocity = Vector3Multiply(velocity, {200, 200, 200});
+        actor->SetVelocity(velocity);
+
     }
 
 
@@ -76,10 +81,17 @@ int DemoXXStressTest2D()
         // Input - Click spacebar to reset ball position
         if (game.GetSystem<InputSystem>()->IsActionPressed("action"))
         {
-            Ball2D* actor01 = static_cast<Ball2D*>(actors.at(0).get());
+            Ball3D* actor01 = static_cast<Ball3D*>(actors.at(0).get());
             
             // CLASS Properties
+            float scale = Random::GetRandomFloat(0.5, 1.5);
+            actor01->SetScale({scale, scale, scale});
             actor01->SetPosition(game.world.GetCenter());
+
+            // SUBCLASS Properties
+            Vector3 velocity = Random::GetRandomVector3({-3, -3, -3}, {3, 3, 3});
+            velocity = Vector3Multiply(velocity, {200, 200, 200});
+            actor01->SetVelocity(velocity);
 
         }
 

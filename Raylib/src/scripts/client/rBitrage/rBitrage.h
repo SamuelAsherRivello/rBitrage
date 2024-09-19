@@ -42,6 +42,7 @@
 // #include "client/rBitrage/actors/Sphere2D.h"
 // #include "client/rBitrage/actors/Sphere3D.h"
 
+#include "client/rBitrageDemos/actors/Ball3D.h"
 #include "client/rBitrageDemos/actors/Ball2D.h"
 #include "client/rBitrageDemos/actors/HudUI2D.h"
 #include "client/rBitrage/actors/Shape2D.h"

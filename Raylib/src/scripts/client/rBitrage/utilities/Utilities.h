@@ -103,12 +103,15 @@ namespace RMC::rBitrage
                 return "[Rectangle (" + std::to_string(value.x) + ", " + std::to_string(value.y) + ", " + std::to_string(value.width) + ", " + std::to_string(value.height) + ")]"; 
             }
 
-           static std::string ToString(Bounds value)
+            static std::string ToString(Bounds value)
             {
                 return "[Bounds (Size=" +  Utilities::ToString(value.GetSize()) + ", Center=" + Utilities::ToString(value.GetCenter()) + ", Pivot=" + Utilities::ToString(value.GetPivot()) + ")]"; 
             }
 
-
+            static std::string ToString(Color value)
+            {
+                return "[Color (r=" +  std::to_string(value.r) + ", g=" + std::to_string(value.g) + ", b=" + std::to_string(value.b) + ", a=" + std::to_string(value.a) + ")]"; 
+            }
 
             static std::string ToString(GUID value)
             {

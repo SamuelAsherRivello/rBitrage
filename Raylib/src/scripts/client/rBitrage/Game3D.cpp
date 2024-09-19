@@ -3,7 +3,6 @@
 namespace RMC::rBitrage 
 {
     Game3D::Game3D() : Game () 
-
     {
         cameraSystemMode = CameraSystemMode::Cam3D;
     }

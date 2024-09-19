@@ -16,7 +16,7 @@ namespace RMC::rBitrage
         SetIsDebug(false);
         SetName(typeid(this).name());
         SetPosition({0,0,0});
-       
+        SetScale({1, 1, 1});
     }
 
     Actor::~Actor() 
