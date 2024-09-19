@@ -73,6 +73,17 @@ namespace RMC::rBitrage
     Vector3 Actor::GetScale() const  { return _transform.Scale; }
     void Actor::SetScale(const Vector3& value)  { _transform.Scale = value; }
 
+
+    Vector3& Actor::GetVelocity() 
+    {
+        return _velocity;
+    }
+
+    void Actor::SetVelocity(const Vector3& velocity) 
+    {
+        _velocity = velocity;
+    }
+
     const Vector3 Actor::GetScaledSize() { return Vector3Multiply(GetBoundsLocal().GetSize(), _transform.Scale); }
 
 

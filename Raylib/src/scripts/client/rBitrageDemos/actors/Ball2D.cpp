@@ -4,7 +4,7 @@ namespace RMC::rBitrage
 {
         
     Ball2D::Ball2D(Game& game, const char *assetKey) 
-        : Projectile2D(game, assetKey), 
+        : Sprite2D(game, assetKey), 
             _mixin(PositionVelocityBoundsMixin(*this, GetVelocity()))
     {
     }
@@ -15,9 +15,14 @@ namespace RMC::rBitrage
 
     void Ball2D::OnFrameUpdate(float deltaTime)
     {
-        Projectile2D::OnFrameUpdate(deltaTime);
+        Sprite2D::OnFrameUpdate(deltaTime);
 
-        //TEMP: Spin to test the pivot
+        //MOVE
+        _transform.Position.x += (GetVelocity().x * deltaTime);
+        _transform.Position.y += (GetVelocity().y * deltaTime);
+        _transform.Position.z += (GetVelocity().z * deltaTime);
+
+        //TEMP
         _transform.Rotation.z += (GetVelocity().x  * deltaTime) / 2;
 
         Vector3 velocityBefore = GetVelocity();

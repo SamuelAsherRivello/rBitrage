@@ -1,10 +1,10 @@
 #pragma once
-#include "client/rBitrage/actors/Projectile3D.h"
+#include "client/rBitrage/actors/Model3D.h"
 
 
 namespace RMC::rBitrage 
 {
-    class Duck3D : public Projectile3D
+    class Duck3D : public Model3D
     {
         public:
             Duck3D(Game& game);

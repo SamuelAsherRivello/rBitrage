@@ -18,7 +18,7 @@ int Demo02rBitrage()
 
     // OPTIONAL: Set Overrides
     game.title = "Demo 02 rBitrage";
-    const int ACTORS_COUNT_MAX = 1;
+    const int ACTORS_COUNT_MAX = 10;
 
     // Initialize
     game.Initialize();
@@ -64,7 +64,7 @@ int Demo02rBitrage()
 
     // FrameRenderLayer::PostCamera
     // OPTIONAL: Add HUD UI
-    HudUI2D hudUI = HudUI2D(game);
+    HudUI2D hudUI = HudUI2D(game, 40);
     const char* scoreText = "Score: 100";
     const char* livesText = "Lives: 003";
     const char* instructions = "Press [Space] to reset";

@@ -3,7 +3,7 @@
 namespace RMC::rBitrage 
 {
     Duck3D::Duck3D (Game& game) 
-        : Projectile3D 
+        : Model3D 
         (
             game,
              std::make_unique<ModelData3D>
@@ -26,7 +26,14 @@ namespace RMC::rBitrage
 
     void Duck3D::OnFrameUpdate(float deltaTime) 
     {
-        Projectile3D::OnFrameUpdate(deltaTime);
+        Actor3D::OnFrameUpdate(deltaTime);
+
+        //MOVE
+        _transform.Position.x += (GetVelocity().x * deltaTime);
+        _transform.Position.y += (GetVelocity().y * deltaTime);
+        _transform.Position.z += (GetVelocity().z * deltaTime);
+
+        //TEMP
         _transform.Rotation.y += 1.0f * deltaTime;
     }
 

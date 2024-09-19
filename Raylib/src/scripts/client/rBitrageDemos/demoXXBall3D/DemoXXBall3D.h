@@ -63,7 +63,7 @@ int DemoXXBall3D()
 
     // FrameRenderLayer::PostCamera
     // OPTIONAL: Add HUD UI
-    HudUI2D hudUI = HudUI2D(game);
+    HudUI2D hudUI = HudUI2D(game, 40);
     const char* scoreText = "Score: 100";
     const char* livesText = "Lives: 003";
     const char* instructions = "Press [Space] to reset";

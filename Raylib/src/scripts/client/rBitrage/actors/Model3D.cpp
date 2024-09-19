@@ -45,7 +45,7 @@ namespace RMC::rBitrage
             return;
         }
         _model.transform = MatrixRotateXYZ(_transform.Rotation);
-        DrawModel(_model, _transform.Position, Utilities::ToVector3Average(GetBoundsLocal().GetSize()).x, _modelData3D->color);
+        DrawModel(_model, _transform.Position, Utilities::ToVector3Average(GetBoundsGlobal().GetSize()).x, _modelData3D->color);
         
     }
 }

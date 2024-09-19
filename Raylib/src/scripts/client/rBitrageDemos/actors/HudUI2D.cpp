@@ -4,7 +4,9 @@
 namespace RMC::rBitrage 
 {
 
-    HudUI2D::HudUI2D(Game& game) : Actor2D(game, "", FrameRenderLayer::PostCamera) 
+    HudUI2D::HudUI2D(Game& game, int fontSize) 
+        : Actor2D(game, "", FrameRenderLayer::PostCamera), 
+            _fontSize(fontSize)
     { 
         //TODO: Set hudUi2d as a 'friend' in bounds so I can call this?/
         //GetBounds().SetSize({game.screen.GetSize().x, game.screen.GetSize().y, 0});
@@ -21,28 +23,26 @@ namespace RMC::rBitrage
         Actor2D::OnFrameRender(frameRenderLayer);
 
         const int MAGIC = _game.screen.GetSize().x / 40; //TODO: rethink
-
         int margin = MAGIC;
         int leftX = margin;
         int topY = margin;
         int rightX = _game.screen.GetSize().x - margin;
         int bottomY = _game.screen.GetSize().y - margin;
         Color fontColor = WHITE;
-        int fontSize = MAGIC;
 
         //Upper left
-        DrawText(_textUpperLeft, leftX, topY, fontSize, fontColor);
+        DrawText(_textUpperLeft, leftX, topY, _fontSize, fontColor);
 
         //Upper Right
-        int upperRightWidth = MeasureText(_textUpperRight, fontSize);
-        DrawText(_textUpperRight, rightX - upperRightWidth, topY, fontSize, fontColor);
+        int upperRightWidth = MeasureText(_textUpperRight, _fontSize);
+        DrawText(_textUpperRight, rightX - upperRightWidth, topY, _fontSize, fontColor);
 
         //Lower Left
-        DrawText(_textLowerLeft, leftX, bottomY - margin, fontSize, fontColor);
+        DrawText(_textLowerLeft, leftX, bottomY - margin, _fontSize, fontColor);
 
         //Lower Right
-        int lowerRightWidth = MeasureText(_textLowerRight, fontSize);
-        DrawText(_textLowerRight, rightX - lowerRightWidth, bottomY - margin, fontSize, fontColor);
+        int lowerRightWidth = MeasureText(_textLowerRight, _fontSize);
+        DrawText(_textLowerRight, rightX - lowerRightWidth, bottomY - margin, _fontSize, fontColor);
 
     }
 

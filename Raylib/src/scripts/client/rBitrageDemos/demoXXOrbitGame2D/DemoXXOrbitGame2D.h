@@ -15,29 +15,37 @@
 using namespace RMC::rBitrage;
 
 
-bool OnStep2(int x, int y) 
-{
-    std::cout << "x: " << x << " y" << y << std::endl;
-    if (x == y) return true;
-    return false;
-}
+//TODO: Move this tweening to a standalone demo scene
+// bool OnStep2(int x, int y) 
+// {
+//     std::cout << "x: " << x << " y" << y << std::endl;
+//     if (x == y) return true;
+//     return false;
+// }
 
-bool OnStep1(int x) 
-{
-    std::cout << "x: " << x <<std::endl;
-    return false;
-}
+// bool OnStep1(int x) 
+// {
+//     std::cout << "x: " << x <<std::endl;
+//     return false;
+// }
+
+//TODO: Change this tween to work with scale - coming soon
+// int x = enemy.GetSize().x;
+//int y = enemy.GetSize().y;
+//int z = enemy.GetSize().z;
+
+//auto tween = game.GetSystem<TweenSystem>()->from(0, 0, 0).to(x, y, z).during(100).via(tweeny::easing::exponentialOut).onStep([&](float x, float y, float z)
+//{
+    //enemy.SetSize(Vector3{x, y, z});
+    //return false;
+//});
 
 int DemoXXOrbitGame2D()
 {
-
-
     Game2D game = Game2D();
 
     //Optional: Override any defaults
-    game.screen.GetSize() = { 720, 1080};
-    game.screen.GetCenter() = {720/2, 1080/2};
-    game.cameraSystemMode = CameraSystemMode::Cam2D;
+    game.screen.SetSize({ 720, 1080});
     game.isDebug = true; //show gizmos
 
     //Calls System:OnInitialize **AND** System:OnInitialized
@@ -72,21 +80,18 @@ int DemoXXOrbitGame2D()
     game.AddActor(&orbitPlayer);
 
     // FrameRenderLayer::PostCamera
-    HudUI2D hudUI = HudUI2D(game);
+    // OPTIONAL: Add HUD UI
+    HudUI2D hudUI = HudUI2D(game, 40);
+    const char* scoreText = "Score: 100";
+    const char* livesText = "Lives: 003";
+    const char* instructions = "Press arrow keys to move.\n\nSpace to shoot.";
+    const char* extra = "";//game.title;
+    hudUI.SetTextUpperLeft(scoreText);
+    hudUI.SetTextUpperRight(livesText);
+    hudUI.SetTextLowerLeft(instructions);
+    hudUI.SetTextLowerRight(extra);
     game.AddActor(&hudUI);
 
-    //TODO: Change this tween to work with scale - coming soon
-    // int x = enemy.GetSize().x;
-    //int y = enemy.GetSize().y;
-    //int z = enemy.GetSize().z;
-
-    //auto tween = game.GetSystem<TweenSystem>()->from(0, 0, 0).to(x, y, z).during(100).via(tweeny::easing::exponentialOut).onStep([&](float x, float y, float z)
-    {
-        //enemy.SetSize(Vector3{x, y, z});
-        //return false;
-    //});
-        
-    // lambdas
     while (!game.GetSystem<ApplicationSystem>()->RaylibWindowShouldClose())
     {
 

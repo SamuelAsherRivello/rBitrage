@@ -9,7 +9,7 @@ namespace RMC::rBitrage
     class HudUI2D : public Actor2D
     {
     public:
-        HudUI2D(Game& game);
+        HudUI2D(Game& game, int fontSize);
         ~HudUI2D();
         void OnFrameRender(const FrameRenderLayer &frameRenderLayer) override;
 
@@ -24,6 +24,7 @@ namespace RMC::rBitrage
         const char* _textUpperRight = "";
         const char* _textLowerLeft = "";
         const char* _textLowerRight = "";
+        int _fontSize;
     };
 }
 

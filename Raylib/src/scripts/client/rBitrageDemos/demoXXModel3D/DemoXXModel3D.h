@@ -1,35 +1,37 @@
-#include <raylib.h>
-#include <algorithm>
-#include <memory>
-#include <string>
-#include <raymath.h>
+
+#pragma once
 //
 #include "client/rBitrage/Game3D.h"
-#include "client/rBitrage/utilities/Random.h"
-#include "client/rBitrage/systems/CameraSystem.h"
+#include "client/rBitrage/systems/AssetLoaderSystem.h"
 #include "client/rBitrage/systems/ApplicationSystem.h"
-
+//
 #include "client/rBitrageDemos/actors/HudUI2D.h"
 #include "client/rBitrageDemos/actors/Duck3D.h"
-
+//
 using namespace RMC::rBitrage;
-
 
 int DemoXXModel3D() 
 {
     // Create Game
     Game3D game = Game3D();
-    game.title = "Demo XX Model 3D";
-    game.isDebug = true; //Show FPS
-    game.world.isDebug = true; //Show grid
+
+
+    // OPTIONAL: Set Overrides
+    game.title = "Demo XX Model3D";
+    game.isDebug = true;
+    //game.world.isDebug = true;
+    //game.screen.isDebug = true;
+    const int ACTORS_COUNT_MAX = 1;
 
     // Initialize
     game.Initialize();
+
 
     // Log a message to VS Code terminal window
     std::cout << "\n********************" << std::endl;
     std::cout << "   Hello World!       " << std::endl;
     std::cout << "********************\n" << std::endl;
+
 
     // Assets
     AssetLoaderSystem* loaderSystem = game.GetSystem<AssetLoaderSystem>();
@@ -38,57 +40,71 @@ int DemoXXModel3D()
     loaderSystem->LoadAllAssets();
 
 
-   std::vector<std::shared_ptr<Actor>> _actors;
-    for (int i = 0; i < 100; ++i)
+    // Actors
+    std::vector<std::shared_ptr<Actor>> actors;
+    for (float i = 0; i < ACTORS_COUNT_MAX; ++i)
     {
+
         // FrameRenderLayer::Camera2D
-        Duck3D actor = Duck3D(game); 
-        actor.SetPosition(game.world.GetCenter());
-        game.AddActor(&actor); 
+        auto actor = std::make_shared<Duck3D>(game);
+        actors.push_back(actor);
+        game.AddActor(actor.get());
+        
+        // CLASS Properties
+        float scale = Random::GetRandomFloat(5, 5);
+        actor->SetScale({scale, scale, scale});
+        actor->SetPosition(game.world.GetCenter());
+        actor->SetIsDebug(true);
 
+        // SUBCLASS Properties
         Vector3 velocity = Random::GetRandomVector3({-3, -3, -3}, {3, 3, 3});
-        velocity = Vector3Multiply(velocity, {1, 1, 1});
-        actor.SetVelocity(velocity);
+        velocity = Vector3Multiply(velocity, {0, 0, 0}); // TURNED OFF 
+        actor->SetVelocity(velocity);
 
-        auto actorSharedPointer = std::make_shared<Duck3D>(actor);
-        _actors.push_back(actorSharedPointer);
-        game.AddActor(actorSharedPointer.get()); 
     }
 
 
-  
-
     // FrameRenderLayer::PostCamera
     // OPTIONAL: Add HUD UI
-    HudUI2D hudUI = HudUI2D(game);
-    hudUI.SetTextLowerLeft("Press [Space] to reset");
-    hudUI.SetTextLowerRight(game.title);
+    HudUI2D hudUI = HudUI2D(game, 40);
+    const char* scoreText = "Score: 100";
+    const char* livesText = "Lives: 003";
+    const char* instructions = "Press [Space] to reset";
+    const char* extra = game.title;
+    hudUI.SetTextUpperLeft(scoreText);
+    hudUI.SetTextUpperRight(livesText);
+    hudUI.SetTextLowerLeft(instructions);
+    hudUI.SetTextLowerRight(extra);
     game.AddActor(&hudUI);
 
 
     // Game Loop - Click escape to close window
     while (!game.GetSystem<ApplicationSystem>()->RaylibWindowShouldClose())
     {
-
-        // Input - Click spacebar to reset rotation
+        // Input - Click spacebar to reset ball position
         if (game.GetSystem<InputSystem>()->IsActionPressed("action"))
         {
-            for (auto& actor : _actors)
-            {
-                actor->SetRotation({0, 0, 0});
-                actor->SetPosition(game.world.GetCenter());
-            }
+            Duck3D* actor01 = static_cast<Duck3D*>(actors.at(0).get());
+            
+            // CLASS Properties
+            float scale = Random::GetRandomFloat(0.5, 1.5);
+            actor01->SetScale({scale, scale, scale});
+            actor01->SetPosition(game.world.GetCenter());
+
+            // SUBCLASS Properties
+            Vector3 velocity = Random::GetRandomVector3({-3, -3, -3}, {3, 3, 3});
+            velocity = Vector3Multiply(velocity, {200, 200, 200});
+            actor01->SetVelocity(velocity);
+
         }
 
 
         // Move
         game.UpdateFrame();
-        int rotationY = Utilities::ToInt(_actors.at(0)->GetRotation().y * RAD2DEG);
-        std::string rotationYString = Utilities::ToString(rotationY);
-        hudUI.SetTextUpperRight(("Rotation: " + rotationYString).c_str());
+
 
         // Draw
-        game.RenderFrame(); 
+        game.RenderFrame();
     
 
     }

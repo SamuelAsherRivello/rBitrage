@@ -64,6 +64,9 @@ namespace RMC::rBitrage
         const Bounds GetBoundsGlobal();
         virtual FrameRenderLayer GetFrameRenderLayer() const;
 
+        Vector3& GetVelocity();
+        void SetVelocity(const Vector3& velocity);
+
         //NOT VIRTUAL
         //for comparison
         GUID GetInstanceId() const;
@@ -84,6 +87,7 @@ namespace RMC::rBitrage
         float _opacity;
         const char * _name;
         Bounds* _boundsLocal;
+        Vector3 _velocity;
     
         
     };

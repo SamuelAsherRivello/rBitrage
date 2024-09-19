@@ -1,6 +1,6 @@
 #pragma once
 #include <raylib.h>
-#include "client/rBitrage/actors/Projectile2D.h"
+#include "client/rBitrage/actors/Sprite2D.h"
 #include "client/rBitrage/systems/AudioSystem.h"
 #include "client/rBitrage/mixins/Mixins.h"
 #include "client/rBitrage/types/Event.h"
@@ -8,7 +8,7 @@
 
 namespace RMC::rBitrage 
 {
-    class Ball2D : public Projectile2D
+    class Ball2D : public Sprite2D
     {
         public:
 
