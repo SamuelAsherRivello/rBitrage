@@ -18,7 +18,7 @@ int Demo02rBitrage()
 
     // OPTIONAL: Set Overrides
     game.title = "Demo 02 rBitrage";
-    const int ACTORS_COUNT_MAX = 10;
+    const int ACTORS_COUNT_MAX = 1;
 
     // Initialize
     game.Initialize();
